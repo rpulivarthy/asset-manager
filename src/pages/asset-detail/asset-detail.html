@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>{{assetName}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-row>
+    <ion-col>
+      <strong>Date</strong>
+    </ion-col>
+    <ion-col>
+      <strong>Time</strong>
+    </ion-col>
+    <ion-col>
+      <strong>DA Price</strong>
+    </ion-col>
+    <ion-col>
+      <strong>RT Price</strong>
+    </ion-col>
+  </ion-row>
+
+  <ion-grid>
+    <ion-row *ngFor="let asset of assetDetail">
+     <ion-col>
+      {{asset.Date}}
+     </ion-col>
+     <ion-col>
+      {{asset.Time}}
+     </ion-col>
+     <ion-col>
+      {{asset.DAPrice}}
+     </ion-col>
+     <ion-col>
+      {{asset.RTPrice}}
+     </ion-col>
+   </ion-row>
+  </ion-grid>
+</ion-content>

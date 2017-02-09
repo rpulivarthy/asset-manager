@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-navbar color="primary"> 
+    <ion-title>Assets</ion-title>
+    <ion-buttons end>
+        <button ion-button (click)=logOut()>
+          <ion-icon name="log-out"></ion-icon>
+        </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list>
+    <button ion-item *ngFor="let asset of assets" (click)="goToAssetDetail(asset)">
+      {{asset}}
+    </button>
+  </ion-list>
+
+
+</ion-content>
