@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, Loading } from 'ionic-angular';
 import { AssetDetail } from './asset-detail.model';
 
 @Component({
@@ -10,8 +10,9 @@ export class AssetDetailPage {
 
   assetName: string;
   assetDetail: Array<AssetDetail>;
+  loading: Loading;
   
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private loadingCtrl: LoadingController) {
     this.assetName = navParams.get('assetSelected');
     this.assetDetail = new Array<AssetDetail>();
     for (var _i=0; _i<10; _i++) {
@@ -24,8 +25,20 @@ export class AssetDetailPage {
     }
   }
 
+  showLoading() {
+    this.loading = this.loadingCtrl.create({
+      content: 'Please wait...'
+    });
+    this.loading.present();
+  }
+
   ionViewDidLoad() {
     console.log('ionViewDidLoad AssetDetailPage');
+  }
+
+  refresh(){
+     this.showLoading();
+     this.loading.dismiss();
   }
 
 }

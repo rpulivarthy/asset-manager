@@ -1,13 +1,18 @@
 <ion-header>
   <ion-navbar color="primary">
     <ion-title>{{assetName}}</ion-title>
+     <ion-buttons end>
+        <button ion-button (click)=refresh()>
+          <ion-icon name="refresh"></ion-icon>
+        </button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
-  <ion-row>
+<ion-content padding class="asset-detail-content">
+  <ion-row class="grid-header">
     <ion-col>
       <strong>Date</strong>
     </ion-col>
@@ -23,7 +28,7 @@
   </ion-row>
 
   <ion-grid>
-    <ion-row *ngFor="let asset of assetDetail">
+    <ion-row class="grid-data" *ngFor="let asset of assetDetail">
      <ion-col>
       {{asset.Date}}
      </ion-col>
