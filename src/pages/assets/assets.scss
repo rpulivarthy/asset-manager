@@ -1,14 +1,41 @@
 page-assets {
     .asset-content{
         ion-item {
-           
+           display: inline;
         }
-        .item-inner {
-               margin: 4px;
-               font-size: 1em;
-               color: green;
-           }
+        // .item-inner {
+        //        margin: 4px;
+        //        font-size: 1em;
+        //        color: green;
+        //    }
+       
+        .asset-item {
+            display: block;
+            .header{
+                font-size: 1.5em;
+                padding:5px;
+                display: inline;
+            }
+            .asset-mini-detail{
+                display: flex;
+                overflow: hidden;
+                padding: 5px;
+                div{
+                    padding-left: 10px;
+                }
+                .price{
+                    padding-left: 10px;
+                    color: red;
+                    background:none;
+                }
+                .arrow{
+                    float:right;
+                    padding-right: 5px;
+                }
+            }
+        }
         
+         
         // ion-list{
         //   background: lightgrey;
         // }

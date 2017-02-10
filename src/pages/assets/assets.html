@@ -12,10 +12,44 @@
 
 <ion-content class="asset-content" padding>
   <ion-list>
-    <button ion-item *ngFor="let asset of assets" (click)="goToAssetDetail(asset)">
-      {{asset}}
-    </button>
+    <div class="asset-item" ion-item *ngFor="let asset of assets">
+      <div class="header">{{asset}} 
+         <ion-buttons end>
+          <button ion-button (click)=goToAssetDetail(asset)>
+            <ion-icon name="arrow-forward"></ion-icon>
+          </button>
+        </ion-buttons>
+      </div>
+      <div class="asset-mini-detail">
+        <div>HE</div>
+        <button class="price">12</button>
+        <div>DA </div>
+        <button class="price">25.36</button>
+        <div>RT</div>
+        <button class="price">25.36</button>
+        <!--<ion-icon class="arrow" name="arrow-forward"></ion-icon>-->
+        <!--<ion-buttons end>
+          <button ion-button (click)=logOut()>
+            <ion-icon name="arrow-forward"></ion-icon>
+          </button>
+        </ion-buttons>-->
+      </div>
+    </div>
+    <!--<ion-item *ngFor="let asset of assets" (click)="goToAssetDetail(asset)">
+      <ion-label>{{asset}}</ion-label>
+      
+      <div>
+        <span style="color:lightslategrey">HE: <strong>12</strong></span>
+        <span></span>
+        <span style="color:lightslategrey">DA: <strong style="color:red">$34.5</strong></span>
+        <span></span>
+        <span style="color:lightslategrey">RT: <strong style="color:red">$56.5</strong></span>
+         <ion-buttons end>
+          <button ion-button>
+          <ion-icon name="arrow-forward"></ion-icon>
+        </button>
+      </ion-buttons>
+      </div>
+    </ion-item>-->
   </ion-list>
-
-
 </ion-content>
