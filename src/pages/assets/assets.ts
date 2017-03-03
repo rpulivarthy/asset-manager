@@ -12,6 +12,7 @@ export class AssetsPage {
 
   assets: string[];
   constructor(public navCtrl: NavController, private auth: AuthService, public navParams: NavParams) {
+    //TODO :: Get the nodes through the service. May not be constructor. On ngLoad
     this.assets = ['Callahan', 'SummerHaven', 'Crystal Lake', 'StoryCounty', 'Callahan', 'SummerHaven', 'Crystal Lake', 'StoryCounty', 'Callahan', 'SummerHaven', 'Crystal Lake', 'StoryCounty',
                    'Callahan', 'SummerHaven', 'Crystal Lake', 'StoryCounty', 'Callahan', 'SummerHaven', 'Crystal Lake', 'StoryCounty', 'Callahan', 'SummerHaven', 'Crystal Lake', 'StoryCounty']
   }

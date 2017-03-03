@@ -17,6 +17,7 @@ export class AssetDetailPage {
   
   constructor(public navCtrl: NavController, public navParams: NavParams, private loadingCtrl: LoadingController) {
     this.assetName = navParams.get('assetSelected');
+    //TODO :: Get the prices through the service. May not be constructor. On ngLoad
     this.assetDetail = new Array<AssetDetail>();
     for (var _i=0; _i<10; _i++) {
       var item = new AssetDetail();
