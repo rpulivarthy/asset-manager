@@ -21,7 +21,7 @@ export class DataService {
     // headers.append('Authorization', 'Bearer' + this._APItoken);
         headers.append('Access-Control-Allow-Origin', '*');
         let options = new RequestOptions({ headers: headers });
-        return this.http.get(this._baseUrl + '/api/lmp/nodes', options).map((res:Response) =>
+        return this.http.get(this._baseUrl + '/api/lmp/nodes', options).retry(3).map((res:Response) =>
         { 
             this.assetSet=res.json(); 
             return this.assetSet
@@ -33,7 +33,7 @@ export class DataService {
     // headers.append('Authorization', 'Bearer' + this._APItoken);
         headers.append('Access-Control-Allow-Origin', '*');
         let options = new RequestOptions({ headers: headers });
-        return this.http.get(this._baseUrl + '/api/lmp/prices?nodeid='+assetId+'&startdate=01-01-2017&enddate=01-31-2017', options).map((res:Response) =>
+        return this.http.get(this._baseUrl + '/api/lmp/prices?nodeid='+assetId+'&startdate=01-01-2017&enddate=01-31-2017', options).retry(3).map((res:Response) =>
         { 
             this.assetDetails=res.json(); 
             return this.assetDetails
