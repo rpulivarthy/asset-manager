@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar color="primary">
-    <ion-title>{{assetName}}</ion-title>
+    <ion-title>{{asset.NY_NodeName}}</ion-title>
      <ion-buttons end>
         <button ion-button (click)=refresh()>
           <ion-icon name="refresh"></ion-icon>
@@ -30,16 +30,16 @@
   <ion-grid>
     <ion-row class="grid-data" *ngFor="let asset of assetDetail">
      <ion-col>
-      {{asset.Date}}
+      {{asset.DATE_TIME   | date:'yMMMMEEEEd'}}
      </ion-col>
      <ion-col>
-      {{asset.Time}}
+      {{asset.DATE_TIME | date:'shortTime'}}
      </ion-col>
      <ion-col>
-      {{asset.DAPrice}}
+      {{asset.DA_PRICE}}
      </ion-col>
      <ion-col>
-      {{asset.RTPrice}}
+      {{asset.RT_PRICE}}
      </ion-col>
    </ion-row>
   </ion-grid>

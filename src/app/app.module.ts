@@ -4,6 +4,8 @@ import { MyApp } from './app.component';
 import { AssetsPage, AssetDetailPage, AlertsPage, LoginPage } from '../pages/pages';
 import { TabsPage } from '../pages/tabs/tabs';
 import { AuthService } from '../providers/auth-service';
+import { DataService } from '../providers/data-service';
+
 
 @NgModule({
   declarations: [
@@ -26,6 +28,6 @@ import { AuthService } from '../providers/auth-service';
     LoginPage,
     TabsPage
   ],
-  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, AuthService]
+  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, AuthService,DataService]
 })
 export class AppModule {}

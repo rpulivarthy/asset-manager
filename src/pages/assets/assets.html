@@ -11,9 +11,15 @@
 
 
 <ion-content class="asset-content" padding>
-  <ion-list>
-    <div class="asset-item" ion-item *ngFor="let asset of assets">
-      <div class="header">{{asset}} 
+  <ion-item>
+    <ion-textarea [(ngModel)]="firstsearchtext" name="firstsearchtextinput" class="form-control" (keyup)="filterChanged(firstsearchtext)"
+                                                placeholder="Filter Assets" id="inputGroup"></ion-textarea>
+  </ion-item>
+ 
+  <!--<ion-header-bar>{{assets.length}}</ion-header-bar>-->
+  <ion-list [virtualScroll]="filteredAssets">
+    <div class="asset-item" ion-item *virtualItem="let asset">
+      <div class="header">{{asset.NY_NodeName}} 
          <ion-buttons end>
           <button ion-button (click)=goToAssetDetail(asset)>
             <ion-icon name="arrow-forward"></ion-icon>
@@ -35,6 +41,7 @@
         </ion-buttons>-->
       </div>
     </div>
+   
     <!--<ion-item *ngFor="let asset of assets" (click)="goToAssetDetail(asset)">
       <ion-label>{{asset}}</ion-label>
       
@@ -51,5 +58,18 @@
       </ion-buttons>
       </div>
     </ion-item>-->
+     <!--<ion-infinite-scroll on-infinite="loadMoreData()" distance="1%">
+        <ion-infinite-scroll-content
+                loadingSpinner="bubbles"
+                loadingText="Loading more data...">
+        </ion-infinite-scroll-content>
+    </ion-infinite-scroll>-->
   </ion-list>
 </ion-content>
+<!--<ionc-pagination
+  color="light"
+  (clickBeginning)="changePage(1)"
+  (clickPrevious)="changePage(paginationInfo.page - 1)"
+  (clickNext)="changePage(paginationInfo.page + 1)"
+  (clickEnd)="changePage(paginationInfo.pageCount)"
+  [pagination]="assets"></ionc-pagination>-->
