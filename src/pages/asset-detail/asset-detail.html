@@ -17,7 +17,7 @@
       <strong>Date</strong>
     </ion-col>
     <ion-col>
-      <strong>Time</strong>
+      <strong>HE Time</strong>
     </ion-col>
     <ion-col>
       <strong>DA Price</strong>
@@ -30,10 +30,10 @@
   <ion-grid>
     <ion-row class="grid-data" *ngFor="let asset of assetDetail">
      <ion-col>
-      {{asset.DATE_TIME   | date:'yMMMMEEEEd'}}
+      {{asset.DATE_TIME   | date:'dd-MMM-yyyy'}}
      </ion-col>
      <ion-col>
-      {{asset.DATE_TIME | date:'shortTime'}}
+      {{asset.DATE_TIME | date:'h:mm'}}
      </ion-col>
      <ion-col>
       {{asset.DA_PRICE}}

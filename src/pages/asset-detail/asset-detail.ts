@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { NavController, NavParams, LoadingController, Loading } from 'ionic-angular';
 import { AssetDetail } from './asset-detail.model';
 import { Chart } from 'chart.js';
-import { IAssets, IAssetDetails } from '../../shared/interfaces';
+import { Assets, AssetDetails } from '../../shared/dataModel';
 import { DataService } from '../../providers/data-service';
 
 @Component({
@@ -12,8 +12,8 @@ import { DataService } from '../../providers/data-service';
 export class AssetDetailPage {
   @ViewChild('lineCanvas') lineCanvas;
 
-  asset: IAssets;
-  assetDetail: IAssetDetails[];
+  asset: Assets;
+  assetDetail: AssetDetails[];
   loading: Loading;
   lineChart: any;
 
@@ -33,7 +33,7 @@ export class AssetDetailPage {
   }
 
   getAssetDetails() {
-    this.dataService.getAssetDetails(this.asset.NY_NodeID).subscribe((assetdetail: IAssetDetails[]) => {
+    this.dataService.getAssetDetails(this.asset.NY_NodeID).subscribe((assetdetail: AssetDetails[]) => {
       this.assetDetail = assetdetail;
       this.drawLineChart();
     });

@@ -5,6 +5,7 @@ import { AssetsPage, AssetDetailPage, AlertsPage, LoginPage } from '../pages/pag
 import { TabsPage } from '../pages/tabs/tabs';
 import { AuthService } from '../providers/auth-service';
 import { DataService } from '../providers/data-service';
+import { Configuration } from './app.constants';
 
 
 @NgModule({
@@ -28,6 +29,6 @@ import { DataService } from '../providers/data-service';
     LoginPage,
     TabsPage
   ],
-  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, AuthService,DataService]
+  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, AuthService,DataService,Configuration]
 })
 export class AppModule {}

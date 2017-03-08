@@ -1,10 +1,10 @@
 
-export interface IAssets {
+export class Assets {
     NY_NodeName: string;
     NY_NodeID: string;
 }
 
-export interface IAssetDetails{
+export class AssetDetails{
     DATE_TIME: string;
     RT_CONGESTION:string;
     RT_LOSS: string;

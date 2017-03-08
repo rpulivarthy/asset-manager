@@ -4,7 +4,7 @@ import { AssetDetailPage } from '../pages';
 import { AuthService } from '../../providers/auth-service';
 import { DataService } from '../../providers/data-service';
 import { LoginPage } from '../pages';
-import { IAssets, IAssetDetails } from '../../shared/interfaces';
+import { Assets, AssetDetails } from '../../shared/dataModel';
 //import { PaginationComponent } from './src/pagination.component';
 
 @Component({
@@ -13,14 +13,14 @@ import { IAssets, IAssetDetails } from '../../shared/interfaces';
 })
 export class AssetsPage {
 
-  assets: IAssets[];
-  filteredAssets:IAssets[];
+  assets: Assets[];
+  filteredAssets:Assets[];
   constructor(public navCtrl: NavController, private auth: AuthService, private dataService: DataService, public navParams: NavParams, ) {
     //TODO :: Get the nodes through the service. May not be constructor. On ngLoad
 
   }
   loadAssets() {
-    this.dataService.getAssets().subscribe((asset: IAssets[]) => {
+    this.dataService.getAssets().subscribe((asset: Assets[]) => {
 
       this.assets =this.filteredAssets=asset;
     //  alert(this.assets);
@@ -28,17 +28,13 @@ export class AssetsPage {
     });
 
   }
-  loadMoreData() {
-    if (this.assets.length == 5) {
-     
-    }
-  }
+
   ionViewDidLoad() {
     this.loadAssets();
     console.log('ionViewDidLoad AssetsPage');
   }
 
-  goToAssetDetail(assetSelected: IAssets) {
+  goToAssetDetail(assetSelected: Assets) {
     this.navCtrl.push(AssetDetailPage, { assetSelected });
   }
   logOut() {
