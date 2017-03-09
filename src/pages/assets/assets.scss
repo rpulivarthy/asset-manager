@@ -14,7 +14,8 @@ page-assets {
             .header{
                 font-size: 1.5em;
                 padding:5px;
-                display: inline;
+                display: block;
+                overflow: hidden;
             }
             .asset-mini-detail{
                 display: flex;
@@ -43,6 +44,8 @@ page-assets {
         //     background: lightgrey;
         //     padding: 10px;
         // }
+        .assetTitle {margin-top: 10px; display: inline-block;}
+        .bar-buttons {float: right;}
     }
 
 }
