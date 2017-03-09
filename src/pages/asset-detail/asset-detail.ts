@@ -50,7 +50,7 @@ export class AssetDetailPage {
 
         type: 'line',
         data: {
-          labels: this.assetDetail.map(s => s.DATE_TIME),
+          labels: this.assetDetail.map(s => s.HE_Time),
           datasets: [
             {
               label: "DA Price",

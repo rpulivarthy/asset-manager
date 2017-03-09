@@ -5,7 +5,8 @@ export class Assets {
 }
 
 export class AssetDetails{
-    DATE_TIME: string;
+    DATE: string;
+    HE_Time:string;
     RT_CONGESTION:string;
     RT_LOSS: string;
     RT_PRICE: string;
