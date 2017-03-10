@@ -46,6 +46,11 @@ page-assets {
         // }
         .assetTitle {margin-top: 10px; display: inline-block;}
         .bar-buttons {float: right;}
+        .text-input-md {border: 1px solid #DDD;-webkit-border-radius: 5px;-moz-border-radius: 5px;border-radius: 5px;}
+        .item-md {background: transparent;}
+        * {outline: none !important;}
+        .item-md.item-input.input-has-focus .item-inner {border-color: #DDD !important; box-shadow: none !important;}
+        .text-input-md {margin: 0; width: 100%;}
     }
 
 }
