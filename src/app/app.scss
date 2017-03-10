@@ -17,3 +17,25 @@
 
 .button-md, .toolbar-md-primary .toolbar-background-md {background-color: #38c; background: #38c;}
 .tabs-md .tab-button[aria-selected=true] .tab-button-icon, .tabs-md .tab-button[aria-selected=true] {color: #38c !important;}
+#bg {
+    position: fixed!important;
+    top: -50%;
+    left: -50%;
+    width: 200%!important;
+    height: 200%!important;
+    z-index: -1;
+    display: block;
+}
+#bg img {
+    position: absolute!important;
+    top: 0!important;
+    left: 0!important;
+    right: 0!important;
+    bottom: 0!important;
+    margin: auto!important;
+    min-width: 50%!important;
+    min-height: 50%!important;
+}
+ion-app.md {background: transparent;}
+page-login .login-content {background-image: none !important;}
+.content-md {background: transparent;}
