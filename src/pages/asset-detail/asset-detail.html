@@ -14,13 +14,13 @@
 <ion-content padding class="asset-detail-content">
   
   <ion-item>
-    <ion-label>Select Start Date</ion-label>
-    <ion-datetime  [(ngModel)]="startDate" (ngModelChange)="getAssetDetails()"></ion-datetime>
+    <ion-label>Select a Date</ion-label>
+    <ion-datetime  [(ngModel)]="selectedDateString" (ngModelChange)="getAssetDetails()"></ion-datetime>
   </ion-item>
-  <ion-item>
+  <!--<ion-item>
     <ion-label>Select End Date</ion-label>
-    <ion-datetime  min="{{startDateString}}" [(ngModel)]="endDate" (ngModelChange)="getAssetDetails()"></ion-datetime>
-  </ion-item>
+    <ion-datetime   min="{{startDate}}" [(ngModel)]="endDate" (ngModelChange)="getAssetDetails()"></ion-datetime>
+  </ion-item>-->
   <!--<ion-item>
    <button ion-button round  color="default" (click)="getAssetDetails()">Click for selected dates Assets</button>
   </ion-item>-->
@@ -48,10 +48,10 @@
         {{asset.HE_Time}}
       </ion-col>
       <ion-col>
-        {{asset.DA_PRICE}}
+        {{asset.DA_PRICE | restrictDecimalSize}}
       </ion-col>
       <ion-col>
-        {{asset.RT_PRICE}}
+        {{asset.RT_PRICE | restrictDecimalSize}}
       </ion-col>
     </ion-row>
   </ion-grid>
