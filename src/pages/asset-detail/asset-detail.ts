@@ -11,29 +11,38 @@ import { DataService } from '../../providers/data-service';
 })
 export class AssetDetailPage {
   @ViewChild('lineCanvas') lineCanvas;
-
+  
   asset: Assets;
   assetDetail: AssetDetails[];
   loading: Loading;
   lineChart: any;
+  startDate: Date;
+  endDate: Date;
+  startDateString: string;
+  endDateString: string;
+  dummyAssetDetail:AssetDetails[];
+  
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private loadingCtrl: LoadingController, private dataService: DataService) {
     this.asset = navParams.get('assetSelected');
+
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1; //January is 0!
+    var yyyy = today.getFullYear();
+    this.startDateString = this.endDateString = yyyy.toString() + '-' + mm.toString() + '-' + dd.toString();
+    this.dummyAssetDetail=[{"DATE": "","HE_Time":"","RT_CONGESTION":"","RT_LOSS": "","RT_PRICE": "","DA_CONGESTION": "","DA_LOSS":"","DA_PRICE": ""}];
     this.getAssetDetails();
-    //TODO :: Get the prices through the service. May not be constructor. On ngLoad
-    // this.assetDetail = new Array<AssetDetail>();
-    // for (var _i=0; _i<10; _i++) {
-    //   var item = new AssetDetail();
-    //   item.DAPrice = Math.random();
-    //   item.Date ="12/01/2015";
-    //   item.RTPrice = Math.random();
-    //   item.Time = _i+10;
-    //   this.assetDetail.push(item); 
-    // }
   }
 
   getAssetDetails() {
-    this.dataService.getAssetDetails(this.asset.NY_NodeID).subscribe((assetdetail: AssetDetails[]) => {
+    if (this.startDate != null) {
+      this.startDateString = this.startDate.toString();
+    }
+    if (this.endDate != null) {
+      this.endDateString = this.endDate.toString();
+    }
+    this.dataService.getAssetDetails(this.asset.NY_NodeID, this.startDateString, this.endDateString).subscribe((assetdetail: AssetDetails[]) => {
       this.assetDetail = assetdetail;
       this.drawLineChart();
     });
@@ -45,7 +54,9 @@ export class AssetDetailPage {
     this.loading.present();
   }
   drawLineChart() {
-    if (this.assetDetail != null) {
+    if (this.assetDetail == null) {
+      this.assetDetail=this.dummyAssetDetail;
+    }
       this.lineChart = new Chart(this.lineCanvas.nativeElement, {
 
         type: 'line',
@@ -100,7 +111,8 @@ export class AssetDetailPage {
         }
 
       });
-    }
+    
+  
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad AssetDetailPage');

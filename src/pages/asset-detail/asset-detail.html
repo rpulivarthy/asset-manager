@@ -1,8 +1,8 @@
 <ion-header>
   <ion-navbar color="primary">
     <ion-title>{{asset.NY_NodeName}}</ion-title>
-     <ion-buttons end>
-        <button ion-button (click)=refresh()>
+    <ion-buttons end>
+      <button ion-button (click)=refresh()>
           <ion-icon name="refresh"></ion-icon>
         </button>
     </ion-buttons>
@@ -12,6 +12,18 @@
 
 
 <ion-content padding class="asset-detail-content">
+  
+  <ion-item>
+    <ion-label>Select Start Date</ion-label>
+    <ion-datetime  [(ngModel)]="startDate" (ngModelChange)="getAssetDetails()"></ion-datetime>
+  </ion-item>
+  <ion-item>
+    <ion-label>Select End Date</ion-label>
+    <ion-datetime  min="{{startDateString}}" [(ngModel)]="endDate" (ngModelChange)="getAssetDetails()"></ion-datetime>
+  </ion-item>
+  <!--<ion-item>
+   <button ion-button round  color="default" (click)="getAssetDetails()">Click for selected dates Assets</button>
+  </ion-item>-->
   <ion-row class="grid-header">
     <ion-col>
       <strong>Date</strong>
@@ -29,27 +41,27 @@
 
   <ion-grid>
     <ion-row class="grid-data" *ngFor="let asset of assetDetail">
-     <ion-col>
-      {{asset.DATE}}
-     </ion-col>
-     <ion-col>
-      {{asset.HE_Time}}
-     </ion-col>
-     <ion-col>
-      {{asset.DA_PRICE}}
-     </ion-col>
-     <ion-col>
-      {{asset.RT_PRICE}}
-     </ion-col>
-   </ion-row>
+      <ion-col>
+        {{asset.DATE}}
+      </ion-col>
+      <ion-col>
+        {{asset.HE_Time}}
+      </ion-col>
+      <ion-col>
+        {{asset.DA_PRICE}}
+      </ion-col>
+      <ion-col>
+        {{asset.RT_PRICE}}
+      </ion-col>
+    </ion-row>
   </ion-grid>
 
-    <ion-card>
-      <ion-card-header>
-        Line Chart
-      </ion-card-header>
-      <ion-card-content>
-        <canvas #lineCanvas></canvas>
-      </ion-card-content>
-    </ion-card>
+  <ion-card>
+    <ion-card-header>
+      Line Chart
+    </ion-card-header>
+    <ion-card-content >
+      <canvas #lineCanvas></canvas>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

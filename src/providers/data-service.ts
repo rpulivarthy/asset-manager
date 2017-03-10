@@ -26,28 +26,20 @@ export class DataService {
             this.assetSet = res.json();
             return this.assetSet
         })
-            .catch(this.handleError);
+           
     }
-    getAssetDetails(assetId: string): Observable<AssetDetails[]> {
-        var today = new Date();
-        var dd = today.getDate();
-        var mm = today.getMonth() + 1; //January is 0!
-        var yyyy = today.getFullYear();
+    getAssetDetails(assetId: string,startdateinput:string,enddateinput:string): Observable<AssetDetails[]> {
        
-        var inputDay = mm.toString() + '-' +dd.toString() + '-' + yyyy.toString();
         let headers = new Headers({ 'Content-Type': 'application/json' });
         // headers.append('Authorization', 'Bearer' + this._APItoken);
         headers.append('Access-Control-Allow-Origin', '*');
         let options = new RequestOptions({ headers: headers });
-        return this.http.get(this.config.apiBaseUrl + '/lmp/prices?nodeid=' + assetId + '&startdate=' + inputDay + '&enddate=' + inputDay, options).retry(3).map((res: Response) => {
+        return this.http.get(this.config.apiBaseUrl + '/lmp/prices?nodeid=' + assetId + '&startdate=' + startdateinput + '&enddate=' + enddateinput, options).retry(3).map((res: Response) => {
             this.assetDetails = res.json();
             return this.assetDetails
         })
-            .catch(this.handleError);
+           
     }
 
-    private handleError(error: any) {
-        console.error(error);
-        return Observable.throw(error.json().error || 'Server error');
-    }
+
 }
