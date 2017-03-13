@@ -6,6 +6,7 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { AuthService } from '../providers/auth-service';
 import { DataService } from '../providers/data-service';
 import { Configuration } from './app.constants';
+import {DecimalRestrictSize} from '../pages/asset-detail/decimalRestrictPipe';
 
 
 
@@ -16,7 +17,8 @@ import { Configuration } from './app.constants';
     AssetDetailPage,
     AlertsPage,
     LoginPage,
-    TabsPage
+    TabsPage,
+    DecimalRestrictSize
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -30,6 +32,6 @@ import { Configuration } from './app.constants';
     LoginPage,
     TabsPage
   ],
-  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, AuthService,DataService,Configuration]
+  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, AuthService,DataService,Configuration,DecimalRestrictSize]
 })
 export class AppModule {}
