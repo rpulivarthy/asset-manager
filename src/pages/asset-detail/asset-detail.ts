@@ -4,7 +4,7 @@ import { AssetDetail } from './asset-detail.model';
 import { Chart } from 'chart.js';
 import { Assets, AssetDetails } from '../../shared/dataModel';
 import { DataService } from '../../providers/data-service';
-import {DecimalRestrictSize} from './decimalRestrictPipe';
+import { DecimalRestrictSize } from './decimalRestrictPipe';
 
 
 @Component({
@@ -31,8 +31,20 @@ export class AssetDetailPage {
     var today = new Date();
     var dd = today.getDate();
     var mm = today.getMonth() + 1; //January is 0!
+    var mmString = "";
+    var ddString = "";
+    if (mm < 10) {
+      mmString = '0' + mm.toString();
+    } else {
+      mmString = mm.toString();
+    }
+    if (dd < 10) {
+      ddString = '0' + dd.toString()
+    } else {
+      ddString = dd.toString();
+    }
     var yyyy = today.getFullYear();
-    this.selectedDateString = yyyy.toString() + '-' + mm.toString() + '-' + dd.toString();
+    this.selectedDateString = yyyy.toString() + '-' + mmString + '-' + ddString;
     this.dummyAssetDetail = [{ "DATE": "", "HE_Time": "", "RT_CONGESTION": "", "RT_LOSS": "", "RT_PRICE": "", "DA_CONGESTION": "", "DA_LOSS": "", "DA_PRICE": "" }];
     this.getAssetDetails();
   }
@@ -41,7 +53,8 @@ export class AssetDetailPage {
     // if (this.selectedDate != null) {
     //   this.selectedDateString = this.selectedDate.toString();
     // }
-
+    this.selectedDateString = this.selectedDateString.replace('-', '');
+    this.selectedDateString = this.selectedDateString.replace('-', '');
     this.dataService.getAssetDetails(this.asset.NY_NodeID, this.selectedDateString, this.selectedDateString).subscribe((assetdetail: AssetDetails[]) => {
       this.assetDetail = assetdetail;
       this.drawLineChart();
@@ -67,18 +80,18 @@ export class AssetDetailPage {
             label: "DA Price",
             fill: false,
             lineTension: 0.1,
-            backgroundColor: "rgba(75,192,192,0.4)",
-            borderColor: "rgba(75,192,192,1)",
+            backgroundColor: "lightseagreen",
+            borderColor: "lightseagreen",
             borderCapStyle: 'butt',
             borderDash: [],
             borderDashOffset: 0.0,
             borderJoinStyle: 'miter',
-            pointBorderColor: "rgba(75,192,192,1)",
-            pointBackgroundColor: "#fff",
+            pointBorderColor: "lightseagreen",
+            pointBackgroundColor: "lightseagreen",
             pointBorderWidth: 1,
             pointHoverRadius: 5,
-            pointHoverBackgroundColor: "rgba(75,192,192,1)",
-            pointHoverBorderColor: "rgba(220,220,220,1)",
+            pointHoverBackgroundColor: "lightseagreen",
+            pointHoverBorderColor: "red",
             pointHoverBorderWidth: 2,
             pointRadius: 1,
             pointHitRadius: 10,
@@ -89,18 +102,18 @@ export class AssetDetailPage {
             label: "RT Price",
             fill: false,
             lineTension: 0.1,
-            backgroundColor: "rgba(75,192,192,0.4)",
-            borderColor: "rgba(75,192,192,1)",
+            backgroundColor: "darkseagreen",
+            borderColor: "darkseagreen",
             borderCapStyle: 'butt',
             borderDash: [],
             borderDashOffset: 0.0,
             borderJoinStyle: 'miter',
-            pointBorderColor: "rgba(75,192,192,1)",
-            pointBackgroundColor: "#fff",
+            pointBorderColor: "darkseagreen",
+            pointBackgroundColor: "darkseagreen",
             pointBorderWidth: 1,
             pointHoverRadius: 5,
-            pointHoverBackgroundColor: "rgba(75,192,192,1)",
-            pointHoverBorderColor: "rgba(220,220,220,1)",
+            pointHoverBackgroundColor: "darkseagreen",
+            pointHoverBorderColor: "darkseagreen",
             pointHoverBorderWidth: 2,
             pointRadius: 1,
             pointHitRadius: 10,
