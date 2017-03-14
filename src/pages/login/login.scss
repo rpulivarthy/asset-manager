@@ -22,13 +22,15 @@ page-login {
  
      ion-item {
      //    border-radius: 30px !important;
-         padding-left: 30px !important;
+         padding-left: 0 !important;
          font-size: 0.9em;
          margin-bottom: 10px;
    //      border: 4px solid #1780b5;
    //      border-bottom: 4px !important;
    //      box-shadow: none !important;
      }
+
+     .item-md.item-block .item-inner {padding: 0;}
  
      .signup-col {
        margin: 0px 16px 0px 16px;
