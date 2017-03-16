@@ -36,18 +36,20 @@
     min-width: 50%!important;
     min-height: 50%!important;
 }
+page-login {overflow: auto;}
 ion-app.md {background: transparent;}
 page-login .login-content {background-image: none !important;}
 page-login .content-md, page-login .item-md {background: transparent;}
 page-login .scroll-content {
     background:rgba(255,255,255,0.7);
-    width: 500px;
-    height: 500px;
+    max-width: 350px;
+    height: 350px;
     overflow: hidden;
     top: 100px;
-    left: 0;
-    right: 0;
-    margin: 0 auto;
+    left: 20px;
+    right: 20px;
+    bottom: 20px;
+    margin: 0 auto 20px auto;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px;
