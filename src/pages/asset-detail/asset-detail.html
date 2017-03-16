@@ -13,7 +13,7 @@
 
 <ion-content padding class="asset-detail-content">
   
-  <ion-item>
+  <ion-item class="datePickerContainer">
     <ion-label>Select a Date</ion-label>
     <ion-datetime  [(ngModel)]="selectedDateString" (ngModelChange)="getAssetDetails()"></ion-datetime>
   </ion-item>
@@ -41,16 +41,16 @@
 
   <ion-grid>
     <ion-row class="grid-data" *ngFor="let asset of assetDetail">
-      <ion-col width-50 class="text-center" style="background:lightsteelblue">
+      <ion-col width-50 class="text-center">
         {{asset.DATE }} at {{asset.HE_Time}}
       </ion-col>
       <!--<ion-col class="text-center" style="background:burlywood">
         {{asset.HE_Time}}
       </ion-col>-->
-      <ion-col class="text-center" style="background:lightseagreen">
+      <ion-col class="text-center">
         {{asset.DA_PRICE | restrictDecimalSize}}
       </ion-col>
-      <ion-col class="text-center" style="background:darkseagreen">
+      <ion-col class="text-center">
         {{asset.RT_PRICE | restrictDecimalSize}}
       </ion-col>
     </ion-row>
