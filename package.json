@@ -1,6 +1,6 @@
 {
-  "name": "ionic-hello-world",
-  "author": "Ionic Framework",
+  "name": "asset-manager-app",
+  "author": "Rama Pulivarthy",
   "homepage": "http://ionicframework.com/",
   "private": true,
   "scripts": {
@@ -20,6 +20,12 @@
     "@angular/platform-browser-dynamic": "2.2.1",
     "@angular/platform-server": "2.2.1",
     "@ionic/storage": "1.1.7",
+    "@types/core-js": "^0.9.35",
+    "@types/jasmine": "^2.5.40",
+    "@types/jquery": "^2.0.39",
+    "@types/lodash": "^4.14.47",
+    "@types/node": "^6.0.58",
+    "@types/requirejs": "^2.1.28",
     "chart.js": "^2.5.0",
     "ionic-angular": "2.0.1",
     "ionic-native": "2.4.1",
@@ -30,6 +36,7 @@
   },
   "devDependencies": {
     "@ionic/app-scripts": "1.0.0",
+    "@types/node": "^7.0.5",
     "typescript": "2.0.9"
   },
   "cordovaPlugins": [

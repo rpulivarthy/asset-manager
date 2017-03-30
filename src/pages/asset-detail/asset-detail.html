@@ -1,8 +1,8 @@
 <ion-header>
   <ion-navbar color="primary">
-    <ion-title>{{assetName}}</ion-title>
-     <ion-buttons end>
-        <button ion-button (click)=refresh()>
+    <ion-title>{{asset.NY_NodeName}}</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)=refresh()>
           <ion-icon name="refresh"></ion-icon>
         </button>
     </ion-buttons>
@@ -12,44 +12,56 @@
 
 
 <ion-content padding class="asset-detail-content">
+  
+  <ion-item class="datePickerContainer">
+    <ion-label>Select a Date</ion-label>
+    <ion-datetime  [(ngModel)]="selectedDateString" (ngModelChange)="getAssetDetails()"></ion-datetime>
+  </ion-item>
+  <!--<ion-item>
+    <ion-label>Select End Date</ion-label>
+    <ion-datetime   min="{{startDate}}" [(ngModel)]="endDate" (ngModelChange)="getAssetDetails()"></ion-datetime>
+  </ion-item>-->
+  <!--<ion-item>
+   <button ion-button round  color="default" (click)="getAssetDetails()">Click for selected dates Assets</button>
+  </ion-item>-->
   <ion-row class="grid-header">
-    <ion-col>
-      <strong>Date</strong>
+    <ion-col width-50 class="text-center">
+      <strong>Date & HE Time</strong>
     </ion-col>
-    <ion-col>
-      <strong>Time</strong>
-    </ion-col>
-    <ion-col>
+    <!--<ion-col>
+      <strong class="text-center">HE Time</strong>
+    </ion-col>-->
+    <ion-col class="text-center">
       <strong>DA Price</strong>
     </ion-col>
-    <ion-col>
+    <ion-col class="text-center">
       <strong>RT Price</strong>
     </ion-col>
   </ion-row>
 
   <ion-grid>
     <ion-row class="grid-data" *ngFor="let asset of assetDetail">
-     <ion-col>
-      {{asset.Date}}
-     </ion-col>
-     <ion-col>
-      {{asset.Time}}
-     </ion-col>
-     <ion-col>
-      {{asset.DAPrice}}
-     </ion-col>
-     <ion-col>
-      {{asset.RTPrice}}
-     </ion-col>
-   </ion-row>
+      <ion-col width-50 class="text-center">
+        {{asset.DATE }} at {{asset.HE_Time}}
+      </ion-col>
+      <!--<ion-col class="text-center" style="background:burlywood">
+        {{asset.HE_Time}}
+      </ion-col>-->
+      <ion-col class="text-center">
+        {{asset.DA_PRICE | restrictDecimalSize}}
+      </ion-col>
+      <ion-col class="text-center">
+        {{asset.RT_PRICE | restrictDecimalSize}}
+      </ion-col>
+    </ion-row>
   </ion-grid>
 
-    <ion-card>
-      <ion-card-header>
-        Line Chart
-      </ion-card-header>
-      <ion-card-content>
-        <canvas #lineCanvas></canvas>
-      </ion-card-content>
-    </ion-card>
+  <ion-card>
+    <ion-card-header>
+      Line Chart
+    </ion-card-header>
+    <ion-card-content >
+      <canvas #lineCanvas></canvas>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

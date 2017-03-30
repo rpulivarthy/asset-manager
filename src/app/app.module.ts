@@ -4,6 +4,11 @@ import { MyApp } from './app.component';
 import { AssetsPage, AssetDetailPage, AlertsPage, LoginPage } from '../pages/pages';
 import { TabsPage } from '../pages/tabs/tabs';
 import { AuthService } from '../providers/auth-service';
+import { DataService } from '../providers/data-service';
+import { Configuration } from './app.constants';
+import {DecimalRestrictSize} from '../pages/asset-detail/decimalRestrictPipe';
+
+
 
 @NgModule({
   declarations: [
@@ -12,7 +17,8 @@ import { AuthService } from '../providers/auth-service';
     AssetDetailPage,
     AlertsPage,
     LoginPage,
-    TabsPage
+    TabsPage,
+    DecimalRestrictSize
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -26,6 +32,6 @@ import { AuthService } from '../providers/auth-service';
     LoginPage,
     TabsPage
   ],
-  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, AuthService]
+  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, AuthService,DataService,Configuration,DecimalRestrictSize]
 })
 export class AppModule {}

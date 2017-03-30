@@ -14,3 +14,43 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+
+.button-md, .toolbar-md-primary .toolbar-background-md {background-color: #38c; background: #38c;}
+.tabs-md .tab-button[aria-selected=true] .tab-button-icon, .tabs-md .tab-button[aria-selected=true] {color: #38c !important;}
+#bg {
+    position: fixed!important;
+    top: -50%;
+    left: -50%;
+    width: 200%!important;
+    height: 200%!important;
+    z-index: -1;
+    display: block;
+}
+#bg img {
+    position: absolute!important;
+    top: 0!important;
+    left: 0!important;
+    right: 0!important;
+    bottom: 0!important;
+    margin: auto!important;
+    min-width: 50%!important;
+    min-height: 50%!important;
+}
+ion-app.md {background: transparent;}
+page-login .login-content {background-image: none !important;}
+page-login .content-md, page-login .item-md {background: transparent;}
+page-login .scroll-content {
+    background:rgba(255,255,255,0.7);
+    width: 500px;
+    height: 500px;
+    overflow: hidden;
+    top: 100px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.picker-md .button-inner, .picker-md .picker-opt {color: #38c !important;}

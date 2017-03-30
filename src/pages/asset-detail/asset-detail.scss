@@ -1,12 +1,18 @@
 page-asset-detail {
     .asset-detail-content{
         .grid-header{
-            background:seagreen;
+            background:#7DBF43;
             color: white;
         }
         .grid-data{
             margin: 0px;
             font-size: 1em;
+             
         }   
+        ion-grid ion-row:nth-child(even) {
+            background: #DDD;
+        }
+        .datePickerContainer {border: 1px solid #7DBF43;}
+        .datePickerContainer .item-inner {border: 0;}
     }
 }
