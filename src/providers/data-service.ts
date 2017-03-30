@@ -38,7 +38,6 @@ export class DataService {
             this.assetDetails = res.json();
             return this.assetDetails
         })
-
     }
 
 
