@@ -31,7 +31,7 @@ export class DataService {
     getAssetDetails(assetId: string, startdateinput: string, enddateinput: string): Observable<AssetDetails[]> {
 
         let headers = new Headers({ 'Content-Type': 'application/json' });
-      //  headers.append('Authorization', this.config.apiToken);
+        headers.append('Authorization', this.config.apiToken);
         headers.append('Access-Control-Allow-Origin', '*');
         let options = new RequestOptions({ headers: headers });
         return this.http.get(this.config.apiBaseUrl + '/lmp/prices?nodeid=' + assetId + '&startdate=' + startdateinput + '&enddate=' + enddateinput, options).retry(3).map((res: Response) => {
