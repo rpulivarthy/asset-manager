@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams,VirtualScroll } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 import { AssetDetailPage } from '../pages';
 import { AuthService } from '../../providers/auth-service';
 import { DataService } from '../../providers/data-service';
 import { LoginPage } from '../pages';
-import { Assets, AssetDetails } from '../../shared/dataModel';
+import { Assets } from '../../shared/dataModel';
 //import { PaginationComponent } from './src/pagination.component';
 
 @Component({
