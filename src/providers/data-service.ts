@@ -40,4 +40,8 @@ export class DataService {
         })
     }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6358f5626283d347acd2555b0d2ef4e6a97365ed
 }
