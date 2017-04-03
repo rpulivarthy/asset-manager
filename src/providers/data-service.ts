@@ -19,27 +19,25 @@ export class DataService {
 
     getAssets(): Observable<Assets[]> {
         let headers = new Headers({ 'Content-Type': 'application/json' });
-        // headers.append('Authorization', 'Bearer' + this._APItoken);
+        headers.append('Authorization', this.config.apiToken);
         headers.append('Access-Control-Allow-Origin', '*');
-        let options = new RequestOptions({ headers: headers });
+        let options = new RequestOptions({ headers: headers});
         return this.http.get(this.config.apiBaseUrl + '/lmp/nodes', options).retry(3).map((res: Response) => {
             this.assetSet = res.json();
             return this.assetSet
         })
-           
+
     }
-    getAssetDetails(assetId: string,startdateinput:string,enddateinput:string): Observable<AssetDetails[]> {
-       
+    getAssetDetails(assetId: string, startdateinput: string, enddateinput: string): Observable<AssetDetails[]> {
+
         let headers = new Headers({ 'Content-Type': 'application/json' });
-        // headers.append('Authorization', 'Bearer' + this._APItoken);
+        headers.append('Authorization', this.config.apiToken);
         headers.append('Access-Control-Allow-Origin', '*');
         let options = new RequestOptions({ headers: headers });
         return this.http.get(this.config.apiBaseUrl + '/lmp/prices?nodeid=' + assetId + '&startdate=' + startdateinput + '&enddate=' + enddateinput, options).retry(3).map((res: Response) => {
             this.assetDetails = res.json();
             return this.assetDetails
         })
-           
     }
-
 
 }
