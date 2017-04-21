@@ -19,7 +19,7 @@
   <!--<ion-header-bar>{{assets.length}}</ion-header-bar>-->
   <ion-list [virtualScroll]="filteredAssets">
     <div class="asset-item" ion-item *virtualItem="let asset">
-      <div class="header"><span class="assetTitle">{{asset.NY_NodeName}} </span>
+      <div class="header"><span class="assetTitle">{{asset.NY_NodeName}}</span>
          <ion-buttons end>
           <button ion-button (click)=goToAssetDetail(asset)>
             <ion-icon name="arrow-forward"></ion-icon>
