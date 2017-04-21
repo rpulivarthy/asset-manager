@@ -24,15 +24,12 @@ export class DataService {
         headers.append('Authorization', this.config.apiToken);
         headers.append('Access-Control-Allow-Origin', '*');
         let options = new RequestOptions({ headers: headers });
-        this.http.get(this.config.apiBaseUrl + '/usercredentials?userid=' + userid + '&password=' + password, options).retry(3).map((res: Response) => {
+        return this.http.get(this.config.apiBaseUrl + '/usercredentials?userid=' + userid + '&password=' + password, options).retry(3).map((res: Response) => {
             if (res.status == 200) {
                 this.validatedUser = res.json();
             }
             return this.validatedUser;
         })
-        this.validatedUser=null;
-        return this.validatedUser;
-        
 
     }
     getAssets(): Observable<Assets[]> {
