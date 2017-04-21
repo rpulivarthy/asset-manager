@@ -2,19 +2,15 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import { User } from '../shared/dataModel';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/retry';
-import 'rxjs/add/operator/retrywhen';
-import { Http, Response } from '@angular/http';
-import { Headers, RequestOptions } from '@angular/http';
-import { Configuration } from '../app/app.constants';
+import { DataService } from '../providers/data-service';
+
+
 
 @Injectable()
 export class AuthService {
   currentUser: User;
   isUserAuthenticated: boolean;
-  constructor(private http: Http, private config: Configuration) {
+  constructor(private dataService: DataService) {
     this.isUserAuthenticated = false;
   }
   public login(credentials) {
@@ -22,15 +18,17 @@ export class AuthService {
       return Observable.throw("Please insert credentials");
     } else {
       return Observable.create(observer => {
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        headers.append('Authorization', this.config.apiToken);
-        headers.append('Access-Control-Allow-Origin', '*');
-        let options = new RequestOptions({ headers: headers });
-        this.http.get(this.config.apiBaseUrl + '/usercredentials?userid=' + credentials.email + '&password=' + credentials.password, options).retry(3).map((res: Response) => {
-          if (res.status == 200) {
-            this.currentUser = res.json();
-            this.isUserAuthenticated=true;
-          }
+        this.isUserAuthenticated = false;
+        this.dataService.authenticateUser(credentials.email, credentials.password).subscribe((user: User) => {
+          this.currentUser = user;
+          if(this.currentUser.email !=""){
+          this.isUserAuthenticated = true;
+        }
+        else{
+          this.isUserAuthenticated=false;
+        }
+          observer.next(this.isUserAuthenticated);
+          observer.complete();
         })
 
       });

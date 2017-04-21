@@ -19,22 +19,22 @@ export class DataService {
     validatedUser: User;
     constructor(private http: Http, private config: Configuration) { }
 
-    // authenticateUser(userid: string, password: string) {
-    //     let headers = new Headers({ 'Content-Type': 'application/json' });
-    //     headers.append('Authorization', this.config.apiToken);
-    //     headers.append('Access-Control-Allow-Origin', '*');
-    //     let options = new RequestOptions({ headers: headers });
-    //     this.http.get(this.config.apiBaseUrl + '/usercredentials?userid=' + userid + '&password=' + password, options).retry(3).map((res: Response) => {
-    //         if (res.status == 200) {
-    //             this.validatedUser = res.json();
-    //         }
-    //         return this.validatedUser;
-    //     })
-    //     this.validatedUser=null;
-    //     return this.validatedUser;
+    authenticateUser(userid: string, password: string) {
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        headers.append('Authorization', this.config.apiToken);
+        headers.append('Access-Control-Allow-Origin', '*');
+        let options = new RequestOptions({ headers: headers });
+        this.http.get(this.config.apiBaseUrl + '/usercredentials?userid=' + userid + '&password=' + password, options).retry(3).map((res: Response) => {
+            if (res.status == 200) {
+                this.validatedUser = res.json();
+            }
+            return this.validatedUser;
+        })
+        this.validatedUser=null;
+        return this.validatedUser;
         
 
-    // }
+    }
     getAssets(): Observable<Assets[]> {
         let headers = new Headers({ 'Content-Type': 'application/json' });
         headers.append('Authorization', this.config.apiToken);
