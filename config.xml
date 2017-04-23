@@ -4,7 +4,7 @@
   <description>An awesome Ionic/Cordova app.</description>
   <author email="Rama.Pulivarthy@nee.com" href="http://ionicframework.com/">Next Era Energy</author>
   <content src="index.html"/>
-  <access origin="*"/>
+  <!--<access origin="*"/>
   <allow-navigation href="http://ionic.local/*"/>
   <allow-navigation href="*://*.example.com/*" />
   <allow-intent href="http://*/*"/>
@@ -19,7 +19,7 @@
   <platform name="ios">
     <allow-intent href="itms:*"/>
     <allow-intent href="itms-apps:*"/>
-  </platform>
+  </platform>-->
   <preference name="webviewbounce" value="false"/>
   <preference name="UIWebViewBounce" value="false"/>
   <preference name="DisallowOverscroll" value="true"/>
