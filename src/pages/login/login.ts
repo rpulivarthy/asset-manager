@@ -7,6 +7,7 @@ import { TabsPage } from '../tabs/tabs';
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html'
+  
 })
 export class LoginPage {
   loading: Loading;
