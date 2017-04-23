@@ -22,7 +22,7 @@ export class DataService {
     authenticateUser(userid: string, password: string) {
         let headers = new Headers({ 'Content-Type': 'application/json' });
         headers.append('Authorization', this.config.apiToken);
-        headers.append('Access-Control-Allow-Origin', '*');
+        headers.append('Access-Control-Allow-Origin', 'Authorization');
         let options = new RequestOptions({ headers: headers });
         return this.http.get(this.config.apiBaseUrl + '/usercredentials?userid=' + userid + '&password=' + password, options).retry(3).map((res: Response) => {
             if (res.status == 200) {
