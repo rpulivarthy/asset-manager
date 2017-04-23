@@ -18,18 +18,15 @@ export class AuthService {
       return Observable.throw("Please insert credentials");
     } else {
       return Observable.create(observer => {
-        this.isUserAuthenticated = false;
         this.dataService.authenticateUser(credentials.email, credentials.password).subscribe((user: User) => {
           this.currentUser = user;
-          if(this.currentUser.email !=""){
-          this.isUserAuthenticated = true;
-        }
-        else{
-          this.isUserAuthenticated=false;
-        }
+          if (this.currentUser.email != "") {
+            this.isUserAuthenticated = true;
+          }
           observer.next(this.isUserAuthenticated);
           observer.complete();
-        })
+
+        });
 
       });
     }

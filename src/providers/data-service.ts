@@ -30,7 +30,7 @@ export class DataService {
             }
             return this.validatedUser;
         })
-
+        //return new User();
     }
     getAssets(): Observable<Assets[]> {
         let headers = new Headers({ 'Content-Type': 'application/json' });
