@@ -23,6 +23,9 @@ export class AuthService {
           if (this.currentUser.email != "") {
             this.isUserAuthenticated = true;
           }
+          else {
+            this.isUserAuthenticated = false;
+          }
           observer.next(this.isUserAuthenticated);
           observer.complete();
 
