@@ -1,8 +1,24 @@
 page-login {
- 
+  overflow: auto;
+  .content-md,.item-md  {
+    background: transparent
+  };
+  .scroll-content {
+    background:rgba(255,255,255,0.7);
+    max-width: 350px;
+    height: 350px;
+    overflow: hidden;
+    top: 100px;
+    left: 20px;
+    right: 20px;
+    bottom: 20px;
+    margin: 0 auto 20px auto;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+  }
   .login-content {
      background-image: url(../assets/img/windturbine3.jpg);
-    //background: #1780b5;
  
     .logo-row {
       align-content: center;
@@ -10,7 +26,6 @@ page-login {
     }
  
     .login-box {
-     // background: #ffffff;
       margin-top: 20px;
     }
  
@@ -20,13 +35,9 @@ page-login {
      }
  
      ion-item {
-     //    border-radius: 30px !important;
          padding-left: 0 !important;
          font-size: 0.9em;
          margin-bottom: 10px;
-   //      border: 4px solid #1780b5;
-   //      border-bottom: 4px !important;
-   //      box-shadow: none !important;
      }
 
      .item-md.item-block .item-inner {padding: 0;}
@@ -42,21 +53,8 @@ page-login {
        padding-bottom: 20px;
        
      }
- 
-    //  .item-inner {
-    //    border-bottom-color: #1780b5 !important;
-    //    box-shadow: none !important;
-    //  }
- 
      .submit-btn {
        background: #7DBF43;
-       //border-radius: 30px !important;
-       //border: 1px solid #ffffff;
      }
- 
-    //  .register-btn {
-    //    color: #ffffff;
-    //    font-size: 0.8em;
-    //  }
   }
 }
