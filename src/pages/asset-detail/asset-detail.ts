@@ -1,10 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
 import { NavController, NavParams, LoadingController, Loading } from 'ionic-angular';
-import { AssetDetail } from './asset-detail.model';
 import { Chart } from 'chart.js';
 import { Assets, AssetDetails } from '../../shared/dataModel';
 import { DataService } from '../../providers/data-service';
-import { DecimalRestrictSize } from './decimalRestrictPipe';
 
 
 @Component({

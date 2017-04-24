@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, VirtualScroll } from 'ionic-angular';
+import { NavController, NavParams  } from 'ionic-angular';
 import { AssetDetailPage } from '../pages';
 import { AuthService } from '../../providers/auth-service';
 import { DataService } from '../../providers/data-service';
 import { LoginPage } from '../pages';
-import { Assets, AssetDetails, AssetWithNodes } from '../../shared/dataModel';
-//import { PaginationComponent } from './src/pagination.component';
+import { Assets, AssetWithNodes } from '../../shared/dataModel';
 
 @Component({
   selector: 'page-assets',
