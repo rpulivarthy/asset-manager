@@ -4,7 +4,7 @@ import { AssetDetailPage } from '../pages';
 import { AuthService } from '../../providers/auth-service';
 import { DataService } from '../../providers/data-service';
 import { LoginPage } from '../pages';
-import { Assets, AssetWithNodes } from '../../shared/dataModel';
+import { Assets } from '../../shared/dataModel';
 
 @Component({
   selector: 'page-assets',
@@ -24,7 +24,7 @@ export class AssetsPage {
     this.firstsearchtext = "";
   }
   loadAssets() {
-    var Nodes: Assets[] = new Array<Assets>();
+    //var Nodes: Assets[] = new Array<Assets>();
     this.nonAdminNodes = [
       { "NY_NodeName": "Rocky Road 1(932ROCK12KVRR-1)", "NY_NodeID": "32417665" },
       { "NY_NodeName": "Rocky Road 2(932ROCK12KVRR-2)", "NY_NodeID": "32417667" },
