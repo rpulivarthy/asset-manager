@@ -42,11 +42,13 @@ export class AssetsPage {
     else {
       this.showSearch = true;
       //alert(this.firstsearchtext);
-      // if (this.authService.isUserAuthenticated) {
-      //   this.dataService.getAssets(this.firstsearchtext).subscribe((assets: Assets[]) => {
-      //     this.assets = assets;
-      //   });
-      // }
+      if (this.firstsearchtext != "") {
+        if (this.authService.isUserAuthenticated) {
+          this.dataService.getAssets(this.firstsearchtext).subscribe((assets: Assets[]) => {
+            this.assets = assets;
+          });
+        }
+      }
     }
 
   }
