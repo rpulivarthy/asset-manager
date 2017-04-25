@@ -37,7 +37,7 @@ export class DataService {
         headers.append('Authorization', this.config.apiToken);
         headers.append('Access-Control-Allow-Origin', '*');
         let options = new RequestOptions({ headers: headers });
-        return this.http.get(this.config.apiBaseUrl + '/lmp/nodes', options).retry(3).map((res: Response) => {
+        return this.http.get(this.config.apiBaseUrl + '/lmp/nodes?searchText='+searchText, options).retry(3).map((res: Response) => {
             this.assetSet = res.json();
             return this.assetSet;
         })
