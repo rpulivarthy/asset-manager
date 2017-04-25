@@ -1,8 +1,8 @@
 <ion-header>
-  <ion-navbar color="primary"> 
+  <ion-navbar color="primary">
     <ion-title>Assets</ion-title>
     <ion-buttons end>
-        <button ion-button (click)=logOut()>
+      <button ion-button (click)=logOut()>
           <ion-icon name="log-out"></ion-icon>
         </button>
     </ion-buttons>
@@ -11,16 +11,17 @@
 
 
 <ion-content class="asset-content" padding>
-  <ion-item>
-    <ion-input [(ngModel)]="firstsearchtext" name="firstsearchtextinput" class="form-control" (keyup)="filterChanged(firstsearchtext)"
-                                                placeholder="Start typing to filter assets...." id="inputGroup"></ion-input>
+
+  <ion-item *ngIf="showSearch">
+    <ion-input padding-right [(ngModel)]="firstsearchtext" name="firstsearchtextinput" placeholder="Enter atleast 3 characters to search.."></ion-input>
+    <button *ngIf="showSearchbutton()" ion-button icon-search item-right (click)="loadAssets()">Search.. <ion-icon></ion-icon></button>
   </ion-item>
- 
+
   <!--<ion-header-bar>{{assets.length}}</ion-header-bar>-->
-  <ion-list [virtualScroll]="filteredAssets">
+  <ion-list [virtualScroll]="assets">
     <div class="asset-item" ion-item *virtualItem="let asset">
       <div class="header"><span class="assetTitle">{{asset.NY_NodeName}}</span>
-         <ion-buttons end>
+        <ion-buttons end>
           <button ion-button (click)=goToAssetDetail(asset)>
             <ion-icon name="arrow-forward"></ion-icon>
           </button>
@@ -33,15 +34,15 @@
         <button class="price">25.36</button>
         <div>RT</div>
         <button class="price">25.36</button>-->
-        <!--<ion-icon class="arrow" name="arrow-forward"></ion-icon>-->
-        <!--<ion-buttons end>
+      <!--<ion-icon class="arrow" name="arrow-forward"></ion-icon>-->
+      <!--<ion-buttons end>
           <button ion-button (click)=logOut()>
             <ion-icon name="arrow-forward"></ion-icon>
           </button>
         </ion-buttons>-->
       <!--</div>-->
     </div>
-   
+
     <!--<ion-item *ngFor="let asset of assets" (click)="goToAssetDetail(asset)">
       <ion-label>{{asset}}</ion-label>
       
@@ -58,7 +59,7 @@
       </ion-buttons>
       </div>
     </ion-item>-->
-     <!--<ion-infinite-scroll on-infinite="loadMoreData()" distance="1%">
+    <!--<ion-infinite-scroll on-infinite="loadMoreData()" distance="1%">
         <ion-infinite-scroll-content
                 loadingSpinner="bubbles"
                 loadingText="Loading more data...">

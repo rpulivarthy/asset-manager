@@ -32,7 +32,7 @@ export class DataService {
         })
         //return new User();
     }
-    getAssets(): Observable<Assets[]> {
+    getAssets(searchText:string): Observable<Assets[]> {
         let headers = new Headers({ 'Content-Type': 'application/json' });
         headers.append('Authorization', this.config.apiToken);
         headers.append('Access-Control-Allow-Origin', '*');
