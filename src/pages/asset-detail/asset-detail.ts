@@ -11,24 +11,25 @@ import { DataService } from '../../providers/data-service';
 })
 export class AssetDetailPage {
   @ViewChild('lineCanvas') lineCanvas;
-
   asset: Assets;
   assetDetail: AssetDetails[];
   loading: Loading;
   lineChart: any;
-  //selectedDate: Date;
-  //endDate: Date;
   selectedDateString: string;
-  // endDateString: string;
+  selectedDateModel: string;
+  selectedDate: Date;
   dummyAssetDetail: AssetDetails[];
-
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private loadingCtrl: LoadingController, private dataService: DataService) {
     this.asset = navParams.get('assetSelected');
-
-    var today = new Date();
-    var dd = today.getDate();
-    var mm = today.getMonth() + 1; //January is 0!
+    this.selectedDateModel = new Date().toISOString();
+    this.selectedDate = new Date();
+    this.dummyAssetDetail = new Array<AssetDetails>();// [{ "DATE": "", "HE_Time": "", "RT_CONGESTION": "", "RT_LOSS": "", "RT_PRICE": "", "DA_CONGESTION": "", "DA_LOSS": "", "DA_PRICE": "" }];
+    this.getAssetDetails();
+  }
+  convertToDesiredDateString(convertableDate: Date): string {
+    var dd = convertableDate.getDate();
+    var mm = convertableDate.getMonth() + 1; //January is 0!
     var mmString = "";
     var ddString = "";
     if (mm < 10) {
@@ -41,16 +42,13 @@ export class AssetDetailPage {
     } else {
       ddString = dd.toString();
     }
-    var yyyy = today.getFullYear();
+    var yyyy = convertableDate.getFullYear();
     this.selectedDateString = yyyy.toString() + '-' + mmString + '-' + ddString;
-    this.dummyAssetDetail = [{ "DATE": "", "HE_Time": "", "RT_CONGESTION": "", "RT_LOSS": "", "RT_PRICE": "", "DA_CONGESTION": "", "DA_LOSS": "", "DA_PRICE": "" }];
-    this.getAssetDetails();
+    return this.selectedDateString;
   }
-
   getAssetDetails() {
-    // if (this.selectedDate != null) {
-    //   this.selectedDateString = this.selectedDate.toString();
-    // }
+    this.selectedDate = new Date(this.selectedDateModel);
+    this.selectedDateString = this.convertToDesiredDateString(this.selectedDate);
     this.selectedDateString = this.selectedDateString.replace('-', '');
     this.selectedDateString = this.selectedDateString.replace('-', '');
     this.dataService.getAssetDetails(this.asset.NY_NodeID, this.selectedDateString, this.selectedDateString).subscribe((assetdetail: AssetDetails[]) => {
@@ -60,7 +58,7 @@ export class AssetDetailPage {
   }
   showLoading() {
     this.loading = this.loadingCtrl.create({
-      content: 'Please wait...'
+      content: 'Fetching Nodes, please wait....'
     });
     this.loading.present();
   }

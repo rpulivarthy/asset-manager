@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams,LoadingController,Loading } from 'ionic-angular';
 import { AssetDetailPage } from '../pages';
 import { AuthService } from '../../providers/auth-service';
 import { DataService } from '../../providers/data-service';
 import { LoginPage } from '../pages';
 import { Assets } from '../../shared/dataModel';
+
 
 @Component({
   selector: 'page-assets',
@@ -13,18 +14,16 @@ import { Assets } from '../../shared/dataModel';
 export class AssetsPage {
 
   assets: Assets[];
-  // filteredAssets: Assets[];
-  // assetNodes: Assets[];
+  loading: Loading;
   nonAdminNodes: Assets[];
   showSearch: boolean;
   firstsearchtext: string;
 
-  constructor(public navCtrl: NavController, private authService: AuthService, private dataService: DataService, public navParams: NavParams, ) {
+  constructor(public navCtrl: NavController,private loadingCtrl: LoadingController, private authService: AuthService, private dataService: DataService, public navParams: NavParams, ) {
     this.showSearch = false;
     this.firstsearchtext = "";
   }
   loadAssets() {
-    //var Nodes: Assets[] = new Array<Assets>();
     this.nonAdminNodes = [
       { "NY_NodeName": "Rocky Road 1(932ROCK12KVRR-1)", "NY_NodeID": "32417665" },
       { "NY_NodeName": "Rocky Road 2(932ROCK12KVRR-2)", "NY_NodeID": "32417667" },
@@ -41,16 +40,23 @@ export class AssetsPage {
     }
     else {
       this.showSearch = true;
-      //alert(this.firstsearchtext);
       if (this.firstsearchtext != "") {
+        this.showLoading();
         if (this.authService.isUserAuthenticated) {
           this.dataService.getAssets(this.firstsearchtext).subscribe((assets: Assets[]) => {
+            this.loading.dismiss();
             this.assets = assets;
           });
         }
       }
     }
 
+  }
+  showLoading() {
+    this.loading = this.loadingCtrl.create({
+      content: 'Fetching Nodes, please wait....'
+    });
+    this.loading.present();
   }
   showSearchbutton() {
     if (this.firstsearchtext.length >= 3) {

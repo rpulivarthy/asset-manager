@@ -15,15 +15,8 @@
   
   <ion-item class="datePickerContainer">
     <ion-label>Select a Date</ion-label>
-    <ion-datetime  [(ngModel)]="selectedDateString" (ngModelChange)="getAssetDetails()"></ion-datetime>
+    <ion-datetime  [(ngModel)]="selectedDateModel" (ngModelChange)="getAssetDetails()"></ion-datetime>
   </ion-item>
-  <!--<ion-item>
-    <ion-label>Select End Date</ion-label>
-    <ion-datetime   min="{{startDate}}" [(ngModel)]="endDate" (ngModelChange)="getAssetDetails()"></ion-datetime>
-  </ion-item>-->
-  <!--<ion-item>
-   <button ion-button round  color="default" (click)="getAssetDetails()">Click for selected dates Assets</button>
-  </ion-item>-->
   <ion-row class="grid-header">
     <ion-col width-50 class="text-center">
       <strong>Date & HE Time</strong>
@@ -44,7 +37,7 @@
       <ion-col width-50 class="text-center">
         {{asset.DATE }} at {{asset.HE_Time}}
       </ion-col>
-      <!--<ion-col class="text-center" style="background:burlywood">
+      <!--<ion-col class="text-center">
         {{asset.HE_Time}}
       </ion-col>-->
       <ion-col class="text-center">
