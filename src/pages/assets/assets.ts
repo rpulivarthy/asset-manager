@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams,LoadingController,Loading } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, Loading } from 'ionic-angular';
 import { AssetDetailPage } from '../pages';
 import { AuthService } from '../../providers/auth-service';
 import { DataService } from '../../providers/data-service';
@@ -18,10 +18,11 @@ export class AssetsPage {
   nonAdminNodes: Assets[];
   showSearch: boolean;
   firstsearchtext: string;
-
-  constructor(public navCtrl: NavController,private loadingCtrl: LoadingController, private authService: AuthService, private dataService: DataService, public navParams: NavParams, ) {
+  showNoNodesFound: boolean;
+  constructor(public navCtrl: NavController, private loadingCtrl: LoadingController, private authService: AuthService, private dataService: DataService, public navParams: NavParams, ) {
     this.showSearch = false;
     this.firstsearchtext = "";
+    this.showNoNodesFound = false;
   }
   loadAssets() {
     this.nonAdminNodes = [
@@ -41,10 +42,14 @@ export class AssetsPage {
     else {
       this.showSearch = true;
       if (this.firstsearchtext != "") {
+        this.showNoNodesFound = false;
         this.showLoading();
         if (this.authService.isUserAuthenticated) {
           this.dataService.getAssets(this.firstsearchtext).subscribe((assets: Assets[]) => {
             this.loading.dismiss();
+            if (assets.length == 0) {
+              this.showNoNodesFound = true;
+            }
             this.assets = assets;
           });
         }
@@ -54,7 +59,7 @@ export class AssetsPage {
   }
   showLoading() {
     this.loading = this.loadingCtrl.create({
-      content: 'Fetching Nodes, please wait....'
+      content: 'Fetching Nodes....'
     });
     this.loading.present();
   }

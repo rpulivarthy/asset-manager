@@ -17,7 +17,7 @@
     <button *ngIf="showSearchbutton()" ion-button item-right (click)="loadAssets()">Go.. <ion-icon name="search"></ion-icon></button>
   </ion-item>
 
-  <!--<ion-header-bar>{{assets.length}}</ion-header-bar>-->
+  <ion-label class="text-center" *ngIf="showNoNodesFound" floating>No nodes found....</ion-label>
   <ion-list [virtualScroll]="assets">
     <div class="asset-item" ion-item *virtualItem="let asset">
       <div class="header"><span class="assetTitle">{{asset.NY_NodeName}}</span>
