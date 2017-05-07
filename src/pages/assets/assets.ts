@@ -35,7 +35,7 @@ export class AssetsPage {
       { "NY_NodeName": "Elgin 3(960ELGI13.5KVEE-3)", "NY_NodeID": "32417795" },
       { "NY_NodeName": "Elgin 4(960ELGI13.5KVEE-4)", "NY_NodeID": "32417797" }
     ]
-    if (this.authService.currentUser.role != "Admin") {
+    if (this.authService.currentUser.role == "Nonadmin") {
       this.showSearch = false;
       this.assets = this.nonAdminNodes;
     }
@@ -44,18 +44,27 @@ export class AssetsPage {
       if (this.firstsearchtext != "") {
         this.showNoNodesFound = false;
         this.showLoading();
-        if (this.authService.isUserAuthenticated) {
-          this.dataService.getAssets(this.firstsearchtext).subscribe((assets: Assets[]) => {
-            this.loading.dismiss();
-            if (assets.length == 0) {
-              this.showNoNodesFound = true;
-            }
-            this.assets = assets;
-          });
+        if (this.authService.currentUser.role == "Admin") {
+          this.assetsAPI(null);
         }
+        else if (this.authService.currentUser.role == "Misoadmin") {
+          this.assetsAPI("miso");
+        }
+
       }
     }
 
+  }
+  assetsAPI(region: string) {
+    if (this.authService.isUserAuthenticated) {
+      this.dataService.getAssets(this.firstsearchtext, region).subscribe((assets: Assets[]) => {
+        this.loading.dismiss();
+        if (assets.length == 0) {
+          this.showNoNodesFound = true;
+        }
+        this.assets = assets;
+      });
+    }
   }
   showLoading() {
     this.loading = this.loadingCtrl.create({

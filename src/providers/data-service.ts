@@ -32,16 +32,23 @@ export class DataService {
         })
         //return new User();
     }
-    getAssets(searchText:string): Observable<Assets[]> {
+    getAssets(searchText: string, region: string): Observable<Assets[]> {
         let headers = new Headers({ 'Content-Type': 'application/json' });
         headers.append('Authorization', this.config.apiToken);
         headers.append('Access-Control-Allow-Origin', '*');
         let options = new RequestOptions({ headers: headers });
-        return this.http.get(this.config.apiBaseUrl + '/lmp/nodes?searchText='+searchText, options).retry(3).map((res: Response) => {
-            this.assetSet = res.json();
-            return this.assetSet;
-        })
-
+        if (region == null) {
+            return this.http.get(this.config.apiBaseUrl + '/lmp/nodes?searchNodeText=' + searchText + '&region=', options).retry(3).map((res: Response) => {
+                this.assetSet = res.json();
+                return this.assetSet;
+            })
+        }
+        else {
+            return this.http.get(this.config.apiBaseUrl + '/lmp/nodes?searchNodeText=' + searchText + '&region=' + region, options).retry(3).map((res: Response) => {
+                this.assetSet = res.json();
+                return this.assetSet;
+            })
+        }
     }
     getAssetDetails(assetId: string, startdateinput: string, enddateinput: string): Observable<AssetDetails[]> {
 
