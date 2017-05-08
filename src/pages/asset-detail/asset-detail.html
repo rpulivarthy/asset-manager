@@ -19,23 +19,23 @@
   </ion-item>
   <ion-row class="grid-header">
     <ion-col width-50 class="text-center">
-      <strong>Date & HE Time</strong>
+      <strong> HE</strong>
     </ion-col>
     <!--<ion-col>
       <strong class="text-center">HE Time</strong>
     </ion-col>-->
     <ion-col class="text-center">
-      <strong>DA Price</strong>
+      <strong>DA</strong>
     </ion-col>
     <ion-col class="text-center">
-      <strong>RT Price</strong>
+      <strong>RT</strong>
     </ion-col>
   </ion-row>
 
   <ion-grid>
     <ion-row class="grid-data" *ngFor="let asset of assetDetail">
       <ion-col width-50 class="text-center">
-        {{asset.DATE }} at {{asset.HE_Time}}
+         {{asset.HE_Time}}
       </ion-col>
       <!--<ion-col class="text-center">
         {{asset.HE_Time}}
