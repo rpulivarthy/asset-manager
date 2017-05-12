@@ -1,7 +1,7 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
-import { AssetsPage, AssetDetailPage, AlertsPage, LoginPage } from '../pages/pages';
+import { AssetsPage, AssetDetailPage, AlertsPage, LoginPage,PopularNodes } from '../pages/pages';
 import { TabsPage } from '../pages/tabs/tabs';
 import { AuthService } from '../providers/auth-service';
 import { DataService } from '../providers/data-service';
@@ -18,7 +18,8 @@ import {DecimalRestrictSize} from '../pages/asset-detail/decimalRestrictPipe';
     AlertsPage,
     LoginPage,
     TabsPage,
-    DecimalRestrictSize
+    DecimalRestrictSize,
+    PopularNodes
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -30,7 +31,8 @@ import {DecimalRestrictSize} from '../pages/asset-detail/decimalRestrictPipe';
     AssetDetailPage,
     AlertsPage,
     LoginPage,
-    TabsPage
+    TabsPage,
+    PopularNodes
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, AuthService,DataService,Configuration,DecimalRestrictSize]
 })

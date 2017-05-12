@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, LoadingController, Loading } from 'ionic-angular';
+import { NavController, NavParams, LoadingController,ViewController , Loading,ModalController } from 'ionic-angular';
 import { AssetDetailPage } from '../pages';
+import { PopularNodes } from '../pages';
 import { AuthService } from '../../providers/auth-service';
 import { DataService } from '../../providers/data-service';
 import { LoginPage } from '../pages';
@@ -19,9 +20,10 @@ export class AssetsPage {
   showSearch: boolean;
   firstsearchtext: string;
   showNoNodesFound: boolean;
-  constructor(public navCtrl: NavController, private loadingCtrl: LoadingController, private authService: AuthService, private dataService: DataService, public navParams: NavParams, ) {
+  popularNodesText:string;
+  constructor(public navCtrl: NavController, private loadingCtrl: LoadingController, private authService: AuthService, private dataService: DataService, public navParams: NavParams,public modalCtrl: ModalController ) {
     this.showSearch = false;
-    this.firstsearchtext = "";
+    this.firstsearchtext =this.popularNodesText= "";
     this.showNoNodesFound = false;
   }
   loadAssets() {
@@ -48,40 +50,19 @@ export class AssetsPage {
           this.showLoading();
           this.assetsAPI(null);
         }
-      }
         else if (this.authService.currentUser.role == "Misoadmin") {
-          this.assets =
-            [
-              { "NY_NodeName": "OTP.ASHTA_FPLP", "NY_NodeID": "OTP.ASHTA_FPLP" },
-              { "NY_NodeName": "OTP.ASHTAII", "NY_NodeID": "OTP.ASHTAII" },
-              { "NY_NodeName": "OTP.ASHTAIII", "NY_NodeID": "OTP.ASHTAIII" },
-              { "NY_NodeName": "ALTW.CRYSTAL1", "NY_NodeID": "ALTW.CRYSTAL1" },
-              { "NY_NodeName": "ALTW.CRYSTAL2", "NY_NodeID": "ALTW.CRYSTAL2" },
-              { "NY_NodeName": "ALTW.CRYSTAL3", "NY_NodeID": "ALTW.CRYSTAL3" },
-              { "NY_NodeName": "ALTW.ENDV", "NY_NodeID": "ALTW.ENDV" },
-              { "NY_NodeName": "ALTW.ENDV1", "NY_NodeID": "ALTW.ENDV1" },
-              { "NY_NodeName": "ALTW.ENDV2", "NY_NodeID": "ALTW.ENDV2" },
-              { "NY_NodeName": "ALTW.ENDV3", "NY_NodeID": "ALTW.ENDV3" },
-              { "NY_NodeName": "ALTW.ENDV4", "NY_NodeID": "ALTW.ENDV4" },
-              { "NY_NodeName": "ALTW.ENDVI", "NY_NodeID": "ALTW.ENDVI" },
-              { "NY_NodeName": "OTP.LANGDN1", "NY_NodeID": "OTP.LANGDN1" },
-              { "NY_NodeName": "OTP.LANGDN2", "NY_NodeID": "OTP.LANGDN2" },
-              { "NY_NodeName": "ALTW.MOWERCO", "NY_NodeID": "ALTW.MOWERCO" },
-              { "NY_NodeName": "ALTW.MOWERCO1", "NY_NodeID": "ALTW.MOWERCO1" },
-              { "NY_NodeName": "MP.OLIVER12", "NY_NodeID": "MP.OLIVER12" },
-              { "NY_NodeName": "MP.OLIVERC2", "NY_NodeID": "MP.OLIVERC2" },
-              { "NY_NodeName": "MP.OLIVERCO", "NY_NodeID": "MP.OLIVERCO" },
-              { "NY_NodeName": "ALTW.STORYCO", "NY_NodeID": "ALTW.STORYCO" },
-              { "NY_NodeName": "ALTW.STORYCOII", "NY_NodeID": "ALTW.STORYCOII" },
-              { "NY_NodeName": "CONS.TUSCOLA1", "NY_NodeID": "CONS.TUSCOLA1" },
-              { "NY_NodeName": "DECO.TUSCOLA2", "NY_NodeID": "DECO.TUSCOLA2" }
-
-            ]
+         this.showNoNodesFound = false;
+          this.showLoading();
+          this.assetsAPI("miso");
+          this.popularNodesText="Popular Miso Nodes";
         }
-
-      
+      }
     }
 
+  }
+  openPopularNodesModal() {
+    let modal = this.modalCtrl.create(PopularNodes);
+    modal.present();
   }
   assetsAPI(region: string) {
     if (this.authService.isUserAuthenticated) {
