@@ -8,33 +8,38 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/retry';
 import 'rxjs/add/operator/retrywhen';
-import { Assets, AssetDetails, User } from '../shared/dataModel';
+import { Assets, AssetDetails, User,TokenResponse } from '../shared/dataModel';
 
 
 @Injectable()
 export class DataService {
-    //  _baseUrl: string = 'http://hydralink-dev.fpl.com';
     assetSet: Assets[];
     assetDetails: AssetDetails[];
-    validatedUser: User;
+    validatedUser: TokenResponse;
     constructor(private http: Http, private config: Configuration) { }
 
     authenticateUser(userid: string, password: string) {
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        headers.append('Authorization', this.config.apiToken);
+        
+        let body = 'username='+userid+'&password='+password+'&grant_type=password';
+
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/x-www-form-urlencoded');
+        headers.append('Accept', 'application/json');
         headers.append('Access-Control-Allow-Origin', '*');
+        headers.append('Audience', 'NEMOD');
         let options = new RequestOptions({ headers: headers });
-        return this.http.get(this.config.apiBaseUrl + '/usercredentials?userid=' + userid + '&password=' + password, options).retry(3).map((res: Response) => {
+
+        return this.http.post(this.config.apiBaseUrl + '/token',body,options).retry(3).map((res: Response) => {
             if (res.status == 200) {
                 this.validatedUser = res.json();
+                localStorage.setItem("access_token",this.validatedUser.access_token);
             }
             return this.validatedUser;
         })
-        //return new User();
     }
     getAssets(searchText: string, region: string): Observable<Assets[]> {
         let headers = new Headers({ 'Content-Type': 'application/json' });
-        headers.append('Authorization', this.config.apiToken);
+        headers.append('Authorization','Bearer '+ localStorage.getItem("access_token"));
         headers.append('Access-Control-Allow-Origin', '*');
         let options = new RequestOptions({ headers: headers });
         if (region == null) {
@@ -53,7 +58,7 @@ export class DataService {
     getAssetDetails(assetId: string, startdateinput: string, enddateinput: string): Observable<AssetDetails[]> {
 
         let headers = new Headers({ 'Content-Type': 'application/json' });
-        headers.append('Authorization', this.config.apiToken);
+        headers.append('Authorization','Bearer '+ localStorage.getItem("access_token"));
         headers.append('Access-Control-Allow-Origin', '*');
         let options = new RequestOptions({ headers: headers, withCredentials: true });
         return this.http.get(this.config.apiBaseUrl + '/lmp/prices?nodeid=' + assetId + '&startdate=' + startdateinput + '&enddate=' + enddateinput, options).retry(3).map((res: Response) => {
