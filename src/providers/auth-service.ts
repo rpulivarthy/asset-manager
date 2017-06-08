@@ -12,7 +12,7 @@ export class AuthService {
   tokenResponse:TokenResponse;
   isUserAuthenticated: boolean;
   constructor(private dataService: DataService) {
-    this.isUserAuthenticated = false;
+    this.isUserAuthenticated = true;
   }
   public login(credentials) {
     if (credentials.email === null || credentials.password === null) {
