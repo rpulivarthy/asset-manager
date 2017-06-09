@@ -19,13 +19,22 @@ export class AssetDetailPage {
   selectedDateModel: string;
   selectedDate: Date;
   dummyAssetDetail: AssetDetails[];
+  maxDate: string;
+  showNoDataFound: boolean;
+  dataFound:string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private loadingCtrl: LoadingController, private dataService: DataService) {
     this.asset = navParams.get('assetSelected');
     this.selectedDateModel = new Date().toISOString();
     this.selectedDate = new Date();
-    this.dummyAssetDetail = new Array<AssetDetails>();// [{ "DATE": "", "HE_Time": "", "RT_CONGESTION": "", "RT_LOSS": "", "RT_PRICE": "", "DA_CONGESTION": "", "DA_LOSS": "", "DA_PRICE": "" }];
+    var today = new Date();
+    var newDate = new Date();
+    newDate.setDate(today.getDate() + 1);
+    this.maxDate = this.convertToDesiredDateString(newDate);
+    this.dummyAssetDetail = new Array<AssetDetails>();
+    this.showNoDataFound = false;
     this.getAssetDetails();
+    this.dataFound="";
   }
   convertToDesiredDateString(convertableDate: Date): string {
     var dd = convertableDate.getDate();
@@ -53,6 +62,14 @@ export class AssetDetailPage {
     this.selectedDateString = this.selectedDateString.replace('-', '');
     this.dataService.getAssetDetails(this.asset.NY_NodeID, this.selectedDateString, this.selectedDateString).subscribe((assetdetail: AssetDetails[]) => {
       this.assetDetail = assetdetail;
+      if (this.assetDetail != null) {
+        this.dataFound="Line Chart";
+        this.showNoDataFound = false;
+      }
+      else {
+        this.dataFound="Data not available for selected date"
+        this.showNoDataFound = true;
+      }
       this.drawLineChart();
     });
   }

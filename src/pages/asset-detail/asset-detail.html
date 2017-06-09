@@ -12,12 +12,13 @@
 
 
 <ion-content padding class="asset-detail-content">
-  
+
   <ion-item class="datePickerContainer">
     <ion-label>Select a Date</ion-label>
-    <ion-datetime  [(ngModel)]="selectedDateModel" (ngModelChange)="getAssetDetails()"></ion-datetime>
+    <ion-datetime [(ngModel)]="selectedDateModel" max="{{maxDate}}" (ngModelChange)="getAssetDetails()"></ion-datetime>
   </ion-item>
-  <ion-row class="grid-header">
+  <ion-row class="grid-header" *ngIf="!showNoDataFound">
+     
     <ion-col width-50 class="text-center">
       <strong> HE</strong>
     </ion-col>
@@ -32,10 +33,10 @@
     </ion-col>
   </ion-row>
 
-  <ion-grid>
+  <ion-grid *ngIf="!showNoDataFound">
     <ion-row class="grid-data" *ngFor="let asset of assetDetail">
       <ion-col width-50 class="text-center">
-         {{asset.HE_Time}}
+        {{asset.HE_Time}}
       </ion-col>
       <!--<ion-col class="text-center">
         {{asset.HE_Time}}
@@ -50,10 +51,10 @@
   </ion-grid>
 
   <ion-card>
-    <ion-card-header>
-      Line Chart
+    <ion-card-header>{{dataFound}}
+     
     </ion-card-header>
-    <ion-card-content >
+    <ion-card-content>
       <canvas #lineCanvas></canvas>
     </ion-card-content>
   </ion-card>
