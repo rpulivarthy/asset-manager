@@ -16,26 +16,26 @@ export class DataService {
     assetDetails: AssetDetails[];
     validatedUser: TokenResponse;
     constructor(private http: Http, private config: Configuration) {
-        this.validatedUser=new TokenResponse();
-        this.validatedUser.access_token="no_token";
-     }
+    }
 
-    authenticateUser(userid: string, password: string): TokenResponse {
+    authenticateUser(userid: string, password: string) {
         let body = 'userName=' + userid + '&password=' + password + '&grant_type=password';
         let headers = new Headers();
         headers.append('Accept', 'application/json');
         headers.append('Content-Type', 'application/x-www-form-urlencoded');
-      //  headers.append('Access-Control-Allow-Origin', '*');
+        //  headers.append('Access-Control-Allow-Origin', '*');
         let options = new RequestOptions({ headers: headers });
-        this.http.post(this.config.apiBaseUrl + '/token', body, options).subscribe((res: Response) => {
+        return this.http.post(this.config.apiBaseUrl + '/token', body, options).map((res: Response) => {
             if (res.status == 200) {
                 this.validatedUser = res.json();
-                sessionStorage.removeItem("access_token");
+                if (sessionStorage.getItem("access_token") != "") {
+                    sessionStorage.removeItem("access_token");
+                }
                 sessionStorage.setItem("access_token", this.validatedUser.access_token);
             }
-
+            return this.validatedUser;
         })
-        return this.validatedUser;
+
     }
 
     getAssets(searchText: string, region: string): Observable<Assets[]> {
@@ -44,13 +44,13 @@ export class DataService {
         //      headers.append('Access-Control-Allow-Origin', '*');
         let options = new RequestOptions({ headers: headers });
         if (region == null) {
-            return this.http.get(this.config.apiBaseUrl + '/lmp/nodes?searchNodeText=' + searchText + '&region=', options).retry(3).map((res: Response) => {
+            return this.http.get(this.config.apiBaseUrl + '/lmp/nodes?searchText=' + searchText + '&region=', options).retry(3).map((res: Response) => {
                 this.assetSet = res.json();
                 return this.assetSet;
             })
         }
         else {
-            return this.http.get(this.config.apiBaseUrl + '/lmp/nodes?searchNodeText=' + searchText + '&region=' + region, options).retry(3).map((res: Response) => {
+            return this.http.get(this.config.apiBaseUrl + '/lmp/nodes?searchText=' + searchText + '&region=' + region, options).retry(3).map((res: Response) => {
                 this.assetSet = res.json();
                 return this.assetSet;
             })

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
-import { User, TokenResponse } from '../shared/dataModel';
+import { User, TokenResponse,DecodeToken } from '../shared/dataModel';
 import { DataService } from '../providers/data-service';
 import * as JWT from 'jwt-decode';
 
@@ -11,6 +11,7 @@ export class AuthService {
   currentUser: User;
   tokenResponse: TokenResponse;
   isUserAuthenticated: boolean;
+  decodedTokenResponse:DecodeToken;
   constructor(private dataService: DataService) {
     this.isUserAuthenticated = false;
   }
@@ -19,24 +20,18 @@ export class AuthService {
       return Observable.throw("Please insert credentials");
     } else {
       return Observable.create(observer => {
-        this.tokenResponse = this.dataService.authenticateUser(credentials.email, credentials.password);
-        if (this.tokenResponse.access_token != "no_token") {
-          this.isUserAuthenticated = true;
-          this.currentUser = new User();
-          this.currentUser.role = "Admin";
-          alert("OK_TEST");
-        }
-        // .subscribe((tokenObj: TokenResponse) => {
-        //   this.tokenResponse = tokenObj;
-        //   if(this.tokenResponse.access_token !=""){
-        //     var decoded=JWT(this.tokenResponse.access_token);
-        //     this.isUserAuthenticated=true;
-        //   }
-        observer.next(this.isUserAuthenticated);
-        observer.complete();
-
-        // });
-
+        this.dataService.authenticateUser(credentials.email, credentials.password).subscribe((tokenObj: TokenResponse) => {
+          this.tokenResponse = tokenObj;
+          if (this.tokenResponse.access_token != "") {
+           this.decodedTokenResponse= JWT(this.tokenResponse.access_token);
+            this.isUserAuthenticated = true;
+            this.currentUser=new User();
+            this.currentUser.role=this.decodedTokenResponse.role;
+            this.currentUser.email=this.currentUser.name=this.decodedTokenResponse.unique_name;
+          }
+          observer.next(this.isUserAuthenticated);
+          observer.complete();
+        })
       });
     }
   }

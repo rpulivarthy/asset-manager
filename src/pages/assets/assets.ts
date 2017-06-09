@@ -28,16 +28,16 @@ export class AssetsPage {
   }
   loadAssets() {
     this.nonAdminNodes = [
-      { "NY_NodeName": "Rocky Road 1(932ROCK12KVRR-1)", "NY_NodeID": "32417665" },
-      { "NY_NodeName": "Rocky Road 2(932ROCK12KVRR-2)", "NY_NodeID": "32417667" },
-      { "NY_NodeName": "Rocky Road 3(932ROCK12KVRR-3)", "NY_NodeID": "32417669" },
-      { "NY_NodeName": "Rocky Road 4(932ROCK12KVRR-4)", "NY_NodeID": "32417671" },
       { "NY_NodeName": "Elgin 1(960ELGI13.5KVEE-1)", "NY_NodeID": "32417791" },
       { "NY_NodeName": "Elgin 2(960ELGI13.5KVEE-2)", "NY_NodeID": "32417793" },
       { "NY_NodeName": "Elgin 3(960ELGI13.5KVEE-3)", "NY_NodeID": "32417795" },
-      { "NY_NodeName": "Elgin 4(960ELGI13.5KVEE-4)", "NY_NodeID": "32417797" }
+      { "NY_NodeName": "Elgin 4(960ELGI13.5KVEE-4)", "NY_NodeID": "32417797" },
+      { "NY_NodeName": "Rocky Road 1(932ROCK12KVRR-1)", "NY_NodeID": "32417665" },
+      { "NY_NodeName": "Rocky Road 2(932ROCK12KVRR-2)", "NY_NodeID": "32417667" },
+      { "NY_NodeName": "Rocky Road 3(932ROCK12KVRR-3)", "NY_NodeID": "32417669" },
+      { "NY_NodeName": "Rocky Road 4(932ROCK12KVRR-4)", "NY_NodeID": "32417671" }
     ]
-    if (this.authService.currentUser.role == "Nonadmin") {
+    if (this.authService.currentUser.role.toLowerCase() == "nonadmin") {
       this.showSearch = false;
       this.assets = this.nonAdminNodes;
     }
@@ -45,12 +45,12 @@ export class AssetsPage {
       this.showSearch = true;
       if (this.firstsearchtext != "") {
 
-        if (this.authService.currentUser.role == "Admin") {
+        if (this.authService.currentUser.role.toLowerCase() == "admin") {
           this.showNoNodesFound = false;
           this.showLoading();
           this.assetsAPI(null);
         }
-        else if (this.authService.currentUser.role == "Misoadmin") {
+        else if (this.authService.currentUser.role.toLowerCase() == "misouser") {
          this.showNoNodesFound = false;
           this.showLoading();
           this.assetsAPI("miso");

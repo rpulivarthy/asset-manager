@@ -16,6 +16,14 @@ export class TokenResponse {
     token_type: string;
     expires_in: string;
 }
+export class DecodeToken{
+    aud:string;
+    exp:number;
+    iss:string;
+    nbf:number;
+    role:string;
+    unique_name:string;
+}
 
 export class User {
     name: string;
