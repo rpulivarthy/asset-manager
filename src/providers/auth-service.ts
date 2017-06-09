@@ -1,34 +1,41 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
-import { User,TokenResponse } from '../shared/dataModel';
+import { User, TokenResponse } from '../shared/dataModel';
 import { DataService } from '../providers/data-service';
-import * as JWT from 'jwt-decode'; 
+import * as JWT from 'jwt-decode';
 
 
 @Injectable()
 export class AuthService {
-  currentUser:User;
-  tokenResponse:TokenResponse;
+  currentUser: User;
+  tokenResponse: TokenResponse;
   isUserAuthenticated: boolean;
   constructor(private dataService: DataService) {
-    this.isUserAuthenticated = true;
+    this.isUserAuthenticated = false;
   }
   public login(credentials) {
     if (credentials.email === null || credentials.password === null) {
       return Observable.throw("Please insert credentials");
     } else {
       return Observable.create(observer => {
-        this.dataService.authenticateUser(credentials.email, credentials.password).subscribe((tokenObj: TokenResponse) => {
-          this.tokenResponse = tokenObj;
-          if(this.tokenResponse.access_token !=""){
-            var decoded=JWT(this.tokenResponse.access_token);
-            this.isUserAuthenticated=true;
-          }
-          observer.next(this.isUserAuthenticated);
-          observer.complete();
+        this.tokenResponse = this.dataService.authenticateUser(credentials.email, credentials.password);
+        if (this.tokenResponse.access_token != "no_token") {
+          this.isUserAuthenticated = true;
+          this.currentUser = new User();
+          this.currentUser.role = "Admin";
+          alert("OK_TEST");
+        }
+        // .subscribe((tokenObj: TokenResponse) => {
+        //   this.tokenResponse = tokenObj;
+        //   if(this.tokenResponse.access_token !=""){
+        //     var decoded=JWT(this.tokenResponse.access_token);
+        //     this.isUserAuthenticated=true;
+        //   }
+        observer.next(this.isUserAuthenticated);
+        observer.complete();
 
-        });
+        // });
 
       });
     }
