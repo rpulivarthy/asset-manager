@@ -6,6 +6,7 @@ import * as JWT from 'jwt-decode';
 import { Http, Response, URLSearchParams } from '@angular/http';
 import { Headers, RequestOptions } from '@angular/http';
 import { Configuration } from '../app/app.constants';
+import { NavController, AlertController, LoadingController, Loading } from 'ionic-angular';
 import 'rxjs/add/observable/throw';
 
 @Injectable()
@@ -15,8 +16,10 @@ export class AuthService {
   validatedUser: TokenResponse;
   isUserAuthenticated: boolean;
   decodedTokenResponse: DecodeToken;
-  constructor(private http: Http, private config: Configuration) {
-    this.currentUser=new User();
+  loading: Loading;
+
+  constructor(private http: Http, private config: Configuration, private loadingCtrl: LoadingController) {
+    this.currentUser = new User();
     this.isUserAuthenticated = false;
   }
 
@@ -25,7 +28,6 @@ export class AuthService {
     let headers = new Headers();
     headers.append('Accept', 'application/json');
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
-    //  headers.append('Access-Control-Allow-Origin', '*');
     let options = new RequestOptions({ headers: headers });
     return this.http.post(this.config.apiBaseUrl + '/token', body, options).map((res: Response) => {
       if (res.status == 200) {
@@ -43,6 +45,7 @@ export class AuthService {
     if (credentials.email === null || credentials.password === null) {
       return Observable.throw("Please insert credentials");
     } else {
+      this.showLoading();
       return Observable.create(observer => {
         this.authenticateUser(credentials.email, credentials.password).subscribe((tokenObj: TokenResponse) => {
           this.tokenResponse = tokenObj;
@@ -52,12 +55,19 @@ export class AuthService {
             this.currentUser = new User();
             this.currentUser.role = this.decodedTokenResponse.role;
             this.currentUser.email = this.currentUser.name = this.decodedTokenResponse.unique_name;
+            this.loading.dismiss();
           }
           observer.next(this.isUserAuthenticated);
           observer.complete();
         })
       })
     }
+  }
+  private showLoading() {
+    this.loading = this.loadingCtrl.create({
+      content: 'Please wait...'
+    });
+    this.loading.present();
   }
 
   public register(credentials) {
@@ -71,15 +81,6 @@ export class AuthService {
       });
     }
   }
-
-  // public getUserInfo(email:string) : User {
-  //   this.allusers.forEach(element => {
-  //     if(element.email==email){
-  //       this.currentUser=element;
-  //     }
-  //   });
-  //   return this.currentUser;
-  // }
 
   public logout() {
     return Observable.create(observer => {

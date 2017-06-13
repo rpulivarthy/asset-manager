@@ -58,3 +58,11 @@ page-login {
      }
   }
 }
+.toast-controller-login-error .toast-wrapper{
+   text-align:center;
+   background:lightcoral;
+}
+.toast-controller-login-success .toast-wrapper{
+  text-align:center;
+  background: lightseagreen;
+}
