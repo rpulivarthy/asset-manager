@@ -2,41 +2,23 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, URLSearchParams } from '@angular/http';
 import { Headers, RequestOptions } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs/Rx';
 import { Configuration } from '../app/app.constants';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/retry';
 import 'rxjs/add/operator/retrywhen';
+import 'rxjs/add/observable/throw';
+import { AuthService } from '../providers/auth-service';
 import { Assets, AssetDetails, User, TokenResponse } from '../shared/dataModel';
 
 @Injectable()
 export class DataService {
     assetSet: Assets[];
     assetDetails: AssetDetails[];
-    validatedUser: TokenResponse;
-    constructor(private http: Http, private config: Configuration) {
+    constructor(private http: Http, private config: Configuration, private authService: AuthService) {
     }
 
-    authenticateUser(userid: string, password: string) {
-        let body = 'userName=' + userid + '&password=' + password + '&grant_type=password';
-        let headers = new Headers();
-        headers.append('Accept', 'application/json');
-        headers.append('Content-Type', 'application/x-www-form-urlencoded');
-        //  headers.append('Access-Control-Allow-Origin', '*');
-        let options = new RequestOptions({ headers: headers });
-        return this.http.post(this.config.apiBaseUrl + '/token', body, options).map((res: Response) => {
-            if (res.status == 200) {
-                this.validatedUser = res.json();
-                if (sessionStorage.getItem("access_token") != "") {
-                    sessionStorage.removeItem("access_token");
-                }
-                sessionStorage.setItem("access_token", this.validatedUser.access_token);
-            }
-            return this.validatedUser;
-        })
-
-    }
 
     getAssets(searchText: string, region: string): Observable<Assets[]> {
         let headers = new Headers({ 'Content-Type': 'application/json' });

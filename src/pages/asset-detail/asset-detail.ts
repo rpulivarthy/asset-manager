@@ -3,6 +3,7 @@ import { NavController, NavParams, LoadingController, Loading } from 'ionic-angu
 import { Chart } from 'chart.js';
 import { Assets, AssetDetails } from '../../shared/dataModel';
 import { DataService } from '../../providers/data-service';
+import { ToastController } from 'ionic-angular';
 
 
 @Component({
@@ -23,7 +24,7 @@ export class AssetDetailPage {
   showNoDataFound: boolean;
   dataFound:string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private loadingCtrl: LoadingController, private dataService: DataService) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private loadingCtrl: LoadingController, private dataService: DataService,private toast:ToastController) {
     this.asset = navParams.get('assetSelected');
     this.selectedDateModel = new Date().toISOString();
     this.selectedDate = new Date();
@@ -67,6 +68,13 @@ export class AssetDetailPage {
         this.showNoDataFound = false;
       }
       else {
+         let toast = this.toast.create({
+            message:'Data not available for selected date',
+            duration: 3000,
+            position: 'top',
+            cssClass:"toast-controller-error"
+          });
+          toast.present();
         this.dataFound="Data not available for selected date"
         this.showNoDataFound = true;
       }

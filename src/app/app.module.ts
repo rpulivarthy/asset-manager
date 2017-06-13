@@ -7,7 +7,7 @@ import { AuthService } from '../providers/auth-service';
 import { DataService } from '../providers/data-service';
 import { Configuration } from './app.constants';
 import {DecimalRestrictSize} from '../pages/asset-detail/decimalRestrictPipe';
-
+import { MyErrorHandler } from './customErrorHandler';
 
 
 @NgModule({
@@ -34,6 +34,6 @@ import {DecimalRestrictSize} from '../pages/asset-detail/decimalRestrictPipe';
     TabsPage,
     PopularNodes
   ],
-  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, AuthService,DataService,Configuration,DecimalRestrictSize]
+  providers: [{provide: ErrorHandler, useClass: MyErrorHandler}, AuthService,DataService,Configuration,DecimalRestrictSize]
 })
 export class AppModule {}
