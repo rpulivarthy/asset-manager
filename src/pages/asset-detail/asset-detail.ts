@@ -71,8 +71,8 @@ export class AssetDetailPage {
          let toast = this.toast.create({
             message:'Data not available for selected date',
             duration: 3000,
-            position: 'top',
-            cssClass:"toast-controller-error"
+            position: 'middle',
+            cssClass:"toast-controller-warning"
           });
           toast.present();
         this.dataFound="Data not available for selected date"

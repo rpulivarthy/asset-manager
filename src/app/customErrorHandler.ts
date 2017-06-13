@@ -28,7 +28,7 @@ export class MyErrorHandler implements ErrorHandler {
         let toast = this.toast.create({
             message: toasterMessage,
             duration: 3000,
-            position: 'top',
+            position: 'middle',
             cssClass:"toast-controller-errorhandler"
         });
         toast.present();
