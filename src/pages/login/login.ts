@@ -24,7 +24,7 @@ export class LoginPage {
       if (allowed) {
         setTimeout(() => {
           let toast = this.toast.create({
-            message: "Login Successful.Welcome",
+            message: "Login successful.Welcome",
             duration: 2000,
             position: 'top',
             cssClass: "toast-controller-login-success"

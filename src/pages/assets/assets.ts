@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, LoadingController,ViewController , Loading,ModalController } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, ViewController, Loading, ModalController, ToastController } from 'ionic-angular';
 import { AssetDetailPage } from '../pages';
 import { PopularNodes } from '../pages';
 import { AuthService } from '../../providers/auth-service';
@@ -20,10 +20,11 @@ export class AssetsPage {
   showSearch: boolean;
   firstsearchtext: string;
   showNoNodesFound: boolean;
-  popularNodesText:string;
-  constructor(public navCtrl: NavController, private loadingCtrl: LoadingController, private authService: AuthService, private dataService: DataService, public navParams: NavParams,public modalCtrl: ModalController ) {
+  popularNodesText: string;
+  constructor(public navCtrl: NavController, private loadingCtrl: LoadingController, private authService: AuthService,
+    private dataService: DataService, public navParams: NavParams, public modalCtrl: ModalController, private toast: ToastController) {
     this.showSearch = false;
-    this.firstsearchtext =this.popularNodesText= "";
+    this.firstsearchtext = this.popularNodesText = "";
     this.showNoNodesFound = false;
   }
   loadAssets() {
@@ -51,10 +52,10 @@ export class AssetsPage {
           this.assetsAPI(null);
         }
         else if (this.authService.currentUser.role.toLowerCase() == "misouser") {
-         this.showNoNodesFound = false;
+          this.showNoNodesFound = false;
           this.showLoading();
           this.assetsAPI("miso");
-          this.popularNodesText="Popular Miso Nodes";
+          this.popularNodesText = "Popular Miso Nodes";
         }
       }
     }
@@ -72,8 +73,19 @@ export class AssetsPage {
           this.showNoNodesFound = true;
         }
         this.assets = assets;
+      }, error => {
+        let toast = this.toast.create({
+          message: "Session Expired",
+          duration: 3000,
+          position: 'top',
+          cssClass: "toast-controller-asset-errorhandler"
+        });
+        toast.present();
+        this.loading.dismiss();
+        this.navCtrl.push(LoginPage);
       });
     }
+
   }
   showLoading() {
     this.loading = this.loadingCtrl.create({

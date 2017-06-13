@@ -32,10 +32,8 @@ export class MyErrorHandler implements ErrorHandler {
             cssClass:"toast-controller-errorhandler"
         });
         toast.present();
-        this.auth.currentUser = null;
         sessionStorage.removeItem("access_token");
         this.auth.isUserAuthenticated = false;
         this.auth.loading.dismiss();
-        this.auth.logout();
     }
 }

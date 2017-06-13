@@ -9,7 +9,7 @@
   </ion-navbar>
 </ion-header>
 <ion-content class="asset-content" padding>
-  <ion-item style="text-align: center" *ngIf="authService.currentUser.role == 'Misoadmin'">
+  <ion-item style="text-align: center" *ngIf="authService.currentUser.role == 'Misouser'">
     <button ion-button  style="text-transform: none;" (click)="openPopularNodesModal()"
       round>Popular Nodes..</button>
   </ion-item>

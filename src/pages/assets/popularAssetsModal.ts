@@ -43,7 +43,7 @@ export class PopularNodes {
       this.popularNodesText="";
   }
   loadAssets() {
-    if (this.authService.currentUser.role == "Misoadmin") {
+    if (this.authService.currentUser.role == "Misouser") {
       this.popularNodesText="Popular Miso Nodes"
       this.assets = this.misoAssets;
     }
