@@ -17,7 +17,11 @@ page-asset-detail {
     }
 }
 
- .toast-controller-warning .toast-wrapper{
+ .toast-controller-assetdetails-warning .toast-wrapper{
    text-align:center;
    background:lightsalmon;
   }
+ .toast-controller-assetdetails-error .toast-wrapper{
+     text-align:center;
+   background:#B22222;
+ }

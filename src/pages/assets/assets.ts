@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, LoadingController, ViewController, Loading, ModalController, ToastController } from 'ionic-angular';
 import { AssetDetailPage } from '../pages';
-import { PopularNodes } from '../pages';
+import { PopularNodes,LoginPage } from '../pages';
 import { AuthService } from '../../providers/auth-service';
 import { DataService } from '../../providers/data-service';
-import { LoginPage } from '../pages';
 import { Assets } from '../../shared/dataModel';
 
 

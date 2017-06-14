@@ -4,7 +4,7 @@ import { Chart } from 'chart.js';
 import { Assets, AssetDetails } from '../../shared/dataModel';
 import { DataService } from '../../providers/data-service';
 import { ToastController } from 'ionic-angular';
-
+import { LoginPage } from '../pages';
 
 @Component({
   selector: 'page-asset-detail',
@@ -22,9 +22,9 @@ export class AssetDetailPage {
   dummyAssetDetail: AssetDetails[];
   maxDate: string;
   showNoDataFound: boolean;
-  dataFound:string;
+  dataFound: string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private loadingCtrl: LoadingController, private dataService: DataService,private toast:ToastController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private loadingCtrl: LoadingController, private dataService: DataService, private toast: ToastController) {
     this.asset = navParams.get('assetSelected');
     this.selectedDateModel = new Date().toISOString();
     this.selectedDate = new Date();
@@ -35,7 +35,7 @@ export class AssetDetailPage {
     this.dummyAssetDetail = new Array<AssetDetails>();
     this.showNoDataFound = false;
     this.getAssetDetails();
-    this.dataFound="";
+    this.dataFound = "";
   }
   convertToDesiredDateString(convertableDate: Date): string {
     var dd = convertableDate.getDate();
@@ -61,29 +61,42 @@ export class AssetDetailPage {
     this.selectedDateString = this.convertToDesiredDateString(this.selectedDate);
     this.selectedDateString = this.selectedDateString.replace('-', '');
     this.selectedDateString = this.selectedDateString.replace('-', '');
-    this.dataService.getAssetDetails(this.asset.NY_NodeID, this.selectedDateString, this.selectedDateString).subscribe((assetdetail: AssetDetails[]) => {
-      this.assetDetail = assetdetail;
-      if (this.assetDetail != null) {
-        this.dataFound="Line Chart";
-        this.showNoDataFound = false;
-      }
-      else {
-         let toast = this.toast.create({
-            message:'Data not available for selected date',
-            duration: 3000,
-            position: 'middle',
-            cssClass:"toast-controller-warning"
+    this.showLoading();
+    this.dataService.getAssetDetails(this.asset.NY_NodeID, this.selectedDateString, this.selectedDateString)
+      .subscribe((assetdetail: AssetDetails[]) => {
+        this.assetDetail = assetdetail;
+        if (this.assetDetail != null) {
+          this.dataFound = "Line Chart";
+          this.showNoDataFound = false;
+        }
+        else {
+          let toast = this.toast.create({
+            message: 'Data not available for selected date',
+            duration: 4000,
+            position: 'bottom',
+            cssClass: "toast-controller-assetdetails-warning"
           });
           toast.present();
-        this.dataFound="Data not available for selected date"
-        this.showNoDataFound = true;
-      }
-      this.drawLineChart();
-    });
+          this.dataFound = "Data not available for selected date"
+          this.showNoDataFound = true;
+        }
+        this.drawLineChart();
+        this.loading.dismiss();
+      }, error => {
+        let toast = this.toast.create({
+          message: "Session Expired",
+          duration: 3000,
+          position: 'middle',
+          cssClass: "toast-controller-assetdetails-error"
+        });
+        toast.present();
+        this.loading.dismiss();
+        this.navCtrl.push(LoginPage);
+      });
   }
   showLoading() {
     this.loading = this.loadingCtrl.create({
-      content: 'Fetching Nodes, please wait....'
+      content: 'Fetching data, please wait....'
     });
     this.loading.present();
   }
@@ -153,8 +166,7 @@ export class AssetDetailPage {
   }
 
   refresh() {
-    this.showLoading();
-    this.loading.dismiss();
+    this.getAssetDetails();
   }
 
 }
