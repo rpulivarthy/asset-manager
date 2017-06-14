@@ -82,7 +82,7 @@ export class AssetsPage {
       }, error => {
         let toast = this.toast.create({
           message: "Session Expired",
-          duration: 4000,
+          duration: 2500,
           position: 'middle',
           cssClass: "toast-controller-asset-errorhandler"
         });
