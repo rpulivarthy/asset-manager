@@ -69,13 +69,20 @@ export class AssetsPage {
       this.dataService.getAssets(this.firstsearchtext, region).subscribe((assets: Assets[]) => {
         this.loading.dismiss();
         if (assets.length == 0) {
+          let toast = this.toast.create({
+            message: 'No nodes found',
+            duration: 2000,
+            position: 'bottom',
+            cssClass: "toast-controller-assetdetails-warning"
+          });
+          toast.present();
           this.showNoNodesFound = true;
         }
         this.assets = assets;
       }, error => {
         let toast = this.toast.create({
           message: "Session Expired",
-          duration: 3000,
+          duration: 4000,
           position: 'middle',
           cssClass: "toast-controller-asset-errorhandler"
         });
@@ -88,7 +95,7 @@ export class AssetsPage {
   }
   showLoading() {
     this.loading = this.loadingCtrl.create({
-      content: 'Fetching Nodes....'
+      content: 'Fetching Nodes, please wait....'
     });
     this.loading.present();
   }

@@ -72,7 +72,7 @@ export class AssetDetailPage {
         else {
           let toast = this.toast.create({
             message: 'Data not available for selected date',
-            duration: 4000,
+            duration: 2000,
             position: 'bottom',
             cssClass: "toast-controller-assetdetails-warning"
           });
@@ -85,7 +85,7 @@ export class AssetDetailPage {
       }, error => {
         let toast = this.toast.create({
           message: "Session Expired",
-          duration: 3000,
+          duration: 4000,
           position: 'middle',
           cssClass: "toast-controller-assetdetails-error"
         });

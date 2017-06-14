@@ -23,13 +23,6 @@ export class LoginPage {
     this.auth.login(this.registerCredentials).subscribe(allowed => {
       if (allowed) {
         setTimeout(() => {
-          let toast = this.toast.create({
-            message: "Login successful.Welcome",
-            duration: 2000,
-            position: 'top',
-            cssClass: "toast-controller-login-success"
-          });
-          toast.present();
           this.nav.setRoot(TabsPage);
         });
       } else {
