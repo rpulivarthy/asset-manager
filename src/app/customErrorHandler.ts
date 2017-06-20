@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
 
 
 @Component({
-  selector:'toast-controller-errorhandler'
+    selector: 'toast-controller-errorhandler'
 })
 export class MyErrorHandler implements ErrorHandler {
 
@@ -18,6 +18,9 @@ export class MyErrorHandler implements ErrorHandler {
     }
 
     handleError(err: Response): void {
+        sessionStorage.removeItem("access_token");
+        this.auth.isUserAuthenticated = false;
+        this.auth.loading.dismiss();
         var toasterMessage = err.statusText.toString();
         if (toasterMessage.toUpperCase() == "BAD REQUEST") {
             toasterMessage = "Invalid Credentials, login failed";
@@ -27,13 +30,16 @@ export class MyErrorHandler implements ErrorHandler {
         }
         let toast = this.toast.create({
             message: toasterMessage,
-            duration: 3000,
             position: 'middle',
-            cssClass:"toast-controller-errorhandler"
+            cssClass: "toast-controller-errorhandler",
+            showCloseButton: true,
+            closeButtonText: "OK"
+        });
+        toast.onDidDismiss(() => {
+            toast.dismiss();
+
         });
         toast.present();
-        sessionStorage.removeItem("access_token");
-        this.auth.isUserAuthenticated = false;
-        this.auth.loading.dismiss();
+
     }
 }

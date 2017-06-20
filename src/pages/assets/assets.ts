@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, LoadingController, ViewController, Loading, ModalController, ToastController } from 'ionic-angular';
 import { AssetDetailPage } from '../pages';
-import { PopularNodes,LoginPage } from '../pages';
+import { PopularNodes, LoginPage } from '../pages';
 import { AuthService } from '../../providers/auth-service';
 import { DataService } from '../../providers/data-service';
 import { Assets } from '../../shared/dataModel';
@@ -80,15 +80,19 @@ export class AssetsPage {
         }
         this.assets = assets;
       }, error => {
+        this.loading.dismiss();
         let toast = this.toast.create({
-          message: "Session Expired",
-          duration: 2500,
+          message: "Session expired, please login again",
           position: 'middle',
-          cssClass: "toast-controller-asset-errorhandler"
+          cssClass: "toast-controller-asset-errorhandler",
+          showCloseButton: true,
+          closeButtonText: "OK"
+        });
+        toast.onDidDismiss(() => {
+          this.navCtrl.push(LoginPage);
+          toast.dismiss();
         });
         toast.present();
-        this.loading.dismiss();
-        this.navCtrl.push(LoginPage);
       });
     }
 

@@ -83,15 +83,19 @@ export class AssetDetailPage {
         this.drawLineChart();
         this.loading.dismiss();
       }, error => {
+        this.loading.dismiss();
         let toast = this.toast.create({
-          message: "Session Expired",
-          duration: 2500,
+          message: "Session expired, please login again",
           position: 'middle',
-          cssClass: "toast-controller-assetdetails-error"
+          cssClass: "toast-controller-asset-errorhandler",
+          showCloseButton: true,
+          closeButtonText: "OK"
+        });
+        toast.onDidDismiss(() => {
+          this.navCtrl.push(LoginPage);
+          toast.dismiss();
         });
         toast.present();
-        this.loading.dismiss();
-        this.navCtrl.push(LoginPage);
       });
   }
   showLoading() {

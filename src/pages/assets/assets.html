@@ -14,7 +14,8 @@
       round>Popular Nodes..</button>
   </ion-item>
   <ion-item *ngIf="showSearch">
-    <ion-input padding-right [(ngModel)]="firstsearchtext" name="firstsearchtextinput" placeholder="Enter atleast 3 characters to search.."></ion-input>
+    <ion-input padding-right [(ngModel)]="firstsearchtext" name="firstsearchtextinput" placeholder="Enter any 3 characters of Node Name or ID
+.."></ion-input>
     <button *ngIf="showSearchbutton()" color="secondary" ion-button item-right style="text-transform: none;" (click)="loadAssets()"
       round>Go.. <ion-icon name="search"></ion-icon></button>
   </ion-item>
