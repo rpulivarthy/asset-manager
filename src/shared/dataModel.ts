@@ -2,9 +2,11 @@
 export class Assets {
     NY_NodeName: string;
     NY_NodeID: string;
-    constructor(NY_NodeName: string, NY_NodeID: string) {
+    NY_PITagName:string;
+    constructor(NY_NodeName: string, NY_NodeID: string, NY_PITagName:string) {
         this.NY_NodeID = NY_NodeID;
         this.NY_NodeName = NY_NodeName;
+        this.NY_PITagName=NY_PITagName;
     }
 }
 export class AssetWithNodes {
@@ -44,4 +46,19 @@ export class AssetDetails {
     DA_CONGESTION: string;
     DA_LOSS: string;
     DA_PRICE: string;
+    PI_MW:string;
+}
+export class AssetDetailRequest {
+    PIServerName: string;
+    TagName: string;
+    StartTime: string;
+    EndTime: string;
+    NodeID: string;
+     constructor(PIServerName: string, TagName: string, StartTime:string,EndTime:string,NodeID:string) {
+        this.PIServerName = PIServerName;
+        this.TagName = TagName;
+        this.StartTime=StartTime;
+        this.EndTime=EndTime;
+        this.NodeID=NodeID;
+    }
 }

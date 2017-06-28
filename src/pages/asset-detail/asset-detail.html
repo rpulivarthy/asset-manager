@@ -19,33 +19,45 @@
   </ion-item>
   <ion-row class="grid-header" *ngIf="!showNoDataFound">
      
-    <ion-col width-50 class="text-center">
+    <ion-col width-15 class="text-center">
       <strong> HE</strong>
     </ion-col>
-    <!--<ion-col>
-      <strong class="text-center">HE Time</strong>
-    </ion-col>-->
-    <ion-col class="text-center">
-      <strong>DA($)</strong>
+    <ion-col width-15 class="text-center">
+      <strong>($)DA</strong>
     </ion-col>
-    <ion-col class="text-center">
-      <strong>RT($)</strong>
+    <ion-col width-15 class="text-center">
+      <strong>($)RT</strong>
+    </ion-col>
+    <ion-col width-20 class="text-center">
+      <strong>RT MW</strong>
+    </ion-col>
+    <ion-col width-20 class="text-center">
+      <strong>DA Awards</strong>
+    </ion-col>
+    <ion-col width-15 class="text-center">
+      <strong>RV</strong>
     </ion-col>
   </ion-row>
 
   <ion-grid *ngIf="!showNoDataFound">
     <ion-row class="grid-data" *ngFor="let asset of assetDetail">
-      <ion-col width-50 class="text-center">
+      <ion-col width-15 class="text-center">
         {{asset.HE_Time}}
       </ion-col>
-      <!--<ion-col class="text-center">
-        {{asset.HE_Time}}
-      </ion-col>-->
-      <ion-col class="text-center">
+      <ion-col width-15 class="text-center">
         {{asset.DA_PRICE | restrictDecimalSize}}
       </ion-col>
-      <ion-col class="text-center">
+      <ion-col width-15 class="text-center">
         {{asset.RT_PRICE | restrictDecimalSize}}
+      </ion-col>
+      <ion-col width-20 class="text-center">
+        {{asset.PI_MW | restrictDecimalSize}}
+      </ion-col>
+      <ion-col width-20 class="text-center">
+       
+      </ion-col>
+      <ion-col width-15 class="text-center">
+        
       </ion-col>
     </ion-row>
   </ion-grid>

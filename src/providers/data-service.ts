@@ -10,7 +10,7 @@ import 'rxjs/add/operator/retry';
 import 'rxjs/add/operator/retrywhen';
 import 'rxjs/add/observable/throw';
 import { AuthService } from '../providers/auth-service';
-import { Assets, AssetDetails, User, TokenResponse } from '../shared/dataModel';
+import { Assets, AssetDetails, User, TokenResponse, AssetDetailRequest } from '../shared/dataModel';
 
 @Injectable()
 export class DataService {
@@ -38,13 +38,20 @@ export class DataService {
             })
         }
     }
-    getAssetDetails(assetId: string, startdateinput: string, enddateinput: string): Observable<AssetDetails[]> {
-
+    getAssetDetails(inputAssetDetailsRequest: AssetDetailRequest): Observable<AssetDetails[]> {
+        let body = JSON.stringify({
+            "PIServerName": inputAssetDetailsRequest.PIServerName,
+            "TagName":inputAssetDetailsRequest.TagName,
+            "StartTime": inputAssetDetailsRequest.StartTime,
+            "EndTime":inputAssetDetailsRequest.EndTime,
+            "NodeID":inputAssetDetailsRequest.NodeID
+        });
         let headers = new Headers({ 'Content-Type': 'application/json' });
         headers.append('Authorization', 'Bearer ' + sessionStorage.getItem("access_token"));
-        //  headers.append('Access-Control-Allow-Origin', '*');
+
+
         let options = new RequestOptions({ headers: headers, withCredentials: true });
-        return this.http.get(this.config.apiBaseUrl + '/lmp/prices?nodeid=' + assetId + '&startdate=' + startdateinput + '&enddate=' + enddateinput, options).retry(3).map((res: Response) => {
+        return this.http.post(this.config.apiBaseUrl + '/lmp/assetdetails', body, options).retry(3).map((res: Response) => {
             this.assetDetails = res.json();
             return this.assetDetails;
         })

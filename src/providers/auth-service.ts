@@ -3,7 +3,7 @@ import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import { User, TokenResponse, DecodeToken } from '../shared/dataModel';
 import * as JWT from 'jwt-decode';
-import { Http, Response, URLSearchParams } from '@angular/http';
+import { Http, Response} from '@angular/http';
 import { Headers, RequestOptions } from '@angular/http';
 import { Configuration } from '../app/app.constants';
 import { NavController, AlertController, LoadingController, Loading } from 'ionic-angular';

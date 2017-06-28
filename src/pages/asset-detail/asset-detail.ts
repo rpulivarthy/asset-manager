@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { NavController, NavParams, LoadingController, Loading } from 'ionic-angular';
 import { Chart } from 'chart.js';
-import { Assets, AssetDetails } from '../../shared/dataModel';
+import { Assets, AssetDetails,AssetDetailRequest } from '../../shared/dataModel';
 import { DataService } from '../../providers/data-service';
 import { ToastController } from 'ionic-angular';
 import { LoginPage } from '../pages';
@@ -23,6 +23,7 @@ export class AssetDetailPage {
   maxDate: string;
   showNoDataFound: boolean;
   dataFound: string;
+  assetDetailRequestObj:AssetDetailRequest;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private loadingCtrl: LoadingController, private dataService: DataService, private toast: ToastController) {
     this.asset = navParams.get('assetSelected');
@@ -36,6 +37,7 @@ export class AssetDetailPage {
     this.showNoDataFound = false;
     this.getAssetDetails();
     this.dataFound = "";
+    
   }
   convertToDesiredDateString(convertableDate: Date): string {
     var dd = convertableDate.getDate();
@@ -62,7 +64,14 @@ export class AssetDetailPage {
     this.selectedDateString = this.selectedDateString.replace('-', '');
     this.selectedDateString = this.selectedDateString.replace('-', '');
     this.showLoading();
-    this.dataService.getAssetDetails(this.asset.NY_NodeID, this.selectedDateString, this.selectedDateString)
+    this.assetDetailRequestObj=new AssetDetailRequest("","","","","");
+    
+    this.assetDetailRequestObj.EndTime=this.assetDetailRequestObj.StartTime=this.selectedDateString;
+    this.assetDetailRequestObj.NodeID=this.asset.NY_NodeID;
+    this.assetDetailRequestObj.PIServerName="ewis-pmi-1";
+    this.assetDetailRequestObj.TagName=this.asset.NY_PITagName;
+
+    this.dataService.getAssetDetails(this.assetDetailRequestObj)
       .subscribe((assetdetail: AssetDetails[]) => {
         this.assetDetail = assetdetail;
         if (this.assetDetail != null) {
