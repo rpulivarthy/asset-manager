@@ -166,6 +166,28 @@ export class AssetDetailPage {
             pointHitRadius: 10,
             data: this.assetDetail.map(s => s.RT_PRICE),
             spanGaps: false,
+          },
+          {
+            label: "RT MW",
+            fill: false,
+            lineTension: 0.1,
+            backgroundColor: "#FF7733",
+            borderColor: "#FF7733",
+            borderCapStyle: 'butt',
+            borderDash: [],
+            borderDashOffset: 0.0,
+            borderJoinStyle: 'miter',
+            pointBorderColor: "#FF7733",
+            pointBackgroundColor: "#FF7733",
+            pointBorderWidth: 1,
+            pointHoverRadius: 5,
+            pointHoverBackgroundColor: "#FF7733",
+            pointHoverBorderColor: "#FF7733",
+            pointHoverBorderWidth: 2,
+            pointRadius: 1,
+            pointHitRadius: 10,
+            data: this.assetDetail.map(s => s.PI_MW),
+            spanGaps: false,
           }
         ]
       }
