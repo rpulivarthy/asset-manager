@@ -8,6 +8,8 @@ import { DataService } from '../providers/data-service';
 import { Configuration } from './app.constants';
 import {DecimalRestrictSize} from '../pages/asset-detail/decimalRestrictPipe';
 import { MyErrorHandler } from './customErrorHandler';
+import { HttpModule } from '@angular/http';
+import { BrowserModule } from "@angular/platform-browser";
 
 
 @NgModule({
@@ -22,6 +24,8 @@ import { MyErrorHandler } from './customErrorHandler';
     PopularNodes
   ],
   imports: [
+    BrowserModule,
+    HttpModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
@@ -34,6 +38,6 @@ import { MyErrorHandler } from './customErrorHandler';
     TabsPage,
     PopularNodes
   ],
-  providers: [{provide: ErrorHandler, useClass: MyErrorHandler}, AuthService,DataService,Configuration,DecimalRestrictSize]
+  providers: [{provide: ErrorHandler, useClass: MyErrorHandler},AuthService,DataService,Configuration,DecimalRestrictSize]
 })
 export class AppModule {}

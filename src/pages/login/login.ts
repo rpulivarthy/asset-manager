@@ -13,7 +13,7 @@ export class LoginPage {
 
   registerCredentials = { email: '', password: '' };
 
-  constructor(private nav: NavController, private auth: AuthService, private alertCtrl: AlertController, private toast: ToastController) { }
+  constructor(private nav: NavController, private auth: AuthService, private toast: ToastController) { }
 
   public createAccount() {
     this.nav.push(RegisterPage);

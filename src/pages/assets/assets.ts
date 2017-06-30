@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, LoadingController, ViewController, Loading, ModalController, ToastController } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, Loading, ModalController, ToastController } from 'ionic-angular';
 import { AssetDetailPage } from '../pages';
 import { PopularNodes, LoginPage } from '../pages';
 import { AuthService } from '../../providers/auth-service';
@@ -13,7 +13,7 @@ import { Assets } from '../../shared/dataModel';
 })
 export class AssetsPage {
 
-  assets: Assets[];
+  assets: Assets[]= []; // Issue with VirtualScroll
   loading: Loading;
   nonAdminNodes: Assets[];
   showSearch: boolean;
@@ -114,7 +114,6 @@ export class AssetsPage {
   }
   ionViewDidLoad() {
     this.loadAssets();
-    console.log('ionViewDidLoad AssetsPage');
   }
 
   goToAssetDetail(assetSelected: Assets) {
