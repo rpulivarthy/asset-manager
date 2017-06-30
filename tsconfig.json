@@ -4,11 +4,10 @@
     "declaration": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "types": [
-      
-      "requirejs"
+    "types": [ 
+      "node"
     ],
-  
+    "typeRoots": ["./node_modules/@types"],
     "lib": [
       "dom",
       "es2015"

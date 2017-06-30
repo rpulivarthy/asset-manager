@@ -9,14 +9,13 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/retry';
 import 'rxjs/add/operator/retrywhen';
 import 'rxjs/add/observable/throw';
-import { AuthService } from '../providers/auth-service';
-import { Assets, AssetDetails, User, TokenResponse, AssetDetailRequest } from '../shared/dataModel';
+import { Assets, AssetDetails, AssetDetailRequest } from '../shared/dataModel';
 
 @Injectable()
 export class DataService {
     assetSet: Assets[];
     assetDetails: AssetDetails[];
-    constructor(private http: Http, private config: Configuration, private authService: AuthService) {
+    constructor(private http: Http, private config: Configuration ) {
     }
 
 

@@ -21,7 +21,7 @@
   </ion-item>
 
   <ion-label class="text-center" *ngIf="showNoNodesFound" floating>No nodes found....</ion-label>
-  <ion-list [virtualScroll]="assets">
+  <ion-list [virtualScroll]="assets" approxItemHeight="85px">
     <div class="asset-item" ion-item *virtualItem="let asset">
       <div class="header"><span class="assetTitle">{{asset.NY_NodeName}}</span>
         <ion-buttons end>
