@@ -7,19 +7,19 @@ export class DecimalRestrictSize implements PipeTransform {
         if (value.length > 10) {
             if (value.indexOf('.') >= 0) {
                 var indexOfDot = value.indexOf('.');
-                return '$' + value.substring(0, indexOfDot + 3)
+                return   value.substring(0, indexOfDot + 3)
             }
             else {
-                return '$' + value;
+                return   value;
             }
         }
         else{
             if (value.indexOf('.') >= 0) {
                 var indexOfDot = value.indexOf('.');
-                return '$' + value.substring(0, indexOfDot + 2)
+                return  value.substring(0, indexOfDot + 2)
             }
             else {
-                return '$' + value;
+                return  value;
             } 
         }
 

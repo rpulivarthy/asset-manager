@@ -69,7 +69,7 @@ export class AssetDetailPage {
     this.assetDetailRequestObj.EndTime=this.assetDetailRequestObj.StartTime=this.selectedDateString;
     this.assetDetailRequestObj.NodeID=this.asset.NY_NodeID;
     this.assetDetailRequestObj.PIServerName="ewis-pmi-1";
-    this.assetDetailRequestObj.TagName=this.asset.NY_PITagName;
+    this.assetDetailRequestObj.TagName="'"+this.asset.NY_PITagName+"'";
 
     this.dataService.getAssetDetails(this.assetDetailRequestObj)
       .subscribe((assetdetail: AssetDetails[]) => {
@@ -119,12 +119,13 @@ export class AssetDetailPage {
     }
     this.lineChart = new Chart(this.lineCanvas.nativeElement, {
 
-      type: 'line',
+      type: 'bar',
       data: {
         labels: this.assetDetail.map(s => s.HE_Time),
         datasets: [
           {
             label: "DA Price",
+            type:'line',
             fill: false,
             lineTension: 0.1,
             backgroundColor: "#38c",
@@ -147,6 +148,7 @@ export class AssetDetailPage {
           },
           {
             label: "RT Price",
+            type:'line',
             fill: false,
             lineTension: 0.1,
             backgroundColor: "#7DBF43",
