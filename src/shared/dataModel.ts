@@ -47,6 +47,9 @@ export class AssetDetails {
     DA_LOSS: string;
     DA_PRICE: string;
     PI_MW:string;
+    PI_MW_NA:string;
+    DA_AWARDS:string;
+    REVENUE:string;
 }
 export class AssetDetailRequest {
     PIServerName: string;

@@ -74,7 +74,7 @@ export class AssetDetailPage {
     this.dataService.getAssetDetails(this.assetDetailRequestObj)
       .subscribe((assetdetail: AssetDetails[]) => {
         this.assetDetail = assetdetail;
-        if (this.assetDetail != null) {
+        if (this.assetDetail.length >0) {
           this.dataFound = "Line Chart";
           this.showNoDataFound = false;
         }

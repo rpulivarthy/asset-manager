@@ -23,10 +23,10 @@
       <strong> HE</strong>
     </ion-col>
     <ion-col width-15 class="text-center">
-      <strong>($)DA</strong>
+      <strong>DA($)</strong>
     </ion-col>
     <ion-col width-15 class="text-center">
-      <strong>($)RT</strong>
+      <strong>RT($)</strong>
     </ion-col>
     <ion-col width-20 class="text-center">
       <strong>RT MW</strong>
@@ -35,7 +35,7 @@
       <strong>DA Awards</strong>
     </ion-col>
     <ion-col width-15 class="text-center">
-      <strong>RV</strong>
+      <strong>Rev</strong>
     </ion-col>
   </ion-row>
 
@@ -51,10 +51,10 @@
         {{asset.RT_PRICE | restrictDecimalSize}}
       </ion-col>
       <ion-col width-20 class="text-center">
-        {{asset.PI_MW | restrictDecimalSize}}
+        {{asset.PI_MW_NA | restrictDecimalSize}}
       </ion-col>
       <ion-col width-20 class="text-center">
-       
+       {{asset.DA_AWARDS | restrictDecimalSize}}
       </ion-col>
       <ion-col width-15 class="text-center">
         
