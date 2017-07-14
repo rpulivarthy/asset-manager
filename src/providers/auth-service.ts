@@ -3,10 +3,10 @@ import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import { User, TokenResponse, DecodeToken } from '../shared/dataModel';
 import * as JWT from 'jwt-decode';
-import { Http, Response} from '@angular/http';
+import { Http, Response } from '@angular/http';
 import { Headers, RequestOptions } from '@angular/http';
 import { Configuration } from '../app/app.constants';
-import { NavController, AlertController, LoadingController, Loading } from 'ionic-angular';
+import { LoadingController, Loading,ToastController } from 'ionic-angular';
 import 'rxjs/add/observable/throw';
 
 @Injectable()
@@ -18,7 +18,7 @@ export class AuthService {
   decodedTokenResponse: DecodeToken;
   loading: Loading;
 
-  constructor(private http: Http, private config: Configuration, private loadingCtrl: LoadingController) {
+  constructor(private http: Http, private config: Configuration, private loadingCtrl: LoadingController,private toast:ToastController) {
     this.currentUser = new User();
     this.isUserAuthenticated = false;
   }
@@ -38,6 +38,23 @@ export class AuthService {
         sessionStorage.setItem("access_token", this.validatedUser.access_token);
       }
       return this.validatedUser;
+    }).catch((error: any) => {
+      if (error.status === 400) {
+        this.loading.dismiss();
+         let toast = this.toast.create({
+          message: "Invalid Credentials, please try again",
+          position: 'middle',
+          cssClass: "toast-controller-asset-errorhandler",
+          showCloseButton: true,
+          closeButtonText: "OK"
+        });
+        // toast.onDidDismiss(() => {
+        //   //this.loading.dismiss();
+        //   toast.dismiss();
+        // });
+        toast.present();
+        return Observable.throw(new Error(error.status));
+      }
     })
   }
 

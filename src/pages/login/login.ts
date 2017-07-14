@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { NavController, AlertController, LoadingController, Loading, ToastController } from 'ionic-angular';
+import { NavController, ToastController } from 'ionic-angular';
 import { AuthService } from '../../providers/auth-service';
-import { RegisterPage } from '../register/register';
 import { TabsPage } from '../tabs/tabs';
 
 @Component({
@@ -13,11 +12,7 @@ export class LoginPage {
 
   registerCredentials = { email: '', password: '' };
 
-  constructor(private nav: NavController, private auth: AuthService, private alertCtrl: AlertController, private toast: ToastController) { }
-
-  public createAccount() {
-    this.nav.push(RegisterPage);
-  }
+  constructor(private nav: NavController, private auth: AuthService, private toast: ToastController) { }
 
   public login() {
     this.auth.login(this.registerCredentials).subscribe(allowed => {
