@@ -40,7 +40,7 @@ export class AuthService {
       return this.validatedUser;
     }).catch((error: any) => {
       if (error.status === 400) {
-        this.loading.dismiss();
+         this.loading.dismiss();
          let toast = this.toast.create({
           message: "Invalid Credentials, please try again",
           position: 'middle',
@@ -48,10 +48,9 @@ export class AuthService {
           showCloseButton: true,
           closeButtonText: "OK"
         });
-        // toast.onDidDismiss(() => {
-        //   //this.loading.dismiss();
-        //   toast.dismiss();
-        // });
+        toast.onDidDismiss(() => {
+          
+        });
         toast.present();
         return Observable.throw(new Error(error.status));
       }

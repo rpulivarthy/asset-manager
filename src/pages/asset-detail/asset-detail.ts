@@ -93,13 +93,15 @@ export class AssetDetailPage {
         this.loading.dismiss();
       }, error => {
         this.loading.dismiss();
-        this.navCtrl.push(LoginPage);
         let toast = this.toast.create({
           message: "Session expired, please login again",
           position: 'middle',
           cssClass: "toast-controller-asset-errorhandler",
           showCloseButton: true,
           closeButtonText: "OK"
+        });
+         toast.onDidDismiss(() => {
+          this.navCtrl.push(LoginPage);
         });
         toast.present();
       });
