@@ -2,7 +2,7 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { Toast } from '@ionic-native/toast'
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
-import { AssetsPage, AssetDetailPage, AlertsPage, LoginPage,PopularNodes } from '../pages/pages';
+import { AssetsPage, AssetDetailPage, AlertsPage, LoginPage,PopularNodes,ContactUs} from '../pages/pages';
 import { TabsPage } from '../pages/tabs/tabs';
 import { AuthService } from '../providers/auth-service';
 import { DataService } from '../providers/data-service';
@@ -21,7 +21,8 @@ import { BrowserModule } from "@angular/platform-browser";
     LoginPage,
     TabsPage,
     DecimalRestrictSize,
-    PopularNodes
+    PopularNodes,
+    ContactUs
   ],
   imports: [
     BrowserModule,
@@ -36,7 +37,8 @@ import { BrowserModule } from "@angular/platform-browser";
     AlertsPage,
     LoginPage,
     TabsPage,
-    PopularNodes
+    PopularNodes,
+    ContactUs
   ],
   providers: [Toast, {provide: ErrorHandler, useClass: IonicErrorHandler},AuthService,DataService,Configuration,DecimalRestrictSize]
 })

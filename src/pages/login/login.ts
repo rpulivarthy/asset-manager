@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController, ToastController } from 'ionic-angular';
+import { NavController, ToastController, ModalController } from 'ionic-angular';
 import { AuthService } from '../../providers/auth-service';
 import { TabsPage } from '../tabs/tabs';
+import { ContactUs } from '../pages';
 
 @Component({
   selector: 'page-login',
@@ -12,7 +13,7 @@ export class LoginPage {
 
   registerCredentials = { email: '', password: '' };
 
-  constructor(private nav: NavController, private auth: AuthService, private toast: ToastController) { }
+  constructor(private nav: NavController, private auth: AuthService, private toast: ToastController, public modalCtrl: ModalController) { }
 
   public login() {
     this.auth.login(this.registerCredentials).subscribe(allowed => {
@@ -36,5 +37,10 @@ export class LoginPage {
       cssClass: "toast-controller-login-error"
     });
     toast.present();
+  }
+
+  openContactUsModal() {
+    let modal = this.modalCtrl.create(ContactUs);
+    modal.present();
   }
 }
