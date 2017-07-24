@@ -55,6 +55,11 @@ export class AssetDetails {
     REVENUE:string;
     REVENUE_NA:string;
 }
+export class ContactMember {
+    NAME:string;
+    EMAIL:string;
+    PHONE:string;
+}
 export class AssetDetailRequest {
     PIServerName: string;
     TagName: string;
