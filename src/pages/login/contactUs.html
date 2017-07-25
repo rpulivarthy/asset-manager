@@ -1,13 +1,33 @@
 <ion-header>
   <ion-navbar color="dark">
-      <ion-row>
-    <ion-title style="text-align: center">Contact Support Team </ion-title>
-     <button ion-button color="danger" (click)="dismiss()" round><ion-icon name="close"></ion-icon></button></ion-row>
+    <ion-row>
+      <ion-title style="text-align: center">Contact Support Team </ion-title>
+      <button ion-button color="danger" (click)="dismiss()" round><ion-icon name="close"></ion-icon></button></ion-row>
   </ion-navbar>
 </ion-header>
 
 
 <ion-content class="asset-content has-header" padding>
-    
-           
+  <ion-item>
+    <ion-label>For any inquiries or questions, please send us an email</ion-label>
+  </ion-item>
+  <ion-row class="grid-header">
+    <ion-col width-50 class="text-center">
+      <strong> Name</strong>
+    </ion-col>
+    <ion-col width-50 class="text-center">
+      <strong>Email</strong>
+    </ion-col>
+  </ion-row>
+
+  <ion-grid>
+    <ion-row class="grid-data" *ngFor="let contact of contactList">
+      <ion-col width-50 class="text-center">
+        {{contact.NAME}}
+      </ion-col>
+      <ion-col width-50 class="text-center">
+        {{contact.EMAIL}}
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

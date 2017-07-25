@@ -1,0 +1,17 @@
+page-asset-detail {
+    .asset-detail-content{
+        .grid-header{
+            background:#7DBF43;
+            color: white;
+        }
+        .grid-data{
+            margin: 0px;
+            font-size: 1em;
+             
+        }   
+        ion-grid ion-row:nth-child(even) {
+            background: #DDD;
+        }
+    }
+}
+

@@ -43,13 +43,22 @@ export class AssetDetails {
     RT_CONGESTION: string;
     RT_LOSS: string;
     RT_PRICE: string;
+    RT_PRICE_NA: string;
     DA_CONGESTION: string;
     DA_LOSS: string;
     DA_PRICE: string;
+    DA_PRICE_NA: string;
     PI_MW:string;
     PI_MW_NA:string;
     DA_AWARDS:string;
+    DA_AWARDS_NA:string;
     REVENUE:string;
+    REVENUE_NA:string;
+}
+export class ContactMember {
+    NAME:string;
+    EMAIL:string;
+    PHONE:string;
 }
 export class AssetDetailRequest {
     PIServerName: string;
