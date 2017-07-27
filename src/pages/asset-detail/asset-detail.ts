@@ -69,7 +69,7 @@ export class AssetDetailPage {
     this.assetDetailRequestObj.EndTime=this.assetDetailRequestObj.StartTime=this.selectedDateString;
     this.assetDetailRequestObj.NodeID=this.asset.NY_NodeID;
     this.assetDetailRequestObj.PIServerName="ewis-pmi-1";
-    this.assetDetailRequestObj.TagName="'"+this.asset.NY_PITagName+"'";
+    this.assetDetailRequestObj.TagName=""+this.asset.NY_PITagName+"";
 
     this.dataService.getAssetDetails(this.assetDetailRequestObj)
       .subscribe((assetdetail: AssetDetails[]) => {
