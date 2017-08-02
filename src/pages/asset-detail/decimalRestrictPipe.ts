@@ -14,14 +14,19 @@ export class DecimalRestrictSize implements PipeTransform {
         //     }
         // }
         // else{
-            if (value.indexOf('.') >= 0) {
-                var indexOfDot = value.indexOf('.');
-                return  value.substring(0, indexOfDot + 3)
+        if (value.indexOf('.') >= 0) {
+            var indexOfDot = value.indexOf('.');
+            return value.substring(0, indexOfDot + 3)
+        }
+        else {
+            if (value != "N/A") {
+                return value + ".00";
             }
             else {
-                return  value;
-            } 
-       // }
+                return value;
+            }
+        }
+        // }
 
     }
 

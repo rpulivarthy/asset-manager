@@ -7,18 +7,18 @@
         </button>
     </ion-buttons>
   </ion-navbar>
-
+  <ion-item class="datePickerContainer">
+    <ion-label>Select a Date</ion-label>
+    <ion-datetime [(ngModel)]="selectedDateModel" max="{{maxDate}}" (ngModelChange)="getAssetDetails()"></ion-datetime>
+  </ion-item>
 </ion-header>
 
 
 <ion-content padding class="asset-detail-content">
 
-  <ion-item class="datePickerContainer">
-    <ion-label>Select a Date</ion-label>
-    <ion-datetime [(ngModel)]="selectedDateModel" max="{{maxDate}}" (ngModelChange)="getAssetDetails()"></ion-datetime>
-  </ion-item>
+
   <ion-row class="grid-header" *ngIf="!showNoDataFound">
-     
+
     <ion-col width-6 class="text-center">
       <strong> HE</strong>
     </ion-col>
@@ -62,7 +62,7 @@
 
   <ion-card>
     <ion-card-header>{{dataFound}}
-     
+
     </ion-card-header>
     <ion-card-content>
       <canvas #lineCanvas></canvas>
