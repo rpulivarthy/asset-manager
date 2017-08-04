@@ -64,12 +64,14 @@ export class AssetDetailPage {
     this.selectedDateString = this.selectedDateString.replace('-', '');
     this.selectedDateString = this.selectedDateString.replace('-', '');
     this.showLoading();
-    this.assetDetailRequestObj=new AssetDetailRequest("","","","","");
+    this.assetDetailRequestObj=new AssetDetailRequest("","","","","",null,"","","");
     
     this.assetDetailRequestObj.EndTime=this.assetDetailRequestObj.StartTime=this.selectedDateString;
     this.assetDetailRequestObj.NodeID=this.asset.NY_NodeID;
     this.assetDetailRequestObj.PIServerName="ewis-pmi-1";
     this.assetDetailRequestObj.TagName=""+this.asset.NY_PITagName+"";
+    this.assetDetailRequestObj.ParticipantName=this.asset.NY_Participantname;
+    this.assetDetailRequestObj.LocationName=this.asset.NY_LocationID;
 
     this.dataService.getAssetDetails(this.assetDetailRequestObj)
       .subscribe((assetdetail: AssetDetails[]) => {
@@ -172,22 +174,44 @@ export class AssetDetailPage {
             label: "RT MW",
             fill: false,
             lineTension: 0.1,
-            backgroundColor: "#FF7733",
-            borderColor: "#FF7733",
+            backgroundColor: "#d3b610",
+            borderColor: "#d3b610",
             borderCapStyle: 'butt',
             borderDash: [],
             borderDashOffset: 0.0,
             borderJoinStyle: 'miter',
-            pointBorderColor: "#FF7733",
-            pointBackgroundColor: "#FF7733",
+            pointBorderColor: "#d3b610",
+            pointBackgroundColor: "#d3b610",
             pointBorderWidth: 1,
             pointHoverRadius: 5,
-            pointHoverBackgroundColor: "#FF7733",
-            pointHoverBorderColor: "#FF7733",
+            pointHoverBackgroundColor: "#d3b610",
+            pointHoverBorderColor: "#d3b610",
             pointHoverBorderWidth: 2,
             pointRadius: 1,
             pointHitRadius: 10,
             data: this.assetDetail.map(s => s.PI_MW),
+            spanGaps: false,
+          },
+          {
+            label: "DA AWARDS",
+            fill: false,
+            lineTension: 0.1,
+            backgroundColor: "#c41d3e",
+            borderColor: "#c41d3e",
+            borderCapStyle: 'butt',
+            borderDash: [],
+            borderDashOffset: 0.0,
+            borderJoinStyle: 'miter',
+            pointBorderColor: "#c41d3e",
+            pointBackgroundColor: "#c41d3e",
+            pointBorderWidth: 1,
+            pointHoverRadius: 5,
+            pointHoverBackgroundColor: "#c41d3e",
+            pointHoverBorderColor: "#c41d3e",
+            pointHoverBorderWidth: 2,
+            pointRadius: 1,
+            pointHitRadius: 10,
+            data: this.assetDetail.map(s => s.DA_AWARDS),
             spanGaps: false,
           }
         ]

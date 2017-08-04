@@ -19,7 +19,7 @@
 
   <ion-row class="grid-header" *ngIf="!showNoDataFound">
 
-    <ion-col width-6 class="text-center">
+    <ion-col width-5 class="text-center">
       <strong> HE</strong>
     </ion-col>
     <ion-col width-17 class="text-center">
@@ -34,14 +34,14 @@
     <ion-col width-20 class="text-center">
       <strong>DA Awards</strong>
     </ion-col>
-    <ion-col width-20 class="text-center">
+    <ion-col width-21 class="text-center">
       <strong>Rev</strong>
     </ion-col>
   </ion-row>
 
   <ion-grid *ngIf="!showNoDataFound">
     <ion-row class="grid-data" *ngFor="let asset of assetDetail">
-      <ion-col width-6 class="text-center">
+      <ion-col width-5 class="text-center">
         {{asset.HE_Time}}
       </ion-col>
       <ion-col width-17 class="text-center">
@@ -54,8 +54,10 @@
         {{asset.PI_MW_NA | restrictDecimalSize}}
       </ion-col>
       <ion-col width-20 class="text-center">
+        {{asset.DA_AWARDS_NA | restrictDecimalSize}}
       </ion-col>
-      <ion-col width-20 class="text-center">
+      <ion-col width-21 class="text-center">
+        {{asset.REVENUE | restrictDecimalSize}}
       </ion-col>
     </ion-row>
   </ion-grid>

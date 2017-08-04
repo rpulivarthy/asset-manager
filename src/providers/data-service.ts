@@ -45,7 +45,10 @@ export class DataService {
             "EndTime":inputAssetDetailsRequest.EndTime,
             "NodeID":inputAssetDetailsRequest.NodeID,
             "Duration":"1h",
-            "PIUserId":"pidemo"
+            "PIUserId":"pidemo",
+            "ParticipantName":inputAssetDetailsRequest.ParticipantName,
+            "LocationName":inputAssetDetailsRequest.LocationName
+
         });
         let headers = new Headers({ 'Content-Type': 'application/json' });
         headers.append('Authorization', 'Bearer ' + sessionStorage.getItem("access_token"));
