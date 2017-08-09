@@ -8,7 +8,7 @@
     </ion-buttons>
   </ion-navbar>
 </ion-header>
-<ion-content class="asset-content" padding>
+<ion-content class="asset-content"  padding>
   <ion-item style="text-align: center" *ngIf="authService.currentUser.role == 'Misouser'">
     <button ion-button  style="text-transform: none;" (click)="openPopularNodesModal()"
       round>Popular Nodes..</button>
@@ -20,13 +20,12 @@
       round>Go.. <ion-icon name="search"></ion-icon></button>
   </ion-item>
 
-  <ion-label class="text-center" *ngIf="showNoNodesFound" floating>No nodes found....</ion-label>
   <ion-list [virtualScroll]="assets" approxItemHeight="85px">
     <div class="asset-item" ion-item *virtualItem="let asset">
       <div class="header"><span class="assetTitle">{{asset.NY_NodeName}}</span>
-        <ion-buttons end>
+        <ion-buttons *ngIf="!showNoNodesFound" end>
           <button ion-button (click)=goToAssetDetail(asset)>
-            <ion-icon name="arrow-forward"></ion-icon>
+            <ion-icon  name="arrow-forward"></ion-icon>
           </button>
         </ion-buttons>
       </div>
