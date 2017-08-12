@@ -15,39 +15,33 @@ import { Assets, AssetDetails, AssetDetailRequest } from '../shared/dataModel';
 export class DataService {
     assetSet: Assets[];
     assetDetails: AssetDetails[];
-    constructor(private http: Http, private config: Configuration ) {
+    constructor(private http: Http, private config: Configuration) {
     }
 
 
-    getAssets(searchText: string, region: string): Observable<Assets[]> {
+    getAssets(UserName: string, role: string, searchText: string): Observable<Assets[]> {
         let headers = new Headers({ 'Content-Type': 'application/json' });
         headers.append('Authorization', 'Bearer ' + sessionStorage.getItem("access_token"));
         //      headers.append('Access-Control-Allow-Origin', '*');
         let options = new RequestOptions({ headers: headers });
-        if (region == null) {
-            return this.http.get(this.config.apiBaseUrl + '/lmp/nodes?searchText=' + searchText + '&region=', options).retry(3).map((res: Response) => {
-                this.assetSet = res.json();
-                return this.assetSet;
-            })
-        }
-        else {
-            return this.http.get(this.config.apiBaseUrl + '/lmp/nodes?searchText=' + searchText + '&region=' + region, options).retry(3).map((res: Response) => {
-                this.assetSet = res.json();
-                return this.assetSet;
-            })
-        }
+
+        return this.http.get(this.config.apiBaseUrl + '/lmp/nodes?userName=' + UserName +'&role='+ role + '&searchText=' + searchText, options).retry(3).map((res: Response) => {
+            this.assetSet = res.json();
+            return this.assetSet;
+        })
     }
+
     getAssetDetails(inputAssetDetailsRequest: AssetDetailRequest): Observable<AssetDetails[]> {
         let body = JSON.stringify({
             "PIServerName": inputAssetDetailsRequest.PIServerName,
-            "TagName":inputAssetDetailsRequest.TagName,
+            "TagName": inputAssetDetailsRequest.TagName,
             "StartTime": inputAssetDetailsRequest.StartTime,
-            "EndTime":inputAssetDetailsRequest.EndTime,
-            "NodeID":inputAssetDetailsRequest.NodeID,
-            "Duration":"1h",
-            "PIUserId":"pidemo",
-            "ParticipantName":inputAssetDetailsRequest.ParticipantName,
-            "LocationName":inputAssetDetailsRequest.LocationName
+            "EndTime": inputAssetDetailsRequest.EndTime,
+            "NodeID": inputAssetDetailsRequest.NodeID,
+            "Duration": "1h",
+            "PIUserId": "pidemo",
+            "ParticipantName": inputAssetDetailsRequest.ParticipantName,
+            "LocationName": inputAssetDetailsRequest.LocationName
 
         });
         let headers = new Headers({ 'Content-Type': 'application/json' });

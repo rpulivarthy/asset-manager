@@ -77,7 +77,7 @@ export class AssetDetailPage {
       .subscribe((assetdetail: AssetDetails[]) => {
         this.assetDetail = assetdetail;
         if (this.assetDetail.length >0) {
-          this.dataFound = "Line Chart";
+          this.dataFound = "Graph";
           this.showNoDataFound = false;
         }
         else {
