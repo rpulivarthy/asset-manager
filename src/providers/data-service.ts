@@ -9,12 +9,12 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/retry';
 import 'rxjs/add/operator/retrywhen';
 import 'rxjs/add/observable/throw';
-import { Assets, AssetDetails, AssetDetailRequest } from '../shared/dataModel';
+import { Assets, AssetDetails, AssetDetailRequest,AssetsWithTotals } from '../shared/dataModel';
 
 @Injectable()
 export class DataService {
     assetSet: Assets[];
-    assetDetails: AssetDetails[];
+    assetDetails: AssetsWithTotals;
     constructor(private http: Http, private config: Configuration) {
     }
 
@@ -31,7 +31,7 @@ export class DataService {
         })
     }
 
-    getAssetDetails(inputAssetDetailsRequest: AssetDetailRequest): Observable<AssetDetails[]> {
+    getAssetDetails(inputAssetDetailsRequest: AssetDetailRequest): Observable<AssetsWithTotals> {
         let body = JSON.stringify({
             "PIServerName": inputAssetDetailsRequest.PIServerName,
             "TagName": inputAssetDetailsRequest.TagName,

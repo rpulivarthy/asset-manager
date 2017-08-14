@@ -42,22 +42,45 @@
       <ion-col width-5>
         {{asset.HE_Time}}
       </ion-col>
-      <ion-col width-17 >
+      <ion-col width-17>
         {{asset.DA_PRICE_NA | restrictDecimalSize}}
       </ion-col>
-      <ion-col width-17 >
+      <ion-col width-17>
         {{asset.RT_PRICE_NA | restrictDecimalSize}}
       </ion-col>
-      <ion-col width-20 >
+      <ion-col width-20>
         {{asset.PI_MW_NA | restrictDecimalSize}}
       </ion-col>
-      <ion-col width-20 >
+      <ion-col width-20>
         {{asset.DA_AWARDS_NA | restrictDecimalSize}}
       </ion-col>
-      <ion-col width-21 >
+      <ion-col width-21>
         {{asset.REVENUE | restrictDecimalSize}}
       </ion-col>
     </ion-row>
+    <ion-row class="grid-data">
+      <ion-col width-5>
+        <b>Total</b>
+      </ion-col>
+      <ion-col width-17>
+
+      </ion-col>
+      <ion-col width-17>
+
+      </ion-col>
+      <ion-col width-20>
+        <b>{{RT_MW_Total|restrictDecimalSize}}</b>
+      </ion-col>
+      <ion-col width-20>
+        <b>{{DAAwards_Total|restrictDecimalSize}}</b>
+      </ion-col>
+      <ion-col width-21>
+        <b>{{Revenue_Total|restrictDecimalSize}}</b>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid *ngIf="!showNoDataFound">
+
   </ion-grid>
 
   <ion-card>

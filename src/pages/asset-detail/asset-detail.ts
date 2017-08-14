@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { NavController, NavParams, LoadingController, Loading } from 'ionic-angular';
 import { Chart } from 'chart.js';
-import { Assets, AssetDetails,AssetDetailRequest } from '../../shared/dataModel';
+import { Assets, AssetDetails, AssetDetailRequest, AssetsWithTotals } from '../../shared/dataModel';
 import { DataService } from '../../providers/data-service';
 import { ToastController } from 'ionic-angular';
 import { LoginPage } from '../pages';
@@ -14,6 +14,7 @@ export class AssetDetailPage {
   @ViewChild('lineCanvas') lineCanvas;
   asset: Assets;
   assetDetail: AssetDetails[];
+  assetWithTotals: AssetsWithTotals;
   loading: Loading;
   lineChart: any;
   selectedDateString: string;
@@ -23,7 +24,10 @@ export class AssetDetailPage {
   maxDate: string;
   showNoDataFound: boolean;
   dataFound: string;
-  assetDetailRequestObj:AssetDetailRequest;
+  assetDetailRequestObj: AssetDetailRequest;
+  DAAwards_Total: string;
+  RT_MW_Total: string;
+  Revenue_Total: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private loadingCtrl: LoadingController, private dataService: DataService, private toast: ToastController) {
     this.asset = navParams.get('assetSelected');
@@ -36,8 +40,8 @@ export class AssetDetailPage {
     this.dummyAssetDetail = new Array<AssetDetails>();
     this.showNoDataFound = false;
     this.getAssetDetails();
-    this.dataFound = "";
-    
+    this.dataFound = this.DAAwards_Total = this.Revenue_Total = this.RT_MW_Total = "";
+
   }
   convertToDesiredDateString(convertableDate: Date): string {
     var dd = convertableDate.getDate();
@@ -64,19 +68,23 @@ export class AssetDetailPage {
     this.selectedDateString = this.selectedDateString.replace('-', '');
     this.selectedDateString = this.selectedDateString.replace('-', '');
     this.showLoading();
-    this.assetDetailRequestObj=new AssetDetailRequest("","","","","",null,"","","");
-    
-    this.assetDetailRequestObj.EndTime=this.assetDetailRequestObj.StartTime=this.selectedDateString;
-    this.assetDetailRequestObj.NodeID=this.asset.NY_NodeID;
-    this.assetDetailRequestObj.PIServerName="ewis-pmi-1";
-    this.assetDetailRequestObj.TagName=""+this.asset.NY_PITagName+"";
-    this.assetDetailRequestObj.ParticipantName=this.asset.NY_Participantname;
-    this.assetDetailRequestObj.LocationName=this.asset.NY_LocationID;
+    this.assetDetailRequestObj = new AssetDetailRequest("", "", "", "", "", null, "", "", "");
+
+    this.assetDetailRequestObj.EndTime = this.assetDetailRequestObj.StartTime = this.selectedDateString;
+    this.assetDetailRequestObj.NodeID = this.asset.NY_NodeID;
+    this.assetDetailRequestObj.PIServerName = "ewis-pmi-1";
+    this.assetDetailRequestObj.TagName = "" + this.asset.NY_PITagName + "";
+    this.assetDetailRequestObj.ParticipantName = this.asset.NY_Participantname;
+    this.assetDetailRequestObj.LocationName = this.asset.NY_LocationID;
 
     this.dataService.getAssetDetails(this.assetDetailRequestObj)
-      .subscribe((assetdetail: AssetDetails[]) => {
-        this.assetDetail = assetdetail;
-        if (this.assetDetail.length >0) {
+      .subscribe((assetdetailswithTotals: AssetsWithTotals) => {
+        this.assetWithTotals = assetdetailswithTotals;
+        this.assetDetail = this.assetWithTotals.DataValues;
+        this.DAAwards_Total = this.assetWithTotals.DA_AWRADS_TOTAL;
+        this.RT_MW_Total = this.assetWithTotals.RT_MW_TOTAL;
+        this.Revenue_Total = this.assetWithTotals.REV_TOTAL;
+        if (this.assetDetail.length > 0) {
           this.dataFound = "Graph";
           this.showNoDataFound = false;
         }
@@ -102,7 +110,7 @@ export class AssetDetailPage {
           showCloseButton: true,
           closeButtonText: "OK"
         });
-         toast.onDidDismiss(() => {
+        toast.onDidDismiss(() => {
           this.navCtrl.push(LoginPage);
         });
         toast.present();
@@ -126,7 +134,7 @@ export class AssetDetailPage {
         datasets: [
           {
             label: "DA Price",
-            type:'line',
+            type: 'line',
             fill: false,
             lineTension: 0.1,
             backgroundColor: "#38c",
@@ -149,7 +157,7 @@ export class AssetDetailPage {
           },
           {
             label: "RT Price",
-            type:'line',
+            type: 'line',
             fill: false,
             lineTension: 0.1,
             backgroundColor: "#7DBF43",
