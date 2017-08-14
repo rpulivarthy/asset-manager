@@ -3,6 +3,9 @@ page-asset-detail {
         .grid-header{
             background:#7DBF43;
             color: white;
+            position: fixed;
+            width: 98.3%;
+            z-index: 1000;
         }
         .grid-data{
             margin: 0px;
@@ -25,3 +28,26 @@ page-asset-detail {
      text-align:center;
    background:#B22222;
  }
+
+ .grid {
+     position: relative;
+     top: 22px;
+     padding-left: 0;
+     padding-right: 0;
+ }
+
+.scroll-content {
+    padding-top: 0 !important;
+    padding-right: 0 !important;
+    top: 16px;
+}
+
+.card-md {
+    width: 100%;
+    margin-left: 0 !important;
+}
+
+@media only screen and (max-width: 768px) {
+    .grid-header {width: 95.3% !important;text-overflow: ellipsis;
+    white-space: nowrap;}
+}

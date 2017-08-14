@@ -15,48 +15,46 @@
 
 
 <ion-content padding class="asset-detail-content">
-
-
   <ion-row class="grid-header" *ngIf="!showNoDataFound">
 
-    <ion-col width-5 class="text-center">
+    <ion-col width-5>
       <strong> HE</strong>
     </ion-col>
-    <ion-col width-17 class="text-center">
+    <ion-col width-17>
       <strong>DA($)</strong>
     </ion-col>
-    <ion-col width-17 class="text-center">
+    <ion-col width-17>
       <strong>RT($)</strong>
     </ion-col>
-    <ion-col width-20 class="text-center">
+    <ion-col width-20>
       <strong>RT MW</strong>
     </ion-col>
-    <ion-col width-20 class="text-center">
+    <ion-col width-20>
       <strong>DA Awards</strong>
     </ion-col>
-    <ion-col width-21 class="text-center">
+    <ion-col width-21>
       <strong>Rev</strong>
     </ion-col>
   </ion-row>
 
   <ion-grid *ngIf="!showNoDataFound">
     <ion-row class="grid-data" *ngFor="let asset of assetDetail">
-      <ion-col width-5 class="text-center">
+      <ion-col width-5>
         {{asset.HE_Time}}
       </ion-col>
-      <ion-col width-17 class="text-center">
+      <ion-col width-17 >
         {{asset.DA_PRICE_NA | restrictDecimalSize}}
       </ion-col>
-      <ion-col width-17 class="text-center">
+      <ion-col width-17 >
         {{asset.RT_PRICE_NA | restrictDecimalSize}}
       </ion-col>
-      <ion-col width-20 class="text-center">
+      <ion-col width-20 >
         {{asset.PI_MW_NA | restrictDecimalSize}}
       </ion-col>
-      <ion-col width-20 class="text-center">
+      <ion-col width-20 >
         {{asset.DA_AWARDS_NA | restrictDecimalSize}}
       </ion-col>
-      <ion-col width-21 class="text-center">
+      <ion-col width-21 >
         {{asset.REVENUE | restrictDecimalSize}}
       </ion-col>
     </ion-row>
