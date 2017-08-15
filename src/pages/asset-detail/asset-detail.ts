@@ -28,6 +28,7 @@ export class AssetDetailPage {
   DAAwards_Total: string;
   RT_MW_Total: string;
   Revenue_Total: string;
+  TotalLabel:string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private loadingCtrl: LoadingController, private dataService: DataService, private toast: ToastController) {
     this.asset = navParams.get('assetSelected');
@@ -40,8 +41,7 @@ export class AssetDetailPage {
     this.dummyAssetDetail = new Array<AssetDetails>();
     this.showNoDataFound = false;
     this.getAssetDetails();
-    this.dataFound = this.DAAwards_Total = this.Revenue_Total = this.RT_MW_Total = "";
-
+    this.dataFound = this.DAAwards_Total = this.Revenue_Total =this.TotalLabel= this.RT_MW_Total = "";
   }
   convertToDesiredDateString(convertableDate: Date): string {
     var dd = convertableDate.getDate();
@@ -76,7 +76,7 @@ export class AssetDetailPage {
     this.assetDetailRequestObj.TagName = "" + this.asset.NY_PITagName + "";
     this.assetDetailRequestObj.ParticipantName = this.asset.NY_Participantname;
     this.assetDetailRequestObj.LocationName = this.asset.NY_LocationID;
-
+    
     this.dataService.getAssetDetails(this.assetDetailRequestObj)
       .subscribe((assetdetailswithTotals: AssetsWithTotals) => {
         this.assetWithTotals = assetdetailswithTotals;
@@ -84,7 +84,8 @@ export class AssetDetailPage {
         this.DAAwards_Total = this.assetWithTotals.DA_AWRADS_TOTAL;
         this.RT_MW_Total = this.assetWithTotals.RT_MW_TOTAL;
         this.Revenue_Total = this.assetWithTotals.REV_TOTAL;
-        if (this.assetDetail.length > 0) {
+        this.TotalLabel="Total";
+        if (this.assetDetail != null) {
           this.dataFound = "Graph";
           this.showNoDataFound = false;
         }
