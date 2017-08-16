@@ -81,6 +81,7 @@ export class AssetDetailPage {
       .subscribe((assetdetailswithTotals: AssetsWithTotals) => {
         this.assetWithTotals = assetdetailswithTotals;
         this.assetDetail = this.assetWithTotals.DataValues;
+        this.drawLineChart();
         this.DAAwards_Total = this.assetWithTotals.DA_AWRADS_TOTAL;
         this.RT_MW_Total = this.assetWithTotals.RT_MW_TOTAL;
         this.Revenue_Total = this.assetWithTotals.REV_TOTAL;
@@ -88,6 +89,7 @@ export class AssetDetailPage {
         if (this.assetDetail != null) {
           this.dataFound = "Graph";
           this.showNoDataFound = false;
+          this.drawLineChart();
         }
         else {
           let toast = this.toast.create({
@@ -100,7 +102,7 @@ export class AssetDetailPage {
           this.dataFound = "Data not available for selected date"
           this.showNoDataFound = true;
         }
-        this.drawLineChart();
+       
         this.loading.dismiss();
       }, error => {
         this.loading.dismiss();
