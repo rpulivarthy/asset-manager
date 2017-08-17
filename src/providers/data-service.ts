@@ -39,7 +39,7 @@ export class DataService {
             "EndTime": inputAssetDetailsRequest.EndTime,
             "NodeID": inputAssetDetailsRequest.NodeID,
             "Duration": "1h",
-            "PIUserId": "pidemo",
+            "PIUserId": inputAssetDetailsRequest.PIUserId,
             "ParticipantName": inputAssetDetailsRequest.ParticipantName,
             "LocationName": inputAssetDetailsRequest.LocationName
 

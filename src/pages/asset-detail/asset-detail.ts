@@ -72,8 +72,9 @@ export class AssetDetailPage {
 
     this.assetDetailRequestObj.EndTime = this.assetDetailRequestObj.StartTime = this.selectedDateString;
     this.assetDetailRequestObj.NodeID = this.asset.NY_NodeID;
-    this.assetDetailRequestObj.PIServerName = "ewis-pmi-1";
-    this.assetDetailRequestObj.TagName = "" + this.asset.NY_PITagName + "";
+    this.assetDetailRequestObj.PIServerName = this.asset.NY_PIServer;
+    this.assetDetailRequestObj.PIUserId = this.asset.NY_PIUserId;
+    this.assetDetailRequestObj.TagName = this.asset.NY_PITagName;
     this.assetDetailRequestObj.ParticipantName = this.asset.NY_Participantname;
     this.assetDetailRequestObj.LocationName = this.asset.NY_LocationID;
     

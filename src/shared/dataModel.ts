@@ -6,13 +6,17 @@ export class Assets {
     NY_LocationID: number;
     NY_Participantname: string;
     NY_Region: string;
-    constructor(NY_NodeName: string, NY_NodeID: string, NY_PITagName: string, NY_LocationID: number, NY_Participantname: string, NY_Region: string) {
+    NY_PIUserId:string;
+    NY_PIServer:string;
+    constructor(NY_NodeName: string, NY_NodeID: string, NY_PITagName: string, NY_LocationID: number, NY_Participantname: string, NY_Region: string,NY_PIUserId:string,NY_PIServer:string) {
         this.NY_NodeID = NY_NodeID;
         this.NY_NodeName = NY_NodeName;
         this.NY_PITagName = NY_PITagName;
         this.NY_LocationID = NY_LocationID;
         this.NY_Participantname = NY_Participantname;
         this.NY_Region = NY_Region;
+        this.NY_PIServer=NY_PIServer;
+        this.NY_PIUserId=NY_PIUserId;
     }
 }
 export class AssetWithNodes {

@@ -76,7 +76,7 @@ export class AssetsPage {
             [
               {
                 "NY_NodeName": "No Nodes Found...", "NY_NodeID": "", "NY_PITagName": "",
-                "NY_LocationID": null, "NY_Participantname": "","NY_Region":""
+                "NY_LocationID": null, "NY_Participantname": "","NY_Region":"","NY_PIServer":"","NY_PIUserId":""
               }];
           let toast = this.toast.create({
             message: 'No nodes found',
