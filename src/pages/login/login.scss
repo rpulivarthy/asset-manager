@@ -8,7 +8,8 @@ page-login {
     max-width: 350px;
     height: 450px;
     overflow: hidden;
-    top: 100px;
+    top: 7y
+    0px;
     left: 20px;
     right: 20px;
     bottom: 20px;
@@ -66,4 +67,15 @@ color: #7DBF43
 .toast-controller-login-error .toast-wrapper{
    text-align:center;
    background:lightcoral;
+}
+
+.content-ios, .ion-page {
+  background-image: url(../assets/img/windturbine3.jpg);
+  height: 100%;
+  min-height: 560px;
+  overflow: hidden;
+}
+
+ion-nav {
+    overflow: auto;
 }
