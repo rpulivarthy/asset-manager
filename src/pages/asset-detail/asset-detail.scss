@@ -3,9 +3,6 @@ page-asset-detail {
         .grid-header{
             background:#7DBF43;
             color: white;
-            position: fixed;
-            width: 98.3%;
-            z-index: 1000;
         }
         .grid-data{
             margin: 0px;
@@ -37,17 +34,31 @@ page-asset-detail {
  }
 
 .scroll-content {
-    padding-top: 0 !important;
-    padding-right: 0 !important;
+    // padding-top: 0 !important;
+    // padding-right: 0 !important;
     top: 16px;
+    padding: 0 !important;
 }
 
 .card-md {
     width: 100%;
-    margin-left: 0 !important;
+    margin-left: -5px !important;
+    box-shadow: none !important;
 }
 
-@media only screen and (max-width: 768px) {
-    .grid-header {width: 95.3% !important;text-overflow: ellipsis;
-    white-space: nowrap;}
+.grid-header .col {
+    white-space: nowrap;
 }
+
+.grid-header .col:nth-child(1), .grid .col:nth-child(1) {
+    padding-left: 10px;
+}
+
+.grid-header .col:nth-child(6), .grid .col:nth-child(6) {
+    padding-right: 10px;
+}
+
+// @media only screen and (max-width: 768px) {
+//     .grid-header {width: 95.3% !important;text-overflow: ellipsis;
+//     white-space: nowrap;}
+// }
