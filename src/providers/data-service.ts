@@ -1,6 +1,6 @@
 
 import { Injectable } from '@angular/core';
-import { Http, Response, URLSearchParams } from '@angular/http';
+import { Http, Response } from '@angular/http';
 import { Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import { Configuration } from '../app/app.constants';
@@ -9,7 +9,7 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/retry';
 import 'rxjs/add/operator/retrywhen';
 import 'rxjs/add/observable/throw';
-import { Assets, AssetDetails, AssetDetailRequest,AssetsWithTotals } from '../shared/dataModel';
+import { Assets, AssetDetailRequest,AssetsWithTotals } from '../shared/dataModel';
 
 @Injectable()
 export class DataService {

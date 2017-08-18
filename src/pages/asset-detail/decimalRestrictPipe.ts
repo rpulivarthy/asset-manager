@@ -1,7 +1,7 @@
-import { Pipe, PipeTransform } from '@angular/core';
+import { Pipe } from '@angular/core';
 
 @Pipe({ name: 'restrictDecimalSize' })
-export class DecimalRestrictSize implements PipeTransform {
+export class DecimalRestrictSize  {
     transform(value: string, args: string[]): any {
         if (!value) return value;
        
