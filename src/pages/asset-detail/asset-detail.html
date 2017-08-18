@@ -17,65 +17,65 @@
 <ion-content padding class="asset-detail-content">
   <ion-row class="grid-header" *ngIf="!showNoDataFound">
 
-    <ion-col width-5>
+    <ion-col width-2>
       <strong> HE</strong>
     </ion-col>
-    <ion-col width-17>
+    <ion-col width-5>
       <strong>DA($)</strong>
     </ion-col>
-    <ion-col width-17>
+    <ion-col width-5>
       <strong>RT($)</strong>
     </ion-col>
-    <ion-col width-20>
+    <ion-col width-30>
       <strong>RT MW</strong>
     </ion-col>
-    <ion-col width-20>
+    <ion-col width-30>
       <strong>DA Awards</strong>
     </ion-col>
-    <ion-col width-21>
+    <ion-col width-28>
       <strong>Rev($)</strong>
     </ion-col>
   </ion-row>
 
   <ion-grid *ngIf="!showNoDataFound">
     <ion-row class="grid-data" *ngFor="let asset of assetDetail">
-      <ion-col width-5>
+      <ion-col width-2>
         {{asset.HE_Time}}
       </ion-col>
-      <ion-col width-17>
+      <ion-col width-5>
         {{asset.DA_PRICE_NA | restrictDecimalSize}}
       </ion-col>
-      <ion-col width-17>
+      <ion-col width-5>
         {{asset.RT_PRICE_NA | restrictDecimalSize}}
       </ion-col>
-      <ion-col width-20>
+      <ion-col width-30>
         {{asset.PI_MW_NA | restrictDecimalSize}}
       </ion-col>
-      <ion-col width-20>
+      <ion-col width-30>
         {{asset.DA_AWARDS_NA | restrictDecimalSize}}
       </ion-col>
-      <ion-col width-21>
+      <ion-col width-28>
         {{asset.REVENUE | restrictDecimalSize}}
       </ion-col>
     </ion-row>
     <ion-row class="grid-data">
-      <ion-col width-5>
+      <ion-col width-2>
         <b>{{TotalLabel}}</b>
       </ion-col>
-      <ion-col width-17>
+      <ion-col width-5>
 
       </ion-col>
-      <ion-col width-17>
+      <ion-col width-5>
 
       </ion-col>
-      <ion-col width-20>
-        <b>{{RT_MW_Total|restrictDecimalSize}}</b>
+      <ion-col class="gridBranding" width-30>
+        {{RT_MW_Total|restrictDecimalSize}}
       </ion-col>
-      <ion-col width-20>
-        <b>{{DAAwards_Total|restrictDecimalSize}}</b>
+      <ion-col class="gridBranding" width-30>
+        {{DAAwards_Total|restrictDecimalSize}}
       </ion-col>
-      <ion-col width-21>
-        <b>{{Revenue_Total|restrictDecimalSize}}</b>
+      <ion-col class="gridBranding" width-28>
+        {{Revenue_Total|restrictDecimalSize}}
       </ion-col>
     </ion-row>
   </ion-grid>

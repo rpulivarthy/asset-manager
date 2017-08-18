@@ -57,7 +57,9 @@ page-asset-detail {
 .grid-header .col:nth-child(6), .grid .col:nth-child(6) {
     padding-right: 10px;
 }
-
+.gridBranding,.col{
+    font-size: 12px;
+}
 // @media only screen and (max-width: 768px) {
 //     .grid-header {width: 95.3% !important;text-overflow: ellipsis;
 //     white-space: nowrap;}

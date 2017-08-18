@@ -44,7 +44,7 @@ page-assets {
         //     background: lightgrey;
         //     padding: 10px;
         // }
-        .assetTitle {margin-top: 10px; display: inline-block; font-size: 0.8em;}
+        .assetTitle {margin-top: 10px; display: inline-block; font-size: 0.6em;}
         .bar-buttons {float: right;}
         .text-input-md {border: 1px solid #DDD;-webkit-border-radius: 5px;-moz-border-radius: 5px;border-radius: 5px;}
         .item-md {background: transparent;}
@@ -56,6 +56,9 @@ page-assets {
         .item-block {min-height: auto;}
         .label-md {margin: 0px 8px 0 0;}
         .button-md {height: 3rem; padding: 0 0.7em;}
+        .list-ios > .item-block:first-child {border: 0 !important;}
+        .button-ios {height: 2em; padding: 0 .7em; margin-top: -10px;}
+        .label-ios {margin: 11px 8px 20px 0;}
     }
 
 }
