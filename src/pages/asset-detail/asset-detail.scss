@@ -1,9 +1,5 @@
 page-asset-detail {
     .asset-detail-content{
-        .grid-header{
-            background:#7DBF43;
-            color: white;
-        }
         .grid-data{
             margin: 0px;
             font-size: 1em;
@@ -14,6 +10,7 @@ page-asset-detail {
         }
         .datePickerContainer {border: 1px solid #7DBF43;}
         .datePickerContainer .item-inner {border: 0;}
+        .card-ios {box-shadow: none !important;}
     }
 }
 
@@ -28,7 +25,6 @@ page-asset-detail {
 
  .grid {
      position: relative;
-     top: 22px;
      padding-left: 0;
      padding-right: 0;
  }
@@ -36,7 +32,6 @@ page-asset-detail {
 .scroll-content {
     // padding-top: 0 !important;
     // padding-right: 0 !important;
-    top: 16px;
     padding: 0 !important;
 }
 
@@ -57,8 +52,15 @@ page-asset-detail {
 .grid-header .col:nth-child(6), .grid .col:nth-child(6) {
     padding-right: 10px;
 }
+.grid-header{
+    background:#7DBF43;
+    color: white;
+}
 .gridBranding,.col{
-    font-size: 12px;
+    font-size: 11px;
+}
+.item-ios.item-block .item-inner {
+    border: 0;
 }
 // @media only screen and (max-width: 768px) {
 //     .grid-header {width: 95.3% !important;text-overflow: ellipsis;

@@ -11,10 +11,6 @@
     <ion-label>Select a Date</ion-label>
     <ion-datetime [(ngModel)]="selectedDateModel" max="{{maxDate}}" (ngModelChange)="getAssetDetails()"></ion-datetime>
   </ion-item>
-</ion-header>
-
-
-<ion-content padding class="asset-detail-content">
   <ion-row class="grid-header" *ngIf="!showNoDataFound">
 
     <ion-col width-2>
@@ -36,6 +32,31 @@
       <strong>Rev($)</strong>
     </ion-col>
   </ion-row>
+</ion-header>
+
+
+<ion-content padding class="asset-detail-content">
+  <!-- <ion-row class="grid-header" *ngIf="!showNoDataFound">
+
+    <ion-col width-2>
+      <strong> HE</strong>
+    </ion-col>
+    <ion-col width-5>
+      <strong>DA($)</strong>
+    </ion-col>
+    <ion-col width-5>
+      <strong>RT($)</strong>
+    </ion-col>
+    <ion-col width-30>
+      <strong>RT MW</strong>
+    </ion-col>
+    <ion-col width-30>
+      <strong>DA Awards</strong>
+    </ion-col>
+    <ion-col width-28>
+      <strong>Rev($)</strong>
+    </ion-col>
+  </ion-row> -->
 
   <ion-grid *ngIf="!showNoDataFound">
     <ion-row class="grid-data" *ngFor="let asset of assetDetail">
