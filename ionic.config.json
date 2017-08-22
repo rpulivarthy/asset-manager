@@ -1,5 +1,8 @@
 {
   "name": "asset-manager-app",
   "app_id": "9ea7305d",
-  "type": "ionic-angular"
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
 }
