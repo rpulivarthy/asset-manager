@@ -28,7 +28,7 @@ export class AssetDetailPage {
   DAAwards_Total: string;
   RT_MW_Total: string;
   Revenue_Total: string;
-  TotalLabel:string;
+  TotalLabel: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private loadingCtrl: LoadingController, private dataService: DataService, private toast: ToastController) {
     this.asset = navParams.get('assetSelected');
@@ -41,7 +41,7 @@ export class AssetDetailPage {
     this.dummyAssetDetail = new Array<AssetDetails>();
     this.showNoDataFound = false;
     this.getAssetDetails();
-    this.dataFound = this.DAAwards_Total = this.Revenue_Total =this.TotalLabel= this.RT_MW_Total = "";
+    this.dataFound = this.DAAwards_Total = this.Revenue_Total = this.TotalLabel = this.RT_MW_Total = "";
   }
   convertToDesiredDateString(convertableDate: Date): string {
     var dd = convertableDate.getDate();
@@ -63,7 +63,17 @@ export class AssetDetailPage {
     return this.selectedDateString;
   }
   getAssetDetails() {
-    this.selectedDate = new Date(this.selectedDateModel);
+
+    var DateString = new Date(this.selectedDateModel).toDateString();
+    if (new Date(this.selectedDateModel).getDate() == new Date().getDate()) {
+      var setTimeTodate = new Date().toLocaleTimeString();
+      DateString = DateString + "," + setTimeTodate;
+      this.selectedDate = new Date(DateString);
+    }
+    else {
+      DateString = DateString + ",12:00:00 AM";
+      this.selectedDate = new Date(DateString);
+    }
     this.selectedDateString = this.convertToDesiredDateString(this.selectedDate);
     this.selectedDateString = this.selectedDateString.replace('-', '');
     this.selectedDateString = this.selectedDateString.replace('-', '');
@@ -77,7 +87,7 @@ export class AssetDetailPage {
     this.assetDetailRequestObj.TagName = this.asset.NY_PITagName;
     this.assetDetailRequestObj.ParticipantName = this.asset.NY_Participantname;
     this.assetDetailRequestObj.LocationName = this.asset.NY_LocationID;
-    
+
     this.dataService.getAssetDetails(this.assetDetailRequestObj)
       .subscribe((assetdetailswithTotals: AssetsWithTotals) => {
         this.assetWithTotals = assetdetailswithTotals;
@@ -86,24 +96,21 @@ export class AssetDetailPage {
         this.DAAwards_Total = this.assetWithTotals.DA_AWRADS_TOTAL;
         this.RT_MW_Total = this.assetWithTotals.RT_MW_TOTAL;
         this.Revenue_Total = this.assetWithTotals.REV_TOTAL;
-        this.TotalLabel="Total";
+        this.TotalLabel = "Total";
         if (this.assetDetail != null) {
-          this.dataFound = "Graph";
-          this.showNoDataFound = false;
-          this.drawLineChart();
+          if (this.assetDetail.length > 0) {
+            this.dataFound = "Graph";
+            this.showNoDataFound = false;
+            this.drawLineChart();
+          }
+          else {
+            this.showNoDataInfo();
+          }
         }
         else {
-          let toast = this.toast.create({
-            message: 'Data not available for selected date',
-            duration: 2000,
-            position: 'bottom',
-            cssClass: "toast-controller-assetdetails-warning"
-          });
-          toast.present();
-          this.dataFound = "Data not available for selected date"
-          this.showNoDataFound = true;
+          this.showNoDataInfo();
         }
-       
+
         this.loading.dismiss();
       }, error => {
         this.loading.dismiss();
@@ -119,6 +126,17 @@ export class AssetDetailPage {
         });
         toast.present();
       });
+  }
+  showNoDataInfo() {
+    let toast = this.toast.create({
+      message: 'Data not available for selected date',
+      duration: 2000,
+      position: 'bottom',
+      cssClass: "toast-controller-assetdetails-warning"
+    });
+    toast.present();
+    this.dataFound = "Data not available for selected date"
+    this.showNoDataFound = true;
   }
   showLoading() {
     this.loading = this.loadingCtrl.create({

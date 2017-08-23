@@ -9,7 +9,7 @@
   </ion-navbar>
   <ion-item class="datePickerContainer">
     <ion-label>Select a Date</ion-label>
-    <ion-datetime [(ngModel)]="selectedDateModel" max="{{maxDate}}" (ngModelChange)="getAssetDetails()"></ion-datetime>
+    <ion-datetime [(ngModel)]="selectedDateModel"  max="{{maxDate}}" (ngModelChange)="getAssetDetails()"></ion-datetime>
   </ion-item>
   <ion-row class="grid-header" *ngIf="!showNoDataFound">
 
