@@ -74,3 +74,16 @@ page-assets {
     text-align:center;
    background:#B22222;
 }
+page-assets .asset-content .button-ios {
+    height: 2.0em;
+    padding: 0 .7em;
+    margin-top: 5px;
+}
+page-assets .asset-content .assetTitle {
+    margin-top: 10px;
+    display: inline-block;
+    font-size: 0.9em;
+    width: 80%;
+    white-space: pre-wrap;
+    overflow: hidden;
+}
