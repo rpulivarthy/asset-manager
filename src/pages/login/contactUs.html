@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header >
   <ion-navbar color="dark">
     <ion-row>
       <ion-title style="size:12px;">Contact Support Team </ion-title>
@@ -12,20 +12,20 @@
     <ion-label>For any inquiries or questions, please send us an email</ion-label>
   </ion-item>
   <ion-row class="grid-header">
-    <ion-col width-50 class="text-center">
+    <ion-col width-30 >
       <strong> Name</strong>
     </ion-col>
-    <ion-col width-50 class="text-center">
+    <ion-col width-70 >
       <strong>Email</strong>
     </ion-col>
   </ion-row>
 
   <ion-grid>
     <ion-row class="login-row"  *ngFor="let contact of contactList">
-      <ion-col width-50 >
+      <ion-col width-30 >
         {{contact.NAME}}
       </ion-col>
-      <ion-col width-50>
+      <ion-col width-70>
         {{contact.EMAIL}}
       </ion-col>
     </ion-row>
