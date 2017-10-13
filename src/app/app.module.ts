@@ -2,12 +2,13 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { Toast } from '@ionic-native/toast'
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
-import { AssetsPage, AssetDetailPage, AlertsPage, LoginPage,PopularNodes,ContactUs} from '../pages/pages';
+import { AssetsPage, AssetDetailPage,PrivacyPolicyPage, LoginPage,ContactUs,PrivacyPolicyModal} from '../pages/pages';
 import { TabsPage } from '../pages/tabs/tabs';
 import { AuthService } from '../providers/auth-service';
 import { DataService } from '../providers/data-service';
 import { Configuration } from './app.constants';
 import { DecimalRestrictSize } from '../pages/asset-detail/decimalRestrictPipe';
+import { CustomCurrencyPipe } from '../pages/asset-detail/customCurrencyPipe';
 import { HttpModule } from '@angular/http';
 import { BrowserModule } from "@angular/platform-browser";
 
@@ -17,12 +18,13 @@ import { BrowserModule } from "@angular/platform-browser";
     MyApp,
     AssetsPage,
     AssetDetailPage,
-    AlertsPage,
+    PrivacyPolicyPage,
     LoginPage,
     TabsPage,
     DecimalRestrictSize,
-    PopularNodes,
-    ContactUs
+    CustomCurrencyPipe,
+    ContactUs,
+    PrivacyPolicyModal
   ],
   imports: [
     BrowserModule,
@@ -34,12 +36,12 @@ import { BrowserModule } from "@angular/platform-browser";
     MyApp,
     AssetsPage,
     AssetDetailPage,
-    AlertsPage,
+    PrivacyPolicyPage,
     LoginPage,
     TabsPage,
-    PopularNodes,
-    ContactUs
+    ContactUs,
+    PrivacyPolicyModal
   ],
-  providers: [Toast, {provide: ErrorHandler, useClass: IonicErrorHandler},AuthService,DataService,Configuration,DecimalRestrictSize]
+  providers: [Toast, {provide: ErrorHandler, useClass: IonicErrorHandler},AuthService,DataService,Configuration,DecimalRestrictSize,CustomCurrencyPipe]
 })
 export class AppModule {}

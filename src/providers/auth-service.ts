@@ -6,7 +6,7 @@ import * as JWT from 'jwt-decode';
 import { Http, Response } from '@angular/http';
 import { Headers, RequestOptions } from '@angular/http';
 import { Configuration } from '../app/app.constants';
-import { LoadingController, Loading,ToastController } from 'ionic-angular';
+import { LoadingController, Loading, ToastController } from 'ionic-angular';
 import 'rxjs/add/observable/throw';
 
 @Injectable()
@@ -18,7 +18,7 @@ export class AuthService {
   decodedTokenResponse: DecodeToken;
   loading: Loading;
 
-  constructor(private http: Http, private config: Configuration, private loadingCtrl: LoadingController,private toast:ToastController) {
+  constructor(private http: Http, private config: Configuration, private loadingCtrl: LoadingController, private toast: ToastController) {
     this.currentUser = new User();
     this.isUserAuthenticated = false;
   }
@@ -29,7 +29,7 @@ export class AuthService {
     headers.append('Accept', 'application/json');
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
     let options = new RequestOptions({ headers: headers });
-    return this.http.post(this.config.apiBaseUrl + '/token', body, options).map((res: Response) => {
+    return this.http.post(this.config.apiBaseUrl+'/token', body, options).map((res: Response) => {
       if (res.status == 200) {
         this.validatedUser = res.json();
         if (sessionStorage.getItem("access_token") != "") {
@@ -40,23 +40,33 @@ export class AuthService {
       return this.validatedUser;
     }).catch((error: any) => {
       if (error.status === 400) {
-         this.loading.dismiss();
-         let toast = this.toast.create({
-          message: "Invalid Credentials, please try again",
-          position: 'middle',
-          cssClass: "toast-controller-asset-errorhandler",
-          showCloseButton: true,
-          closeButtonText: "OK"
-        });
-        toast.onDidDismiss(() => {
-          
-        });
-        toast.present();
+        if (error._body) {
+          let badRequestMessage: string = error._body;
+          if (badRequestMessage.indexOf("user_not_authorized") >= 0) this.manageLoginErrorToast("User not authorized for NEMOD.");
+          else if (badRequestMessage.indexOf("user_locked") >= 0) this.manageLoginErrorToast("User is locked after 5 failed attempts, please contact support team.");
+          else this.manageLoginErrorToast("Invalid Username or Password, please try again.");
+        }
+        else {
+          this.manageLoginErrorToast("Invalid Username or Password, please try again.");
+        }
         return Observable.throw(new Error(error.status));
       }
     })
   }
+  public manageLoginErrorToast(toastMessage: string) {
+    this.loading.dismiss();
+    let toast = this.toast.create({
+      message: toastMessage,
+      position: 'middle',
+      cssClass: "toast-controller-asset-errorhandler",
+      showCloseButton: true,
+      closeButtonText: "OK"
+    });
+    toast.onDidDismiss(() => {
 
+    });
+    toast.present();
+  }
   public login(credentials) {
     if (credentials.email === null || credentials.password === null) {
       return Observable.throw("Please insert credentials");
@@ -71,6 +81,8 @@ export class AuthService {
             this.currentUser = new User();
             this.currentUser.role = this.decodedTokenResponse.role;
             this.currentUser.email = this.currentUser.name = this.decodedTokenResponse.unique_name;
+            if (this.decodedTokenResponse.nameid.toLocaleLowerCase() == "true") { this.currentUser.privacypolicyflag = true }
+            else (this.currentUser.privacypolicyflag = false);
             this.loading.dismiss();
           }
           observer.next(this.isUserAuthenticated);

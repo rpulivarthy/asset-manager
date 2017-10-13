@@ -1,0 +1,27 @@
+<ion-header>
+    <ion-navbar color="primary">
+        <ion-title style=text-align:center>Privacy Policy</ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content padding>
+    <ion-grid>
+        <ion-row>
+            <ion-col width-95 style=font-size:13px;text-align:justify;>
+                <p>
+                    Privacy Policy Comes here.
+                </p>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <ion-list radio-group [(ngModel)]="privacyPolicyAccepted">
+        <ion-item>
+            <ion-label>I accept</ion-label>
+            <ion-radio value="true"></ion-radio>
+        </ion-item>
+        <ion-item>
+            <ion-label>I don't accept</ion-label>
+            <ion-radio value="false"></ion-radio>
+        </ion-item>
+    </ion-list>
+    <button color="primary" class="disable-hover button button-ios button-default button-default-ios button-round button-round-ios" (click)="setPrivacyPolicy()" round>Next</button>
+</ion-content>

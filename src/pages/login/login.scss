@@ -6,7 +6,7 @@ page-login {
   .scroll-content {
     background:rgba(255,255,255,0.7);
     max-width: 350px;
-    height: 450px;
+    height: 480px;
     overflow: hidden;
     top:70px;
     left: 20px;
@@ -18,7 +18,11 @@ page-login {
     border-radius: 5px;
   }
   .login-content {
-    background-image: url(../assets/img/windturbine3.jpg);
+    background-image: url(../assets/img/windturbine3.jpg) no-repeat fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
  
     .logo-row {
       align-content: center;

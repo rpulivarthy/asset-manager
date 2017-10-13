@@ -4,10 +4,14 @@
       <img src="assets/img/logo_NE.jpg" /><br />
       <span class="loginBranding"><b>NextEra Energy Marketing Operations Data (NEMOD)</b> </span>
     </ion-col>
-
   </ion-row>
   <div class="login-box">
     <form (ngSubmit)="login()" #registerForm="ngForm">
+      <ion-row>
+        <ion-col>
+          <a (click)="openPrivacyPolicyModal()"  class="button"><u>Privacy Policy</u></a>
+        </ion-col>
+      </ion-row>
       <ion-row>
         <ion-col>
           <ion-list inset>
@@ -32,9 +36,10 @@
   </div>
   <ion-row>
     <ion-col>
-        <button ion-button style="text-transform: none;" (click)="openContactUsModal()" round>Contact Us</button>
+      <button ion-button style="text-transform: none;" (click)="openContactUsModal()" round>Contact Us</button>
     </ion-col>
   </ion-row>
+
   <!--<ion-row class="logo-row">
     <ion-col></ion-col>
       <ion-col>

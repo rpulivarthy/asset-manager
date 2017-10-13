@@ -1,38 +1,36 @@
 
+ogin-header{
+    top:35px;
+}        
   
-  .login-header{
-      top:35px;
-  }        
-    
 .toolbar-title-ios {
-    text-align: center;
-    font-size: 1.3rem;
-    font-weight: 600;
-    color: #000;
-    pointer-events: auto;
+  text-align: center;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #000;
+  pointer-events: auto;
 }
 ion-label {
-    margin: 0;
-    display: block;
-    overflow: hidden;
-    -webkit-box-flex: 1;
-    -webkit-flex: 1;
-    -ms-flex: 1;
-    flex: 1;
-    font-size: inherit;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    font-size: 1.1rem;
+  margin: 0;
+  display: block;
+  overflow: hidden;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  font-size: inherit;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 1.1rem;
 }
 
 login-row {
-    margin: 0;
-    display: block;
-    overflow: hidden;
-    font-size: 1.1rem;
+  margin: 0;
+  display: block;
+  overflow: hidden;
+  font-size: 1.1rem;
 }   
 .gridBranding, .col {
-    font-size: 9.8px;
+  font-size: 9.8px;
 }
-
 

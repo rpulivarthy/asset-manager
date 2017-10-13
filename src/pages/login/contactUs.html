@@ -1,32 +1,18 @@
-<ion-header >
+<ion-header>
   <ion-navbar color="dark">
     <ion-row>
-      <ion-title style="size:12px;">Contact Support Team </ion-title>
-      <button ion-button color="danger" (click)="dismiss()" round><ion-icon name="close"></ion-icon></button></ion-row>
+      <ion-title>Contact Support Team </ion-title>
+      <button ion-button color="danger" (click)="dismiss()" round><ion-icon name="close"></ion-icon></button>
+    </ion-row>
   </ion-navbar>
 </ion-header>
-
-
 <ion-content padding>
-  <ion-item>
-    <ion-label>For any inquiries or questions, please send us an email</ion-label>
-  </ion-item>
-  <ion-row class="grid-header">
-    <ion-col width-30 >
-      <strong> Name</strong>
-    </ion-col>
-    <ion-col width-70 >
-      <strong>Email</strong>
-    </ion-col>
-  </ion-row>
-
   <ion-grid>
-    <ion-row class="login-row"  *ngFor="let contact of contactList">
-      <ion-col width-30 >
-        {{contact.NAME}}
-      </ion-col>
-      <ion-col width-70>
-        {{contact.EMAIL}}
+    <ion-row class="login-row">
+      <ion-col width-95 style=font-size:13px;text-align:justify>
+        <p>
+          For any inquiries or questions, please send an email to <strong>DL-NEER-NEMOD-SUPPORT@FPL.COM</strong>
+        </p>
       </ion-col>
     </ion-row>
   </ion-grid>

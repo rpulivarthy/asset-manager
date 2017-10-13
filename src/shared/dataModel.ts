@@ -35,17 +35,14 @@ export class DecodeToken {
     nbf: number;
     role: string;
     unique_name: string;
+    nameid:string;
 }
 
 export class User {
     name: string;
     email: string;
     role: string;
-    //   constructor(name: string, email: string,role:string) {
-    //     this.name = name;
-    //     this.email = email;
-    //     this.role=role;
-    //   }
+    privacypolicyflag:boolean;
 }
 export class AssetDetails {
     DATE: string;
@@ -70,11 +67,6 @@ export class AssetsWithTotals {
     DA_AWRADS_TOTAL: string;
     RT_MW_TOTAL: string;
     REV_TOTAL: string;
-}
-export class ContactMember {
-    NAME: string;
-    EMAIL: string;
-    PHONE: string;
 }
 export class AssetDetailRequest {
     PIServerName: string;

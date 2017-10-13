@@ -8,8 +8,8 @@
     </ion-buttons>
   </ion-navbar>
   <ion-item class="datePickerContainer">
-    <ion-label style="font-size:16px;font-weight:350" >Select a Date</ion-label>
-    <ion-datetime [(ngModel)]="selectedDateModel"  max="{{maxDate}}" (ngModelChange)="getAssetDetails()"></ion-datetime>
+    <ion-label style="font-size:16px;font-weight:350">Select a Date</ion-label>
+    <ion-datetime [(ngModel)]="selectedDateModel" max="{{maxDate}}" (ngModelChange)="getAssetDetails()"></ion-datetime>
   </ion-item>
   <ion-row class="grid-header" *ngIf="!showNoDataFound">
 
@@ -64,10 +64,10 @@
         {{asset.HE_Time}}
       </ion-col>
       <ion-col width-5>
-        {{asset.DA_PRICE_NA | restrictDecimalSize}}
+        {{asset.DA_PRICE_NA | customCurrency}}
       </ion-col>
       <ion-col width-5>
-        {{asset.RT_PRICE_NA | restrictDecimalSize}}
+        {{asset.RT_PRICE_NA | customCurrency}}
       </ion-col>
       <ion-col width-30>
         {{asset.PI_MW_NA | restrictDecimalSize}}
@@ -76,7 +76,7 @@
         {{asset.DA_AWARDS_NA | restrictDecimalSize}}
       </ion-col>
       <ion-col width-28>
-        {{asset.REVENUE | restrictDecimalSize}}
+        {{asset.REVENUE | customCurrency}}
       </ion-col>
     </ion-row>
     <ion-row class="grid-data">
@@ -90,13 +90,13 @@
 
       </ion-col>
       <ion-col class="gridBranding" width-30>
-        {{RT_MW_Total|restrictDecimalSize}}
+        {{RT_MW_Total | restrictDecimalSize}}
       </ion-col>
       <ion-col class="gridBranding" width-30>
-        {{DAAwards_Total|restrictDecimalSize}}
+        {{DAAwards_Total | restrictDecimalSize}}
       </ion-col>
       <ion-col class="gridBranding" width-28>
-        {{Revenue_Total|restrictDecimalSize}}
+        {{Revenue_Total | customCurrency}}
       </ion-col>
     </ion-row>
   </ion-grid>
@@ -105,7 +105,7 @@
   </ion-grid>
 
   <ion-card>
-    <ion-card-header>{{dataFound}}
+    <ion-card-header style=font-size:18px;>{{dataFound}}
 
     </ion-card-header>
     <ion-card-content>

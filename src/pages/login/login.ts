@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, ToastController, ModalController } from 'ionic-angular';
 import { AuthService } from '../../providers/auth-service';
 import { TabsPage } from '../tabs/tabs';
-import { ContactUs } from '../pages';
+import { ContactUs,PrivacyPolicyPage,PrivacyPolicyModal } from '../pages';
 
 @Component({
   selector: 'page-login',
@@ -19,7 +19,12 @@ export class LoginPage {
     this.auth.login(this.registerCredentials).subscribe(allowed => {
       if (allowed) {
         setTimeout(() => {
-          this.nav.setRoot(TabsPage);
+          if(this.auth.currentUser.privacypolicyflag){
+            this.nav.setRoot(TabsPage);
+          }
+         else{
+           this.nav.setRoot(PrivacyPolicyPage);
+         }
         });
       } else {
         this.showError("Access Denied");
@@ -41,6 +46,10 @@ export class LoginPage {
 
   openContactUsModal() {
     let modal = this.modalCtrl.create(ContactUs);
+    modal.present();
+  }
+  openPrivacyPolicyModal() {
+    let modal = this.modalCtrl.create(PrivacyPolicyModal);
     modal.present();
   }
 }

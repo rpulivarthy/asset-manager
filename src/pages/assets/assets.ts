@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, LoadingController, Loading, ModalController, ToastController } from 'ionic-angular';
 import { AssetDetailPage } from '../pages';
-import { PopularNodes, LoginPage } from '../pages';
+import {  LoginPage } from '../pages';
 import { AuthService } from '../../providers/auth-service';
 import { DataService } from '../../providers/data-service';
 import { Assets } from '../../shared/dataModel';
@@ -27,20 +27,9 @@ export class AssetsPage {
     this.showNoNodesFound = false;
   }
   loadAssets() {
-    // this.nonAdminNodes = [
-    //   { "NY_NodeName": "Elgin 1(960ELGI13.5KVEE-1)", "NY_NodeID": "32417791", "NY_PITagName": "PMI_ICCP_1_ELGIN_CE_0A0000000000481A00010301", "NY_LocationID": 86122101, "NY_Participantname": "ELGINE" },
-    //   { "NY_NodeName": "Elgin 2(960ELGI13.5KVEE-2)", "NY_NodeID": "32417793", "NY_PITagName": "PMI_ICCP_1_ELGIN_CE_0A0000000000481B00010301", "NY_LocationID": 86122102, "NY_Participantname": "ELGINE" },
-    //   { "NY_NodeName": "Elgin 3(960ELGI13.5KVEE-3)", "NY_NodeID": "32417795", "NY_PITagName": "PMI_ICCP_1_ELGIN_CE_0A0000000000510D00010301", "NY_LocationID": 86122103, "NY_Participantname": "ELGINE" },
-    //   { "NY_NodeName": "Elgin 4(960ELGI13.5KVEE-4)", "NY_NodeID": "32417797", "NY_PITagName": "PMI_ICCP_1_ELGIN_CE_0A0000000000481D00010301", "NY_LocationID": 86122104, "NY_Participantname": "ELGINE" },
-    //   { "NY_NodeName": "Rocky Road 1(932ROCK12KVRR-1)", "NY_NodeID": "32417665", "NY_PITagName": "PMI_ICCP_1_ROCKY_ROAD_CE_0A000000000047F400010301", "NY_LocationID": 86272101, "NY_Participantname": "ROCRP" },
-    //   { "NY_NodeName": "Rocky Road 2(932ROCK12KVRR-2)", "NY_NodeID": "32417667", "NY_PITagName": "PMI_ICCP_1_ROCKY_ROAD_CE_0A000000000047F500010301", "NY_LocationID": 86272102, "NY_Participantname": "ROCRP" },
-    //   { "NY_NodeName": "Rocky Road 3(932ROCK12KVRR-3)", "NY_NodeID": "32417669", "NY_PITagName": "PMI_ICCP_1_ROCKY_ROAD_CE_0A000000000047F600010301", "NY_LocationID": 86272103, "NY_Participantname": "ROCRP" },
-    //   { "NY_NodeName": "Rocky Road 4(932ROCK12KVRR-4)", "NY_NodeID": "32417671", "NY_PITagName": "PMI_ICCP_1_ROCKY_ROAD_CE_0A000000000047F700010301", "NY_LocationID": 86272104, "NY_Participantname": "ROCRP" }
-    // ]
     if (this.authService.currentUser.role.toLowerCase() == "nonadmin") {
       this.showSearch = false;
       this.showLoading();
-      //this.assets = this.nonAdminNodes;
       this.assetsAPI(this.authService.currentUser.name,"NonAdmin");
     }
     else {
@@ -52,19 +41,9 @@ export class AssetsPage {
           this.showLoading();
           this.assetsAPI("","Admin");
         }
-        // else if (this.authService.currentUser.role.toLowerCase() == "misouser") {
-        //   this.showNoNodesFound = false;
-        //   this.showLoading();
-        //   this.assetsAPI("miso");
-        //   this.popularNodesText = "Popular Miso Nodes";
-        // }
       }
     }
 
-  }
-  openPopularNodesModal() {
-    let modal = this.modalCtrl.create(PopularNodes);
-    modal.present();
   }
   assetsAPI(UserName:string,Role:string) {
     if (this.authService.isUserAuthenticated) {

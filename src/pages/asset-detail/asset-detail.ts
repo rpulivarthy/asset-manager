@@ -1,10 +1,11 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { NavController, NavParams, LoadingController, Loading } from 'ionic-angular';
 import { Chart } from 'chart.js';
 import { Assets, AssetDetails, AssetDetailRequest, AssetsWithTotals } from '../../shared/dataModel';
 import { DataService } from '../../providers/data-service';
 import { ToastController } from 'ionic-angular';
 import { LoginPage } from '../pages';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'page-asset-detail',
@@ -128,14 +129,15 @@ export class AssetDetailPage {
       });
   }
   showNoDataInfo() {
+    if (this.lineChart ) this.lineChart.destroy();
     let toast = this.toast.create({
-      message: 'Data not available for selected date',
+      message: 'Data not available for the selected date.',
       duration: 2000,
       position: 'bottom',
       cssClass: "toast-controller-assetdetails-warning"
     });
     toast.present();
-    this.dataFound = "Data not available for selected date"
+    this.dataFound = "Data not available for the selected date."
     this.showNoDataFound = true;
   }
   showLoading() {
@@ -148,15 +150,15 @@ export class AssetDetailPage {
     if (this.assetDetail == null) {
       this.assetDetail = this.dummyAssetDetail;
     }
+    if (this.lineChart ) this.lineChart .destroy();
     this.lineChart = new Chart(this.lineCanvas.nativeElement, {
-
       type: 'bar',
       data: {
         labels: this.assetDetail.map(s => s.HE_Time),
         datasets: [
           {
             label: "DA Price",
-            type: 'line',
+            type: 'bar',
             fill: false,
             lineTension: 0.1,
             backgroundColor: "#38c",
@@ -179,7 +181,7 @@ export class AssetDetailPage {
           },
           {
             label: "RT Price",
-            type: 'line',
+            type: 'bar',
             fill: false,
             lineTension: 0.1,
             backgroundColor: "#7DBF43",
@@ -202,6 +204,7 @@ export class AssetDetailPage {
           },
           {
             label: "RT MW",
+            type: 'line',
             fill: false,
             lineTension: 0.1,
             backgroundColor: "#d3b610",
@@ -224,6 +227,7 @@ export class AssetDetailPage {
           },
           {
             label: "DA AWARDS",
+            type: 'line',
             fill: false,
             lineTension: 0.1,
             backgroundColor: "#c41d3e",
@@ -251,6 +255,24 @@ export class AssetDetailPage {
 
 
   }
+
+  ngOnInit() {
+    $(document).ready(function(){
+      $('.scroll-content').bind('scroll', function() {
+         var scrollTop = $(window).scrollTop();
+         var elementOffset = $('.card').offset().top;
+         var currentElementOffset = (elementOffset - scrollTop);
+         if (currentElementOffset < 150) {
+          $('.grid-header').hide();
+          $('.scroll-content').css('margin-top', '105px');
+          } else {
+              $('.grid-header').show();
+              $('.scroll-content').css('margin-top', '123px');
+          }
+      });
+   });
+  }
+
   ionViewDidLoad() {
     console.log('ionViewDidLoad AssetDetailPage');
   }
