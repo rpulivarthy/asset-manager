@@ -27,6 +27,7 @@
     "@ionic/cli-plugin-cordova": "^1.6.2",
     "@ionic/storage": "2.0.1",
     "@types/node": "^8.0.6",
+    "android-versions": "^1.2.1",
     "chart.js": "^2.6.0",
     "chartjs": "^0.3.24",
     "cordova-ios": "4.4.0",
