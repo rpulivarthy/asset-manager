@@ -11,8 +11,9 @@ import { LoginPage } from '../pages';
 })
 export class PrivacyPolicyPage implements OnInit {
     privacyPolicyAccepted: string;
-    constructor(public navCtrl: NavController, public navParams: NavParams, private loadingCtrl: LoadingController, 
-        private authService: AuthService, private dataService: DataService) { }
+    showNext: boolean;
+    constructor(public navCtrl: NavController, public navParams: NavParams, private loadingCtrl: LoadingController,
+        private authService: AuthService, private dataService: DataService) { this.showNext = false; }
     ngOnInit() { }
     setPrivacyPolicy() {
         if (this.privacyPolicyAccepted == "true") {
@@ -27,6 +28,9 @@ export class PrivacyPolicyPage implements OnInit {
         else {
             this.privacyPolicyRejected();
         }
+    }
+    showNextBtn(){
+        this.showNext=true;
     }
     privacyPolicyRejected() {
         this.authService.currentUser = null;

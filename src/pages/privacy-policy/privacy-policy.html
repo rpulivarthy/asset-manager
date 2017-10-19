@@ -197,13 +197,13 @@
     <ion-list radio-group [(ngModel)]="privacyPolicyAccepted">
         <ion-item>
             <ion-label>I accept</ion-label>
-            <ion-radio value="true"></ion-radio>
+            <ion-radio value="true" (click)="showNextBtn()"></ion-radio>
         </ion-item>
         <ion-item>
             <ion-label>I don't accept</ion-label>
-            <ion-radio value="false"></ion-radio>
+            <ion-radio value="false" (click)="showNextBtn()"></ion-radio>
         </ion-item>
     </ion-list>
-    <button color="primary" class="disable-hover button button-ios button-default button-default-ios button-round button-round-ios"
+    <button *ngIf="showNext" color="primary" class="disable-hover button button-default button-pp-round"
         (click)="setPrivacyPolicy()" round>Next</button>
 </ion-content>
