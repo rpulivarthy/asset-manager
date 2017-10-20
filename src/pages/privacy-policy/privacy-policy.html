@@ -6,7 +6,7 @@
 <ion-content padding>
     <ion-grid>
         <ion-row>
-            <ion-col width-95 style=font-size:13px;text-align:justify;>
+            <ion-col width-95 style=font-size:12px;text-align:justify;>
                 <p>
                     By clicking “I Accept” below, you are indicating that you have read and agree to the terms of this Beta Testing and Confidentiality
                     Agreement (“Agreement”) on behalf of yourself and the entity that you represent (all such parties, collectively,
@@ -193,17 +193,17 @@
                     </p>
             </ion-col>
         </ion-row>
+        <ion-list radio-group [(ngModel)]="privacyPolicyAccepted">
+            <ion-item>
+                <ion-label>I accept</ion-label>
+                <ion-radio value="true" (click)="showNextBtn()"></ion-radio>
+            </ion-item>
+            <ion-item>
+                <ion-label>I don't accept</ion-label>
+                <ion-radio value="false" (click)="showNextBtn()"></ion-radio>
+            </ion-item>
+        </ion-list>
     </ion-grid>
-    <ion-list radio-group [(ngModel)]="privacyPolicyAccepted">
-        <ion-item>
-            <ion-label>I accept</ion-label>
-            <ion-radio value="true" (click)="showNextBtn()"></ion-radio>
-        </ion-item>
-        <ion-item>
-            <ion-label>I don't accept</ion-label>
-            <ion-radio value="false" (click)="showNextBtn()"></ion-radio>
-        </ion-item>
-    </ion-list>
-    <button *ngIf="showNext" color="primary" class="disable-hover button button-default button-pp-round"
-        (click)="setPrivacyPolicy()" round>Next</button>
+    <button *ngIf="showNext" color="primary" class="disable-hover button button-default button-pp-round" (click)="setPrivacyPolicy()"
+        round>Next</button>
 </ion-content>
