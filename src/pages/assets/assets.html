@@ -18,7 +18,7 @@
 
   <ion-list [virtualScroll]="assets" approxItemHeight="85px">
     <div class="asset-item" ion-item *virtualItem="let asset">
-      <div class="header"><span class="assetTitle">{{asset.NY_NodeName}}</span>
+      <div class="header"><span class="assetTitle">{{asset.Name}}</span>
         <ion-buttons *ngIf="!showNoNodesFound" end>
           <button ion-button (click)=goToAssetDetail(asset)>
             <ion-icon  name="arrow-forward"></ion-icon>

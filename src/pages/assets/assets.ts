@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, LoadingController, Loading, ModalController, ToastController } from 'ionic-angular';
 import { AssetDetailPage } from '../pages';
-import {  LoginPage } from '../pages';
+import { LoginPage } from '../pages';
 import { AuthService } from '../../providers/auth-service';
 import { DataService } from '../../providers/data-service';
 import { Assets } from '../../shared/dataModel';
@@ -30,33 +30,32 @@ export class AssetsPage {
     if (this.authService.currentUser.role.toLowerCase() == "nonadmin") {
       this.showSearch = false;
       this.showLoading();
-      this.assetsAPI(this.authService.currentUser.name,"NonAdmin");
+      this.assetsAPI(this.authService.currentUser.name, "NonAdmin");
     }
     else {
       this.showSearch = true;
       if (this.firstsearchtext != "") {
-
         if (this.authService.currentUser.role.toLowerCase() == "admin") {
           this.showNoNodesFound = false;
           this.showLoading();
-          this.assetsAPI("","Admin");
+          this.assetsAPI("", "Admin");
         }
       }
     }
-
   }
-  assetsAPI(UserName:string,Role:string) {
+  assetsAPI(UserName: string, Role: string) {
     if (this.authService.isUserAuthenticated) {
-      this.dataService.getAssets(UserName,Role,this.firstsearchtext).subscribe((assets: Assets[]) => {
+      this.dataService.getAssets(UserName, Role, this.firstsearchtext).subscribe((assets: Assets[]) => {
         this.loading.dismiss();
         this.assets = assets;
         if (this.assets.length == 0) {
           this.assets =
             [
               {
-                "NY_NodeName": "No Nodes Found...", "NY_NodeID": "", "NY_PITagName": "",
-                "NY_LocationID": null, "NY_Participantname": "","NY_Region":"","NY_PIServer":"","NY_PIUserId":""
-              }];
+                "Name": "No Nodes Found...", "Region": "", "PriceNode": "",
+                "PriceNodeId": "", "ParticipantName": "", "Location": ""
+              }
+            ];
           let toast = this.toast.create({
             message: 'No nodes found',
             duration: 2000,
@@ -66,7 +65,13 @@ export class AssetsPage {
           toast.present();
           this.showNoNodesFound = true;
         }
-
+        else {
+          if (this.authService.currentUser.role.toLowerCase() == "nonadmin") {
+            this.assets.forEach(e => {
+              e.Name = e.Name + "(" + e.PriceNode + ")";
+            })
+          }
+        }
       }, error => {
         this.loading.dismiss();
         let toast = this.toast.create({

@@ -1,7 +1,7 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { NavController, NavParams, LoadingController, Loading } from 'ionic-angular';
 import { Chart } from 'chart.js';
-import { Assets, AssetDetails, AssetDetailRequest, AssetsWithTotals } from '../../shared/dataModel';
+import { Assets, AssetDetails } from '../../shared/dataModel';
 import { DataService } from '../../providers/data-service';
 import { ToastController } from 'ionic-angular';
 import { LoginPage } from '../pages';
@@ -15,7 +15,6 @@ export class AssetDetailPage {
   @ViewChild('lineCanvas') lineCanvas;
   asset: Assets;
   assetDetail: AssetDetails[];
-  assetWithTotals: AssetsWithTotals;
   loading: Loading;
   lineChart: any;
   selectedDateString: string;
@@ -25,7 +24,6 @@ export class AssetDetailPage {
   maxDate: string;
   showNoDataFound: boolean;
   dataFound: string;
-  assetDetailRequestObj: AssetDetailRequest;
   DAAwards_Total: string;
   RT_MW_Total: string;
   Revenue_Total: string;
@@ -79,27 +77,46 @@ export class AssetDetailPage {
     this.selectedDateString = this.selectedDateString.replace('-', '');
     this.selectedDateString = this.selectedDateString.replace('-', '');
     this.showLoading();
-    this.assetDetailRequestObj = new AssetDetailRequest("", "", "", "", "", null, "", "", "");
 
-    this.assetDetailRequestObj.EndTime = this.assetDetailRequestObj.StartTime = this.selectedDateString;
-    this.assetDetailRequestObj.NodeID = this.asset.NY_NodeID;
-    this.assetDetailRequestObj.PIServerName = this.asset.NY_PIServer;
-    this.assetDetailRequestObj.PIUserId = this.asset.NY_PIUserId;
-    this.assetDetailRequestObj.TagName = this.asset.NY_PITagName;
-    this.assetDetailRequestObj.ParticipantName = this.asset.NY_Participantname;
-    this.assetDetailRequestObj.LocationName = this.asset.NY_LocationID;
-
-    this.dataService.getAssetDetails(this.assetDetailRequestObj)
-      .subscribe((assetdetailswithTotals: AssetsWithTotals) => {
-        this.assetWithTotals = assetdetailswithTotals;
-        this.assetDetail = this.assetWithTotals.DataValues;
+    this.dataService.getAssetDetails(this.asset.PriceNodeId, this.selectedDateString, this.selectedDateString)
+      .subscribe((assetdetails: AssetDetails[]) => {
+        this.assetDetail = assetdetails;
         this.drawLineChart();
-        this.DAAwards_Total = this.assetWithTotals.DA_AWRADS_TOTAL;
-        this.RT_MW_Total = this.assetWithTotals.RT_MW_TOTAL;
-        this.Revenue_Total = this.assetWithTotals.REV_TOTAL;
         this.TotalLabel = "Total";
         if (this.assetDetail != null) {
           if (this.assetDetail.length > 0) {
+            var DAAwardsTotal = 0;
+            var RevenueTotal = 0;
+            var RTMWTotal = 0;
+            this.assetDetail.forEach(e => {
+              if (e.DA_AWARDS != null) {
+                DAAwardsTotal = DAAwardsTotal + parseFloat(e.DA_AWARDS);
+              }
+              if (e.PI_MW != null) {
+                RTMWTotal = RTMWTotal + parseFloat(e.PI_MW);
+              }
+              if (e.REVENUE != null) {
+                RevenueTotal = RevenueTotal + parseFloat(e.REVENUE);
+              }
+            });
+            if (DAAwardsTotal == 0) {
+              this.DAAwards_Total = "N/A";
+            }
+            else {
+              this.DAAwards_Total = DAAwardsTotal.toString();
+            }
+            if (RTMWTotal == 0) {
+              this.RT_MW_Total = "N/A";
+            }
+            else {
+              this.RT_MW_Total = RTMWTotal.toString();
+            }
+            if (RevenueTotal == 0) {
+              this.Revenue_Total = "N/A";
+            }
+            else {
+              this.Revenue_Total = RevenueTotal.toString();
+            }
             this.dataFound = "Graph";
             this.showNoDataFound = false;
             this.drawLineChart();
@@ -129,7 +146,7 @@ export class AssetDetailPage {
       });
   }
   showNoDataInfo() {
-    if (this.lineChart ) this.lineChart.destroy();
+    if (this.lineChart) this.lineChart.destroy();
     let toast = this.toast.create({
       message: 'Data not available for the selected date.',
       duration: 2000,
@@ -150,7 +167,7 @@ export class AssetDetailPage {
     if (this.assetDetail == null) {
       this.assetDetail = this.dummyAssetDetail;
     }
-    if (this.lineChart ) this.lineChart .destroy();
+    if (this.lineChart) this.lineChart.destroy();
     this.lineChart = new Chart(this.lineCanvas.nativeElement, {
       type: 'bar',
       data: {
@@ -257,20 +274,20 @@ export class AssetDetailPage {
   }
 
   ngOnInit() {
-    $(document).ready(function(){
-      $('.scroll-content').bind('scroll', function() {
-         var scrollTop = $(window).scrollTop();
-         var elementOffset = $('.card').offset().top;
-         var currentElementOffset = (elementOffset - scrollTop);
-         if (currentElementOffset < 150) {
+    $(document).ready(function () {
+      $('.scroll-content').bind('scroll', function () {
+        var scrollTop = $(window).scrollTop();
+        var elementOffset = $('.card').offset().top;
+        var currentElementOffset = (elementOffset - scrollTop);
+        if (currentElementOffset < 150) {
           $('.grid-header').hide();
           $('.scroll-content').css('margin-top', '105px');
-          } else {
-              $('.grid-header').show();
-              $('.scroll-content').css('margin-top', '123px');
-          }
+        } else {
+          $('.grid-header').show();
+          $('.scroll-content').css('margin-top', '123px');
+        }
       });
-   });
+    });
   }
 
   ionViewDidLoad() {

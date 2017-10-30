@@ -9,12 +9,12 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/retry';
 import 'rxjs/add/operator/retrywhen';
 import 'rxjs/add/observable/throw';
-import { Assets, AssetDetailRequest, AssetsWithTotals } from '../shared/dataModel';
+import { Assets, AssetDetails } from '../shared/dataModel';
 
 @Injectable()
 export class DataService {
     assetSet: Assets[];
-    assetDetails: AssetsWithTotals;
+    assetDetails: AssetDetails[];
     constructor(private http: Http, private config: Configuration) {
     }
 
@@ -29,28 +29,37 @@ export class DataService {
             return this.assetSet;
         })
     }
-
-    getAssetDetails(inputAssetDetailsRequest: AssetDetailRequest): Observable<AssetsWithTotals> {
-        let body = JSON.stringify({
-            "PIServerName": inputAssetDetailsRequest.PIServerName,
-            "TagName": inputAssetDetailsRequest.TagName,
-            "StartTime": inputAssetDetailsRequest.StartTime,
-            "EndTime": inputAssetDetailsRequest.EndTime,
-            "NodeID": inputAssetDetailsRequest.NodeID,
-            "Duration": "1h",
-            "PIUserId": inputAssetDetailsRequest.PIUserId,
-            "ParticipantName": inputAssetDetailsRequest.ParticipantName,
-            "LocationName": inputAssetDetailsRequest.LocationName
-
-        });
+    getAssetDetails(nodeId: string, startTime: string, endTime: string): Observable<AssetDetails[]> {
         let headers = new Headers({ 'Content-Type': 'application/json' });
         headers.append('Authorization', 'Bearer ' + sessionStorage.getItem("access_token"));
-        let options = new RequestOptions({ headers: headers, withCredentials: true });
-        return this.http.post(this.config.apiBaseUrl + '/lmp/assetdetails', body, options).retry(3).map((res: Response) => {
+        let options = new RequestOptions({ headers: headers });
+
+        return this.http.get(this.config.apiBaseUrl + '/lmp/assetdetails?nodeId=' + nodeId + '&startTime=' + startTime + '&endTime=' + endTime, options).retry(3).map((res: Response) => {
             this.assetDetails = res.json();
             return this.assetDetails;
         })
     }
+    // getAssetDetails(inputAssetDetailsRequest: AssetDetailRequest): Observable<AssetsWithTotals> {
+    //     let body = JSON.stringify({
+    //         "PIServerName": inputAssetDetailsRequest.PIServerName,
+    //         "TagName": inputAssetDetailsRequest.TagName,
+    //         "StartTime": inputAssetDetailsRequest.StartTime,
+    //         "EndTime": inputAssetDetailsRequest.EndTime,
+    //         "NodeID": inputAssetDetailsRequest.NodeID,
+    //         "Duration": "1h",
+    //         "PIUserId": inputAssetDetailsRequest.PIUserId,
+    //         "ParticipantName": inputAssetDetailsRequest.ParticipantName,
+    //         "LocationName": inputAssetDetailsRequest.LocationName
+
+    //     });
+    //     let headers = new Headers({ 'Content-Type': 'application/json' });
+    //     headers.append('Authorization', 'Bearer ' + sessionStorage.getItem("access_token"));
+    //     let options = new RequestOptions({ headers: headers, withCredentials: true });
+    //     return this.http.post(this.config.apiBaseUrl + '/lmp/assetdetails', body, options).retry(3).map((res: Response) => {
+    //         this.assetDetails = res.json();
+    //         return this.assetDetails;
+    //     })
+    // }
     setPrivacyPolicy(userName: string): Observable<boolean> {
         let headers = new Headers({ 'Content-Type': 'application/json' });
         headers.append('Authorization', 'Bearer ' + sessionStorage.getItem("access_token"));
